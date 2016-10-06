@@ -33,24 +33,44 @@ function scroll.setupMap()
         map[x] = {}
         for y=1,mapHeight do
             map[x][y] = love.math.random(0,3)
+            rareGrass = love.math.random(0,100)
+            if rareGrass == 5 then
+                map[x][y] = 4
+            end
         end
     end
---Inserted
-map[1][1] = 4
-map[1][2] = 4
-map[1][3] = 4
-map[2][1] = 4
-map[2][3] = 4
-map[3][2] = 4
 
-map[5][1] = 4
-map[5][2] = 4
-map[5][3] = 4
-map[6][2] = 4
-map[7][1] = 4
-map[7][2] = 4
-map[7][3] = 4
---Inserted
+    --Inserted
+    map[1][1] = 5
+    map[1][2] = 5
+    map[1][3] = 5
+    map[2][1] = 5
+    map[2][3] = 5
+    map[3][2] = 5
+
+    map[5][1] = 5
+    map[5][2] = 5
+    map[5][3] = 5
+    map[6][2] = 5
+    map[7][1] = 5
+    map[7][2] = 5
+    map[7][3] = 5
+
+    map[1][6] = 5
+    map[3][6] = 5
+    map[3][8] = 5
+    map[1][7] = 5
+    map[1][8] = 5
+    map[2][6] = 5
+    map[2][8] = 5
+    map[3][7] = 5
+
+    map[5][6] = 5
+    map[6][6] = 5
+    map[7][6] = 5
+    map[6][7] = 5
+    map[6][8] = 5
+    --Inserted
 end
  
 function scroll.setupMapView()
@@ -87,8 +107,8 @@ function scroll.setupTileset()
     tileQuads[4] = love.graphics.newQuad(4 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
 
-
-
+    tileQuads[5] = love.graphics.newQuad(5 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
 
     tilesetBatch = love.graphics.newSpriteBatch(tilesetImage, tilesDisplayWidth * tilesDisplayHeight)
 
