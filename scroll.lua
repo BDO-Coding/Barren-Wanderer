@@ -1,5 +1,7 @@
 scroll={}
 
+require "player"
+
 local map -- stores tiledata
 local mapWidth, mapHeight -- width and height in tiles
  
@@ -12,8 +14,6 @@ local tilesetImage
 local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
-
-playerSpeed = 0.003
 
 function scroll.load()
 
@@ -104,20 +104,42 @@ end
 
 function scroll.update(dt)
 
-    if love.keyboard.isDown("w")  then
-        scroll.moveMap(0, -playerSpeed * tileSize)
-    end
+    if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
 
-    if love.keyboard.isDown("s")  then
-        scroll.moveMap(0, playerSpeed * tileSize)
-    end
+        scroll.moveMap(0, -playerSpeedDiagonal * tileSize)
+        scroll.moveMap(playerSpeedDiagonal * tileSize, 0)
+        
+    elseif love.keyboard.isDown("w") and love.keyboard.isDown("a") then
 
-    if love.keyboard.isDown("a")  then
-        scroll.moveMap(-playerSpeed * tileSize, 0)
-    end
+        scroll.moveMap(0, -playerSpeedDiagonal * tileSize)
+        scroll.moveMap(-playerSpeedDiagonal * tileSize, 0)
 
-    if love.keyboard.isDown("d")  then
-        scroll.moveMap(playerSpeed * tileSize, 0)
+    elseif love.keyboard.isDown("s") and love.keyboard.isDown("d") then
+
+        scroll.moveMap(0, playerSpeedDiagonal * tileSize)
+        scroll.moveMap(playerSpeedDiagonal * tileSize, 0)
+
+    elseif love.keyboard.isDown("s") and love.keyboard.isDown("a") then
+
+        scroll.moveMap(0, playerSpeedDiagonal * tileSize)
+        scroll.moveMap(-playerSpeedDiagonal * tileSize, 0)
+
+    else
+        if love.keyboard.isDown("w")  then
+            scroll.moveMap(0, -playerSpeed * tileSize)
+        end
+
+        if love.keyboard.isDown("s")  then
+            scroll.moveMap(0, playerSpeed * tileSize)
+        end
+
+        if love.keyboard.isDown("a")  then
+            scroll.moveMap(-playerSpeed * tileSize, 0)
+        end
+
+        if love.keyboard.isDown("d")  then
+            scroll.moveMap(playerSpeed * tileSize, 0)
+        end
     end
 
 end

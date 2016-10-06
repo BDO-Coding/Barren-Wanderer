@@ -2,6 +2,9 @@ player={}
 
 function player.load()
 
+	playerSpeed = 0.002
+	playerSpeedDiagonal = 0.001
+
 end
 
 function player.update()
