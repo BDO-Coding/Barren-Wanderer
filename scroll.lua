@@ -35,7 +35,22 @@ function scroll.setupMap()
             map[x][y] = love.math.random(0,3)
         end
     end
+--Inserted
+map[1][1] = 4
+map[1][2] = 4
+map[1][3] = 4
+map[2][1] = 4
+map[2][3] = 4
+map[3][2] = 4
 
+map[5][1] = 4
+map[5][2] = 4
+map[5][3] = 4
+map[6][2] = 4
+map[7][1] = 4
+map[7][2] = 4
+map[7][3] = 4
+--Inserted
 end
  
 function scroll.setupMapView()
@@ -68,6 +83,12 @@ function scroll.setupTileset()
     -- middle of red carpet
     tileQuads[3] = love.graphics.newQuad(3 * tileSize, 0 * tileSize, tileSize, tileSize, -- 4 0, x - y in a 32-32 grid 
     tilesetImage:getWidth(), tilesetImage:getHeight())
+
+    tileQuads[4] = love.graphics.newQuad(4 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+
+
+
 
     tilesetBatch = love.graphics.newSpriteBatch(tilesetImage, tilesDisplayWidth * tilesDisplayHeight)
 
