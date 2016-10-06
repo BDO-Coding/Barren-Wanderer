@@ -41,10 +41,10 @@ function scroll.setupMapView()
     mapX = 1
     mapY = 1
     tilesDisplayWidth = 26
-    tilesDisplayHeight = 20
+    tilesDisplayHeight = 26
 
-    zoomX = 3
-    zoomY = 3 -----------------------------------------------------------------USEFUL
+    zoomX = 2
+    zoomY = 2 -----------------------------------------------------------------USEFUL
 
 end
  
@@ -103,19 +103,19 @@ end
 function scroll.update(dt)
 
     if love.keyboard.isDown("w")  then
-        scroll.moveMap(0, -0.2 * tileSize)
+        scroll.moveMap(0, -0.001 * tileSize)
     end
 
     if love.keyboard.isDown("s")  then
-        scroll.moveMap(0, 0.2 * tileSize)
+        scroll.moveMap(0, 0.001 * tileSize)
     end
 
     if love.keyboard.isDown("a")  then
-        scroll.moveMap(-0.2 * tileSize, 0)
+        scroll.moveMap(-0.001 * tileSize, 0)
     end
 
     if love.keyboard.isDown("d")  then
-        scroll.moveMap(0.2 * tileSize, 0)
+        scroll.moveMap(0.001 * tileSize, 0) ------------------------------------------ USEFUL
     end
 
 end
