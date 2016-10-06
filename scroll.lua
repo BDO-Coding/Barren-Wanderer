@@ -52,7 +52,7 @@ end
  
 function scroll.setupTileset()
 
-    tilesetImage = love.graphics.newImage( "tilesset2.png" )
+    tilesetImage = love.graphics.newImage( "tileset.png" )
     tilesetImage:setFilter("nearest", "linear") -- this "linear filter" removes some artifacts if we were to scale the tiles
     tileSize = 32
 
