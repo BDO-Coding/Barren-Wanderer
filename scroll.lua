@@ -71,7 +71,7 @@ function scroll.setupTileset()
     tilesetImage:setFilter("nearest", "linear") -- this "linear filter" removes some artifacts if we were to scale the tiles
     tileSize = 32
 
-    -- grass
+    -- dark grass
     tileQuads[0] = love.graphics.newQuad(0 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
     -- kitchen floor tile
