@@ -1,10 +1,12 @@
 require "scroll"
 require "player"
+require "images"
  
 function love.load()
 
     scroll.load()
     player.load()
+    images.load()
 
 end
  
@@ -12,6 +14,7 @@ function love.update(dt)
 
     UPDATE_SCROLL()
     UPDATE_PLAYER()
+    UPDATE_IMAGES()
 
 end
  

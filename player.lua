@@ -1,4 +1,5 @@
 player={}
+require"images"
 
 function player.load()
 
@@ -13,8 +14,8 @@ end
 
 function player.draw()
 
-	playerDown = love.graphics.newImage("images/playerDown.png")
-	love.graphics.draw(playerDown, 560, 350, 0, 2, 2)
+	playerImage = images.playerDown
+	love.graphics.draw(playerImage, 560, 350, 0, 2, 2)
 
 end
 
