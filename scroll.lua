@@ -23,8 +23,8 @@ end
 
 function scroll.setupMap()
 
-    mapWidth = 28
-    mapHeight = 22-----------------------------------------------------------USEFUL
+    mapWidth = 280
+    mapHeight = 220-----------------------------------------------------------USEFUL
 
     map = {}
     for x=1,mapWidth do
@@ -43,8 +43,8 @@ function scroll.setupMapView()
     tilesDisplayWidth = 26
     tilesDisplayHeight = 20
 
-    zoomX = 1
-    zoomY = 1 -----------------------------------------------------------------USEFUL
+    zoomX = 3
+    zoomY = 3 -----------------------------------------------------------------USEFUL
 
 end
  
