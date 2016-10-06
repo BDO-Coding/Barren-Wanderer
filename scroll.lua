@@ -52,21 +52,21 @@ end
  
 function scroll.setupTileset()
 
-    tilesetImage = love.graphics.newImage( "tileset.png" )
+    tilesetImage = love.graphics.newImage( "tilesset2.png" )
     tilesetImage:setFilter("nearest", "linear") -- this "linear filter" removes some artifacts if we were to scale the tiles
     tileSize = 32
 
     -- grass
-    tileQuads[0] = love.graphics.newQuad(0 * tileSize, 20 * tileSize, tileSize, tileSize,
+    tileQuads[0] = love.graphics.newQuad(0 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
     -- kitchen floor tile
-    tileQuads[1] = love.graphics.newQuad(2 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tileQuads[1] = love.graphics.newQuad(1 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
     -- parquet flooring
-    tileQuads[2] = love.graphics.newQuad(4 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tileQuads[2] = love.graphics.newQuad(2 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
     -- middle of red carpet
-    tileQuads[3] = love.graphics.newQuad(3 * tileSize, 9 * tileSize, tileSize, tileSize,
+    tileQuads[3] = love.graphics.newQuad(3 * tileSize, 0 * tileSize, tileSize, tileSize, -- 4 0, x - y in a 32-32 grid 
     tilesetImage:getWidth(), tilesetImage:getHeight())
 
     tilesetBatch = love.graphics.newSpriteBatch(tilesetImage, tilesDisplayWidth * tilesDisplayHeight)
