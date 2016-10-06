@@ -124,9 +124,7 @@ end
 
 function scroll.draw()
 
-    love.graphics.draw(tilesetBatch,
-    math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
-    love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
+    love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
 
 end
 

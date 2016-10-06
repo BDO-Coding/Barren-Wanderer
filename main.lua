@@ -19,5 +19,7 @@ function love.draw()
 
     DRAW_SCROLL()
     DRAW_PLAYER()
+
+    love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20) --FPS Counter
   
 end
