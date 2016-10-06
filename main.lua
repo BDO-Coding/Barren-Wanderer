@@ -18,8 +18,8 @@ function love.load()
 end
  
 function setupMap()
-  mapWidth = 60
-  mapHeight = 40
+  mapWidth = 28
+  mapHeight = 22-----------------------------------------------------------USEFUL
  
   map = {}
   for x=1,mapWidth do
@@ -37,7 +37,7 @@ function setupMapView()
   tilesDisplayHeight = 20
  
   zoomX = 1
-  zoomY = 1
+  zoomY = 1 -----------------------------------------------------------------USEFUL
 end
  
 function setupTileset()
