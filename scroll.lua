@@ -13,6 +13,8 @@ local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 
+playerSpeed = 0.003
+
 function scroll.load()
 
     scroll.setupMap()
@@ -103,19 +105,19 @@ end
 function scroll.update(dt)
 
     if love.keyboard.isDown("w")  then
-        scroll.moveMap(0, -0.001 * tileSize)
+        scroll.moveMap(0, -playerSpeed * tileSize)
     end
 
     if love.keyboard.isDown("s")  then
-        scroll.moveMap(0, 0.001 * tileSize)
+        scroll.moveMap(0, playerSpeed * tileSize)
     end
 
     if love.keyboard.isDown("a")  then
-        scroll.moveMap(-0.001 * tileSize, 0)
+        scroll.moveMap(-playerSpeed * tileSize, 0)
     end
 
     if love.keyboard.isDown("d")  then
-        scroll.moveMap(0.001 * tileSize, 0) ------------------------------------------ USEFUL
+        scroll.moveMap(playerSpeed * tileSize, 0)
     end
 
 end
