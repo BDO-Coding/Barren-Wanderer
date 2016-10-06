@@ -14,7 +14,7 @@ end
 function player.draw()
 
 	playerDown = love.graphics.newImage("images/playerDown.png")
-	love.graphics.draw(playerDown, 570, 350, 0, 2, 2)
+	love.graphics.draw(playerDown, 560, 350, 0, 2, 2)
 
 end
 
