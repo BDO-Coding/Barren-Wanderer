@@ -48,6 +48,14 @@ function player.draw()
     	playerScreenX = 560
     end
 
+    if love.keyboard.isDown("lctrl") then
+    	playerSpeed = 0.004
+    	playerSpeedDiagonal = 0.003
+    else
+    	playerSpeed = 0.002
+    	playerSpeedDiagonal = 0.001
+    end
+
 	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
 
 end
