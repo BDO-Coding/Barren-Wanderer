@@ -12,9 +12,9 @@ end
  
 function love.update(dt)
 
-    UPDATE_SCROLL()
-    UPDATE_PLAYER()
-    UPDATE_IMAGES()
+    UPDATE_SCROLL(dt)
+    UPDATE_PLAYER(dt)
+    UPDATE_IMAGES(dt)
 
 end
  

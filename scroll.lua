@@ -1,5 +1,4 @@
 scroll={}
-
 require "player"
 
 local map -- stores tiledata
