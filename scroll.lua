@@ -31,9 +31,10 @@ function scroll.setupMap()
     for x=1,mapWidth do
         map[x] = {}
         for y=1,mapHeight do
-            map[x][y] = love.math.random(0,3)
+            map[x][y] = love.math.random(0,13)
         end
     end
+
 
     --Inserted
     map[1][1] = 5
@@ -86,24 +87,50 @@ function scroll.setupTileset()
     tilesetImage:setFilter("nearest", "linear") -- this "linear filter" removes some artifacts if we were to scale the tiles
     tileSize = 32
 
-    -- dark grass
+    -- Ocean
     tileQuads[0] = love.graphics.newQuad(0 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
-    -- kitchen floor tile
+    orar = 1
+
+    --Sand
     tileQuads[1] = love.graphics.newQuad(1 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
-    -- parquet flooring
+    --River
     tileQuads[2] = love.graphics.newQuad(2 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
-    -- middle of red carpet
+    -- Mountain2
     tileQuads[3] = love.graphics.newQuad(3 * tileSize, 0 * tileSize, tileSize, tileSize, -- 4 0, x - y in a 32-32 grid 
     tilesetImage:getWidth(), tilesetImage:getHeight())
-
+    -- Mountain3
     tileQuads[4] = love.graphics.newQuad(4 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
-
+    --Mountain1
     tileQuads[5] = love.graphics.newQuad(5 * tileSize, 0 * tileSize, tileSize, tileSize,
     tilesetImage:getWidth(), tilesetImage:getHeight())
+    --HotSand
+    tileQuads[6] = love.graphics.newQuad(6 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --Quicksand
+    tileQuads[7] = love.graphics.newQuad(7 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --Grass1
+    tileQuads[8] = love.graphics.newQuad(8 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --Grass2
+    tileQuads[9] = love.graphics.newQuad(9 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --Grass3
+    tileQuads[10] = love.graphics.newQuad(10 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --Tree1
+    tileQuads[11] = love.graphics.newQuad(11 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --Tree2
+    tileQuads[12] = love.graphics.newQuad(12 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --JungleTree
+    tileQuads[13] = love.graphics.newQuad(13 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())        
 
     tilesetBatch = love.graphics.newSpriteBatch(tilesetImage, tilesDisplayWidth * tilesDisplayHeight)
 
