@@ -33,10 +33,6 @@ function scroll.setupMap()
         map[x] = {}
         for y=1,mapHeight do
             map[x][y] = love.math.random(0,3)
-            rareGrass = love.math.random(0,100)
-            if rareGrass == 5 then
-                map[x][y] = 4
-            end
         end
     end
 
