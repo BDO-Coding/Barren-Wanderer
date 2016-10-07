@@ -28,13 +28,25 @@ function scroll.setupMap()
     mapHeight = 220-----------------------------------------------------------USEFUL
 
     map = {}
+    --Random Gen
     for x=1,mapWidth do
         map[x] = {}
         for y=1,mapHeight do
-            map[x][y] = love.math.random(0,13)
+           map[x][y] = love.math.random(0,13)
         end
     end
+-- Pro Gen
+    for x=1,mapWidth do
+        for y=1,mapHeight do
+              --if map[x][y]+1 == 2 then Is killing all sand
 
+                if map[x][y] == 2 then
+               map[x][y] = 2 
+           end
+             
+              
+        end
+    end
 
     --Inserted
     map[1][1] = 5
@@ -42,7 +54,7 @@ function scroll.setupMap()
     map[1][3] = 5
     map[2][1] = 5
     map[2][3] = 5
-    map[3][2] = 5
+   map[3][2] = 5
 
     map[5][1] = 5
     map[5][2] = 5
