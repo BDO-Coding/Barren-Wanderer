@@ -10,10 +10,13 @@ function player.load()
 	playerSizeY = 2
 	playerScreenX = 560
 	playerScreenY = 350
+	animeDelay = 2
 
 end
 
-function player.update()
+function player.update(dt)
+
+	animeDelay = animeDelay - dt
 
 end
 
@@ -60,9 +63,9 @@ function player.draw()
 
 end
 
-function UPDATE_PLAYER()
+function UPDATE_PLAYER(dt)
 
-	player.update()
+	player.update(dt)
 
 end
 

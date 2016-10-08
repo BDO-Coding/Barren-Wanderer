@@ -35,7 +35,7 @@ function scroll.setupMap()
            map[x][y] = love.math.random(0,13)
         end
     end
--- Pro Gen
+    --Pro Gen
     for x=1,mapWidth do
         for y=1,mapHeight do
             --if map[x][y]+1 == 2 then -- Is killing all sand
