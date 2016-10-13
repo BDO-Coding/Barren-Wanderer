@@ -12,20 +12,12 @@ function menu.load()
 
 end
 
-function menu.update(dt)
+function menu.draw()
 
     if inmenu == true then
 
         mouseX = love.mouse.getX()
         mouseY = love.mouse.getY()
-
-    end
-
-end
-
-function menu.draw()
-
-    if inmenu == true then
 
         love.graphics.setBackgroundColor( 17, 240, 240)
 
@@ -43,6 +35,7 @@ function menu.draw()
         love.graphics.setColor(0, 0, 0)
         love.graphics.printf("Barren World", -480, 60, 100, "center", 0, 3, 3, -155)
         love.graphics.printf("Created by Danny Harris and Ori Taylor", -380, 600, 1020, "center")
+        love.graphics.setColor(255, 255, 255)
 
     end
 
@@ -56,8 +49,6 @@ function love.mousepressed(x, y, button, istouch)
         scroll.load()
         player.load()
         monster.load()
-
-        player.tutorialOn = false
     end
 
 end
@@ -65,7 +56,6 @@ end
 function UPDATE_MENU(dt)
 
     love.mousepressed()
-    menu.update(dt)
 
 end
 
