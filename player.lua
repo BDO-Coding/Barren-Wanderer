@@ -10,14 +10,31 @@ function player.load()
 	playerSizeY = 2
 	playerScreenX = 560
 	playerScreenY = 350
-	animeDelay = 1000
-    aAlternate = true
+
+    animeDelayW = 0.4
+    animeDelayA = 0.4
+    animeDelayS = 0.4
+    animeDelayD = 0.4
+
+    alternateW = true
+    alternateA = true
+    alternateS = true
+    alternateD = true
 
 end
 
 function player.update(dt)
 
-	animeDelay = animeDelay - dt
+    if love.keyboard.isDown("a")then
+	    animeDelayA = animeDelayA - dt
+    elseif love.keyboard.isDown("d")then
+        animeDelayD = animeDelayD - dt
+    elseif love.keyboard.isDown("w")then
+        animeDelayW = animeDelayW - dt
+    elseif love.keyboard.isDown("s")then
+        animeDelayS = animeDelayS - dt
+    end
+
 
 end
 
@@ -40,51 +57,66 @@ function player.draw()
         playerScreenX = 560
     end
 
-    if love.keyboard.isDown("a") and aAlternate == true then
-        playerImage = images.playerDown
-        playerSizeX = -2
-        playerScreenX = 620
-        for i = 0, 1000, 1 do
-            animeDelay = animeDelay - 1
-            print(i, aAlternate)
-            if i < 1 then
-                aAlternate = false
-                animeDelay = 1000
-                print("hi")
-                break
-            end
+    if love.keyboard.isDown("s") and alternateS == true then
+        playerImage = images.playerDownAnime
+        playerSizeX = 2
+        playerScreenX = 560
+        if animeDelayS <= 0 then
+            alternateS = false
+            animeDelayS = 0.4
         end
-    elseif love.keyboard.isDown("a") and aAlternate == false then
-        playerImage = images.playerSide
+    elseif love.keyboard.isDown("s") and alternateS == false then
+        playerImage = images.playerDownAnime
         playerSizeX = -2
-        playerScreenX = 620
-        for i = 0, 1000, 1 do
-            animeDelay = animeDelay - 1
-        end
-        if k == 0 then
-            aAlternate = true
-            animeDelay = 1000
+        playerScreenX = 625
+        if animeDelayS <= 0 then
+            alternateS = true
+            animeDelayS = 0.4
         end
     end
 
-    --[[function love.keypressed(aKey)
-        if aKey == "a" and aAlternate == true then
-            playerImage = images.playerSide
-            playerSizeX = -2
-            playerScreenX = 620
-            aAlternate = false
-        elseif aKey == "a" and aAlternate == false then
-            playerImage = images.playerDown
-            playerSizeX = -2
-            playerScreenX = 620
-            aAlternate = true
+    if love.keyboard.isDown("a") and alternateA == true then
+        playerImage = images.playerDownAnime
+        playerSizeX = -2
+        playerScreenX = 620
+        if animeDelayA <= 0 then
+            alternateA = false
+            animeDelayA = 0.4
         end
-    end]]
+    elseif love.keyboard.isDown("a") and alternateA == false then
+        playerImage = images.playerSide
+        playerSizeX = -2
+        playerScreenX = 620
+        if animeDelayA <= 0 then
+            alternateA = true
+            animeDelayA = 0.4
+        end
+    end
 
-    if love.keyboard.isDown("d") then
-    	playerImage = images.playerSide
-    	playerSizeX = 2
-    	playerScreenX = 560
+    if love.keyboard.isDown("d") and alternateD == true then
+        playerImage = images.playerDownAnime
+        playerSizeX = 2
+        playerScreenX = 560
+        if animeDelayD <= 0 then
+            alternateD = false
+            animeDelayD = 0.4
+        end
+    elseif love.keyboard.isDown("d") and alternateD == false then
+        playerImage = images.playerSide
+        playerSizeX = 2
+        playerScreenX = 560
+        if animeDelayD <= 0 then
+            alternateD = true
+            animeDelayD = 0.4
+        end
+    end
+
+    function love.keyreleased(releaseImage)
+        if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" then
+            playerImage = images.playerDown
+            playerSizeX = 2
+            playerScreenX = 560
+        end
     end
 
     if love.keyboard.isDown("lctrl") then
