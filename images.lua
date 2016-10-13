@@ -12,10 +12,6 @@ function images.load()
 
 end
 
-function images.update(dt)
-
-end
-
 function UPDATE_IMAGES(dt)
 
 	images.update()

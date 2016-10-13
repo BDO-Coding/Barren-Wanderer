@@ -117,6 +117,14 @@ function player.draw()
         end
     end
 
+    if love.keyboard.isDown("lctrl") then
+    	playerSpeed = 0.004
+    	playerSpeedDiagonal = 0.003
+    else
+    	playerSpeed = 0.002
+    	playerSpeedDiagonal = 0.001
+    end
+
     function love.keyreleased(releaseImage)
         if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" then
             playerImage = images.playerDown
@@ -127,14 +135,6 @@ function player.draw()
             playerSizeX = 2
             playerScreenX = 560
         end
-    end
-
-    if love.keyboard.isDown("lctrl") then
-    	playerSpeed = 0.004
-    	playerSpeedDiagonal = 0.003
-    else
-    	playerSpeed = 0.002
-    	playerSpeedDiagonal = 0.001
     end
 
 	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
