@@ -1,0 +1,14 @@
+This is our Barren World TODO List:
+
+-Add menu
+-Add biome arrays
+	-Grassland
+	-Jungle
+	-Ocean
+	-Oblivion
+	-etc..
+-Make terrain generation more preportioned
+-Add powas (YAY)
+-Add monsters
+-Add a quest system
+-ADD STUFF TO THIS LIST
