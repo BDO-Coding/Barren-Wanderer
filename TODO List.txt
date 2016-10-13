@@ -1,7 +1,10 @@
 This is our Barren World TODO List:
 
--Add menu
--Add biome arrays
+-Add more menu options:
+	-Settings
+	-Credits
+	-New Game / Load Game instead of play button
+-Add biome arrays:
 	-Grassland
 	-Jungle
 	-Ocean
@@ -9,6 +12,7 @@ This is our Barren World TODO List:
 	-etc..
 -Make terrain generation more preportioned
 -Add powas (YAY)
--Add monsters
+-Add monsters in-game (currently only have the class with a basic array)
 -Add a quest system
+-Add weapons
 -ADD STUFF TO THIS LIST
