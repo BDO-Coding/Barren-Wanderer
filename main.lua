@@ -6,7 +6,7 @@ require "monster"
  
 function love.load()
 
-	--Loading Classes
+	ingame = false
 	inmenu = true
 
 	menu.load()
@@ -15,7 +15,7 @@ end
  
 function love.update(dt)
 
-	if inmenu == false then
+	if ingame == true then
 	    UPDATE_SCROLL(dt)
 	    UPDATE_PLAYER(dt)
 	    UPDATE_MONSTER(dt)
@@ -27,7 +27,9 @@ end
  
 function love.draw()
 
-	if inmenu == false then
+	love.graphics.setColor(255, 255, 255)
+
+	if ingame == true then
 	    DRAW_SCROLL()
 	    DRAW_PLAYER()
 	    DRAW_MONSTER()

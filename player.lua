@@ -33,6 +33,9 @@ function player.update(dt)
         animeDelayW = animeDelayW - dt
     elseif love.keyboard.isDown("s")then
         animeDelayS = animeDelayS - dt
+    elseif love.keyboard.isDown("escape")then
+        inmenu = true
+        print(inmenu)
     end
 
 
