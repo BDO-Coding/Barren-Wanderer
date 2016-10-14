@@ -30,9 +30,9 @@ function menu.draw()
         end
 
         love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle("line", 170, 150, 220, 60)
+
         love.graphics.print("Play", 255, 160, 0, 2, 3)
-     
-        love.graphics.setColor(0, 0, 0)
         love.graphics.printf("Barren World", -480, 60, 100, "center", 0, 3, 3, -155)
         love.graphics.printf("Created by Danny Harris and Ori Taylor", -380, 600, 1020, "center")
         love.graphics.setColor(255, 255, 255)
