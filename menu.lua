@@ -111,28 +111,24 @@ end
 function love.mousepressed(x, y, button, istouch)
 
     if inmenu == true then
-        if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 then
 
+        if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 then
             inmenu = false
             ingame = true
 
             scroll.load()
             player.load()
             monster.load()
-
         end
 
         if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 then
-
             options = true
-
         end
 
         if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then
-
             options = false
-
         end
+        
     end
 
 end

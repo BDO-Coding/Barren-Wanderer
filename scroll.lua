@@ -176,41 +176,43 @@ end
 
 function scroll.update(dt)
 
-    if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
+    if inmenu == false then
+        if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
 
-        scroll.moveMap(0, -playerSpeedDiagonal * tileSize)
-        scroll.moveMap(playerSpeedDiagonal * tileSize, 0)
-        
-    elseif love.keyboard.isDown("w") and love.keyboard.isDown("a") then
+            scroll.moveMap(0, -playerSpeedDiagonal * tileSize)
+            scroll.moveMap(playerSpeedDiagonal * tileSize, 0)
+            
+        elseif love.keyboard.isDown("w") and love.keyboard.isDown("a") then
 
-        scroll.moveMap(0, -playerSpeedDiagonal * tileSize)
-        scroll.moveMap(-playerSpeedDiagonal * tileSize, 0)
+            scroll.moveMap(0, -playerSpeedDiagonal * tileSize)
+            scroll.moveMap(-playerSpeedDiagonal * tileSize, 0)
 
-    elseif love.keyboard.isDown("s") and love.keyboard.isDown("d") then
+        elseif love.keyboard.isDown("s") and love.keyboard.isDown("d") then
 
-        scroll.moveMap(0, playerSpeedDiagonal * tileSize)
-        scroll.moveMap(playerSpeedDiagonal * tileSize, 0)
+            scroll.moveMap(0, playerSpeedDiagonal * tileSize)
+            scroll.moveMap(playerSpeedDiagonal * tileSize, 0)
 
-    elseif love.keyboard.isDown("s") and love.keyboard.isDown("a") then
+        elseif love.keyboard.isDown("s") and love.keyboard.isDown("a") then
 
-        scroll.moveMap(0, playerSpeedDiagonal * tileSize)
-        scroll.moveMap(-playerSpeedDiagonal * tileSize, 0)
+            scroll.moveMap(0, playerSpeedDiagonal * tileSize)
+            scroll.moveMap(-playerSpeedDiagonal * tileSize, 0)
 
-    else
-        if love.keyboard.isDown("w")  then
-            scroll.moveMap(0, -playerSpeed * tileSize)
-        end
+        else
+            if love.keyboard.isDown("w")  then
+                scroll.moveMap(0, -playerSpeed * tileSize)
+            end
 
-        if love.keyboard.isDown("s")  then
-            scroll.moveMap(0, playerSpeed * tileSize)
-        end
+            if love.keyboard.isDown("s")  then
+                scroll.moveMap(0, playerSpeed * tileSize)
+            end
 
-        if love.keyboard.isDown("a")  then
-            scroll.moveMap(-playerSpeed * tileSize, 0)
-        end
+            if love.keyboard.isDown("a")  then
+                scroll.moveMap(-playerSpeed * tileSize, 0)
+            end
 
-        if love.keyboard.isDown("d")  then
-            scroll.moveMap(playerSpeed * tileSize, 0)
+            if love.keyboard.isDown("d")  then
+                scroll.moveMap(playerSpeed * tileSize, 0)
+            end
         end
     end
 
