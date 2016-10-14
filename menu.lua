@@ -60,28 +60,28 @@ function menu.draw()
 
     if inmenu == true and options == false and ingame == true then
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 150 and mouseY < 210 then
+        if mouseX > 500 and mouseX < 720 and mouseY > 150 and mouseY < 210 then
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 150, 220, 60)
+            love.graphics.rectangle("fill", 500, 150, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 150, 220, 60)
+            love.graphics.rectangle("fill", 500, 150, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 250 and mouseY < 310 then
+        if mouseX > 500 and mouseX < 720 and mouseY > 250 and mouseY < 310 then
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 250, 220, 60)
+            love.graphics.rectangle("fill", 500, 250, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 250, 220, 60)
+            love.graphics.rectangle("fill", 500, 250, 220, 60)
         end
 
         love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle("line", 170, 150, 220, 60)
-        love.graphics.rectangle("line", 170, 250, 220, 60)
+        love.graphics.rectangle("line", 500, 150, 220, 60)
+        love.graphics.rectangle("line", 500, 250, 220, 60)
 
-        love.graphics.print("Play", 255, 160, 0, 2, 3)
-        love.graphics.print("Options", 232, 260, 0, 2, 3)
+        love.graphics.print("Resume", 562, 160, 0, 2, 3)
+        love.graphics.print("Options", 562, 260, 0, 2, 3)
 
     end
 
@@ -111,22 +111,34 @@ end
 function love.mousepressed(x, y, button, istouch)
 
     if inmenu == true then
+        if ingame == false then
+            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 then
+                inmenu = false
+                ingame = true
 
-        if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 then
-            inmenu = false
-            ingame = true
+                scroll.load()
+                player.load()
+                monster.load()
+            end
+            if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 then
+                options = true
+            end
 
-            scroll.load()
-            player.load()
-            monster.load()
-        end
+            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then
+                options = false
+            end
+        else
+            if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 then
+                inmenu = false
+            end
 
-        if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 then
-            options = true
-        end
+            if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 then
+                options = true
+            end
 
-        if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then
-            options = false
+            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then
+                options = false
+            end
         end
         
     end
