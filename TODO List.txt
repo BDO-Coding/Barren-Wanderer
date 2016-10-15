@@ -25,5 +25,6 @@ This is our Barren World TODO List:
 -Add different dimensions (this is kinda the same as the biome arrays one, or at least part of it)
 -Add farming
 	-Add food
+		-Potatos
 -Add potions
 -ADD STUFF TO THIS LIST
