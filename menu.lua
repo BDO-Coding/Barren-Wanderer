@@ -72,12 +72,22 @@ function menu.draw()
             love.graphics.rectangle("fill", 170, 250, 220, 60)
         end
 
+        if mouseX > 170 and mouseX < 390 and mouseY > 350 and mouseY < 410 then
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 350, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 350, 220, 60)
+        end
+
         love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle("line", 170, 150, 220, 60)
         love.graphics.rectangle("line", 170, 250, 220, 60)
+        love.graphics.rectangle("line", 170, 350, 220, 60)
 
-        love.graphics.print("New Game", 255, 160, 0, 2, 3)
-        love.graphics.print("Options", 232, 260, 0, 2, 3)
+        love.graphics.print("New Game", 218, 160, 0, 2, 3)
+        love.graphics.print("Load Game", 214, 260, 0, 2, 3)
+        love.graphics.print("Options", 232, 360, 0, 2, 3)
 
     end
 
@@ -295,7 +305,7 @@ function love.mousepressed(x, y, button, istouch)
                 monster.load()
                 
             end
-            if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 then
+            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 then
                 options = true
             end
 

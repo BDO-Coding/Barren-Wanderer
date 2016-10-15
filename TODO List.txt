@@ -4,7 +4,7 @@ This is our Barren World TODO List:
 	-Settings
 	-Credits
 	-New Game / Load Game instead of play button
--Add biome arrays:
+-Add biomes to the array:
 	-Grassland
 	-Jungle
 	-Ocean
