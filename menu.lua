@@ -1,7 +1,6 @@
 menu = {}
 require "scroll"
 require "player"
-require "images"
 require "monster"
 
 local menuMap -- stores tiledata
@@ -19,17 +18,20 @@ local tilesetSprite
 
 function menu.load()
 
-    images.load()
-
     options = false
+    credits = false
 
     mouseX = love.mouse.getX()
     mouseY = love.mouse.getY()
 
-    moveSpeed = 0.1
-    moveDirection = 0
+    menuPlayerImage = images.playerDown
+    playerImageDelay = 4
+    playerImageSize = 30
+    playerImageX = 500
 
-    menuMapMoveDelay = 2
+    moveSpeed = 0.001
+    moveTime = 0.001
+    moveDelay = 20
 
     menu.setupMap()
     menu.setupMapView()
@@ -47,18 +49,15 @@ function menu.draw()
         love.graphics.draw(tilesetBatch, math.floor(-zoomX*(menuMapX%1)*tileSize), math.floor(-zoomY*(menuMapY%1)*tileSize), 0, zoomX, zoomY)
 
         love.graphics.setColor(0, 255, 255)
-        love.graphics.rectangle("fill", 20, 600, 260, 15, 10)
         love.graphics.rotate(5.84685)
         love.graphics.rectangle("fill", -40, 145, 335, 60, 10)
         love.graphics.rotate(-5.84685)
         love.graphics.setColor(255, 0, 0)
         love.graphics.print("Barren World", 30, 150, 5.84685, 4, 4)
-        love.graphics.setColor(0, 0, 0)
-        love.graphics.print("Created by Danny Harris and Ori Taylor", 30, 600, 0)
 
     end
 
-    if inmenu == true and options == false and ingame == false then
+    if inmenu == true and options == false and ingame == false and credits == false then
 
         if mouseX > 170 and mouseX < 390 and mouseY > 150 and mouseY < 210 then
             love.graphics.setColor(30, 125, 49)
@@ -84,14 +83,47 @@ function menu.draw()
             love.graphics.rectangle("fill", 170, 350, 220, 60)
         end
 
+        if mouseX > 170 and mouseX < 390 and mouseY > 450 and mouseY < 510 then
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 450, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 450, 220, 60)
+        end
+
         love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle("line", 170, 150, 220, 60)
         love.graphics.rectangle("line", 170, 250, 220, 60)
         love.graphics.rectangle("line", 170, 350, 220, 60)
+        love.graphics.rectangle("line", 170, 450, 220, 60)
 
         love.graphics.print("New Game", 218, 160, 0, 2, 3)
         love.graphics.print("Load Game", 214, 260, 0, 2, 3)
         love.graphics.print("Options", 232, 360, 0, 2, 3)
+        love.graphics.print("Credits", 235, 460, 0, 2, 3)
+
+        if playerImageDelay > 3 then
+            menuPlayerImage = images.playerDown
+            playerImageSize = 30
+            playerImageX = 400
+        elseif playerImageDelay > 2 then
+            menuPlayerImage = images.playerSide
+            playerImageSize = 30
+            playerImageX = 400
+        elseif playerImageDelay > 1 then
+            menuPlayerImage = images.playerUp
+            playerImageSize = 30
+            playerImageX = 400
+        elseif playerImageDelay > 0 then
+            menuPlayerImage = images.playerSide
+            playerImageSize = -30
+            playerImageX = 1350
+        elseif playerImageDelay > -1 then
+            playerImageDelay = 4
+        end
+
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.draw(menuPlayerImage, playerImageX, -100, 0, playerImageSize, 30)
 
     end
 
@@ -120,6 +152,28 @@ function menu.draw()
         love.graphics.print("Resume", 562, 160, 0, 2, 3)
         love.graphics.print("Options", 562, 260, 0, 2, 3)
 
+    end
+
+    if credits == true then
+        love.graphics.setColor(0, 255, 255)
+        love.graphics.rectangle("fill", 300, 100, 800, 390, 10)
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.print("Coded by: \n         Danny Harris and Ori Taylor", 320, 120, 0, 3, 3)
+        love.graphics.print("Art by: \n         Danny Harris and Ori Taylor", 320, 200, 0, 3, 3)
+        love.graphics.print("Programs used: \n         LÖVE for Lua\n         paint.net\n         Sublime Text", 320, 300, 0, 3, 3)
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        end
+
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle("line", 170, 500, 220, 60)
+
+        love.graphics.print("Back", 249, 510, 0, 2, 3)
     end
 
 end
@@ -245,23 +299,19 @@ end
 
 function menu.update(dt)
 
-    menuMapMoveDelay = menuMapMoveDelay - dt
+    moveDelay = moveDelay - moveTime
+    playerImageDelay = playerImageDelay - dt
 
-    if moveDirection == 0 and menuMapMoveDelay <= 1 then
+    if moveDelay > 15 then
         menu.moveMap(moveSpeed * tileSize, 0)
-        moveDirection = 1
-    elseif moveDirection == 1 and menuMapMoveDelay <= 1 then
+    elseif moveDelay > 10 then
         menu.moveMap(0, moveSpeed * tileSize)
-        moveDirection = 2
-    elseif moveDirection == 2 and menuMapMoveDelay <= 1 then
+    elseif moveDelay > 5 then
         menu.moveMap(-moveSpeed * tileSize, 0)
-        moveDirection = 3
-    elseif moveDirection == 3 and menuMapMoveDelay <= 1 then
-        menu.moveMap(moveSpeed * tileSize, 0)
-        moveDirection = 4
-    elseif moveDirection == 4 and menuMapMoveDelay <= 1 then
-        moveDirection = 0
-        menuMapMoveDelay = 2
+    elseif moveDelay > 0 then
+        menu.moveMap(0, -moveSpeed * tileSize)
+    elseif moveDelay < 0 then
+        moveDelay = 20
     end
 
 end
@@ -291,7 +341,7 @@ function love.mousepressed(x, y, button, istouch)
 
     if inmenu == true then
         if ingame == false then
-            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 then
+            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false then
                 inmenu = false
                 ingame = true
 
@@ -300,12 +350,17 @@ function love.mousepressed(x, y, button, istouch)
                 monster.load()
                 
             end
-            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 then
+            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and options == false and credits == false then
                 options = true
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then
+            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 then
                 options = false
+                credits = false
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false then
+                credits = true
             end
         else
             if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 then

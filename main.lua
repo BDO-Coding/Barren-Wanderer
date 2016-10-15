@@ -9,9 +9,8 @@ function love.load()
 	ingame = false
 	inmenu = true
 
-	biomeArray = {}
-
 	menu.load()
+	images.load()
 
 end
  

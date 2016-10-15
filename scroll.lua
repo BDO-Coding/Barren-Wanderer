@@ -27,6 +27,9 @@ function scroll.load()
 end
 
 function scroll.biome()
+
+    biomeArray = {}
+
     for x=1, 480 do
         biomeArray[x] = {}
         for y=1, 480 do
@@ -34,8 +37,8 @@ function scroll.biome()
         end
     end
 
+    biomeSize = mapWidth/math.sqrt(biomeNum)
 
-biomeSize = mapWidth/math.sqrt(biomeNum)
     for x=1, biomeSize do
         for y=1, biomeSize do
             biomeArray[x][y] = 8--love.math.random(0,13)
