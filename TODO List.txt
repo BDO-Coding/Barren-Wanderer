@@ -22,4 +22,5 @@ This is our Barren World TODO List:
 -Add level up applience points if we are showing xp level
 -Stop player spawning at the side of the map
 -Make map bigger
+-Add different dimension
 -ADD STUFF TO THIS LIST
