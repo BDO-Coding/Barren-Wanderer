@@ -11,6 +11,7 @@ This is our Barren World TODO List:
 	-Oblivion
 	-etc..
 -Make terrain generation more preportioned
+	-Stop islands being square
 -Add powas (YAY)
 -Add monsters in-game (currently only have the class with a basic array)
 -Add a quest system
