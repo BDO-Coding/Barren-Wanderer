@@ -11,9 +11,39 @@ function player.load()
 	playerScreenX = 560
 	playerScreenY = 350
 
+    animeDelayW = 0.4
+    animeDelayA = 0.4
+    animeDelayS = 0.4
+    animeDelayD = 0.4
+
+    alternateW = true
+    alternateA = true
+    alternateS = true
+    alternateD = true
+
 end
 
-function player.update()
+function player.update(dt)
+
+    if love.keyboard.isDown("a")then
+	    animeDelayA = animeDelayA - dt
+    elseif love.keyboard.isDown("d")then
+        animeDelayD = animeDelayD - dt
+    elseif love.keyboard.isDown("w")then
+        animeDelayW = animeDelayW - dt
+    elseif love.keyboard.isDown("s")then
+        animeDelayS = animeDelayS - dt
+    end
+
+    function love.keypressed(pressSlow)
+
+        if pressSlow == ("escape") and inmenu == false then
+            inmenu = true
+        elseif pressSlow == ("escape") and inmenu == true then
+            inmenu = false
+        end
+
+    end
 
 end
 
@@ -24,28 +54,79 @@ function player.draw()
 		doOnce = false
 	end
 
-	if love.keyboard.isDown("w") then
-       	playerImage = images.playerUp
-       	playerSizeX = 2
-       	playerScreenX = 560
-    end
+    if inmenu == false then
 
-    if love.keyboard.isDown("s") then
-        playerImage = images.playerDown
-        playerSizeX = 2
-        playerScreenX = 560
-    end
+        if love.keyboard.isDown("w") and alternateW == true then
+            playerImage = images.playerUpAnimeA
+            playerSizeX = 2
+            playerScreenX = 560
+            if animeDelayW <= 0 then
+                alternateW = false
+                animeDelayW = 0.4
+            end
+        elseif love.keyboard.isDown("w") and alternateW == false then
+            playerImage = images.playerUpAnimeD
+            playerSizeX = 2
+            playerScreenX = 560
+            if animeDelayW <= 0 then
+                alternateW = true
+                animeDelayW = 0.4
+            end
+        end
 
-    if love.keyboard.isDown("a") then
-    	playerImage = images.playerSide
-    	playerSizeX = -2
-    	playerScreenX = 620
-    end
+        if love.keyboard.isDown("s") and alternateS == true then
+            playerImage = images.playerDownAnimeA
+            playerSizeX = 2
+            playerScreenX = 560
+            if animeDelayS <= 0 then
+                alternateS = false
+                animeDelayS = 0.4
+            end
+        elseif love.keyboard.isDown("s") and alternateS == false then
+            playerImage = images.playerDownAnimeD
+            playerSizeX = 2
+            playerScreenX = 560
+            if animeDelayS <= 0 then
+                alternateS = true
+                animeDelayS = 0.4
+            end
+        end
 
-    if love.keyboard.isDown("d") then
-    	playerImage = images.playerSide
-    	playerSizeX = 2
-    	playerScreenX = 560
+        if love.keyboard.isDown("a") and alternateA == true then
+            playerImage = images.playerDownAnimeD
+            playerSizeX = -2
+            playerScreenX = 625
+            if animeDelayA <= 0 then
+                alternateA = false
+                animeDelayA = 0.4
+            end
+        elseif love.keyboard.isDown("a") and alternateA == false then
+            playerImage = images.playerSide
+            playerSizeX = -2
+            playerScreenX = 625
+            if animeDelayA <= 0 then
+                alternateA = true
+                animeDelayA = 0.4
+            end
+        end
+
+        if love.keyboard.isDown("d") and alternateD == true then
+            playerImage = images.playerDownAnimeD
+            playerSizeX = 2
+            playerScreenX = 560
+            if animeDelayD <= 0 then
+                alternateD = false
+                animeDelayD = 0.4
+            end
+        elseif love.keyboard.isDown("d") and alternateD == false then
+            playerImage = images.playerSide
+            playerSizeX = 2
+            playerScreenX = 560
+            if animeDelayD <= 0 then
+                alternateD = true
+                animeDelayD = 0.4
+            end
+        end
     end
 
     if love.keyboard.isDown("lctrl") then
@@ -56,13 +137,25 @@ function player.draw()
     	playerSpeedDiagonal = 0.001
     end
 
+    function love.keyreleased(releaseImage)
+        if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" and inmenu == false then
+            playerImage = images.playerDown
+            playerSizeX = 2
+            playerScreenX = 560
+        elseif releaseImage == "w" and inmenu == false then
+            playerImage = images.playerUp
+            playerSizeX = 2
+            playerScreenX = 560
+        end
+    end
+
 	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
 
 end
 
-function UPDATE_PLAYER()
+function UPDATE_PLAYER(dt)
 
-	player.update()
+	player.update(dt)
 
 end
 

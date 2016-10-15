@@ -1,27 +1,41 @@
+require "menu"
 require "scroll"
 require "player"
 require "images"
+require "monster"
  
 function love.load()
 
-    scroll.load()
-    player.load()
-    images.load()
+	ingame = false
+	inmenu = true
+
+	menu.load()
 
 end
  
 function love.update(dt)
 
-    UPDATE_SCROLL(dt)
-    UPDATE_PLAYER(dt)
-    UPDATE_IMAGES(dt)
+	if ingame == true then
+	    UPDATE_SCROLL(dt)
+	    UPDATE_PLAYER(dt)
+	    UPDATE_MONSTER(dt)
+	end
+
+	UPDATE_MENU(dt)
 
 end
  
 function love.draw()
 
-    DRAW_SCROLL()
-    DRAW_PLAYER()
+	love.graphics.setColor(255, 255, 255)
+
+	if ingame == true then
+	    DRAW_SCROLL()
+	    DRAW_PLAYER()
+	    DRAW_MONSTER()
+	end
+
+	DRAW_MENU()
 
     love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20) --FPS Counter
   
