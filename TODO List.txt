@@ -31,5 +31,6 @@ This is our Barren World TODO List:
 		-Lots more
 	-Add animals
 	-Add fences
+-Add building
 -Add potions
 -ADD STUFF TO THIS LIST
