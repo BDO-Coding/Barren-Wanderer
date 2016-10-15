@@ -14,20 +14,31 @@ local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 
+local biomeNum = 1000 --has to be a square number
+local biomeSize
+
 function scroll.load()
 
     scroll.setupMap()
     scroll.setupMapView()
     scroll.setupTileset()
     
+
 end
 
 function scroll.biome()
-
-    for x=1, mapWidth do
+    for x=1, 480 do
         biomeArray[x] = {}
-        for y=1, mapHeight do
-            biomeArray[x][y] = love.math.random(0,13)
+        for y=1, 480 do
+            biomeArray[x][y] = 3--love.math.random(0,13)
+        end
+    end
+
+
+biomeSize = mapWidth/math.sqrt(biomeNum)
+    for x=1, biomeSize do
+        for y=1, biomeSize do
+            biomeArray[x][y] = 8--love.math.random(0,13)
         end
     end
 
@@ -36,7 +47,7 @@ end
 function scroll.setupMap()
 
     mapWidth = 480
-    mapHeight = 420
+    mapHeight = 480
 
     scroll.biome()
 
