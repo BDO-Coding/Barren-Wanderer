@@ -76,7 +76,7 @@ function menu.draw()
         love.graphics.rectangle("line", 170, 150, 220, 60)
         love.graphics.rectangle("line", 170, 250, 220, 60)
 
-        love.graphics.print("New Game", 255, 160, 0, 2, 3)
+        love.graphics.print("New Game", 219, 160, 0, 2, 3)
         love.graphics.print("Options", 232, 260, 0, 2, 3)
 
     end
