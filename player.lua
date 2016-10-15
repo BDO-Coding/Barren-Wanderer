@@ -11,10 +11,10 @@ function player.load()
 	playerScreenX = 560
 	playerScreenY = 350
 
-    animeDelayW = 0.4
-    animeDelayA = 0.4
-    animeDelayS = 0.4
-    animeDelayD = 0.4
+    animeDelayW = 0.1
+    animeDelayA = 0.1
+    animeDelayS = 0.1
+    animeDelayD = 0.1
 
     alternateW = true
     alternateA = true
