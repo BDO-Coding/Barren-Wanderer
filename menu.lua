@@ -46,10 +46,15 @@ function menu.draw()
 
         love.graphics.draw(tilesetBatch, math.floor(-zoomX*(menuMapX%1)*tileSize), math.floor(-zoomY*(menuMapY%1)*tileSize), 0, zoomX, zoomY)
 
+        love.graphics.setColor(0, 255, 255)
+        love.graphics.rectangle("fill", 20, 600, 260, 15, 10)
+        love.graphics.rotate(5.84685)
+        love.graphics.rectangle("fill", -40, 145, 335, 60, 10)
+        love.graphics.rotate(-5.84685)
+        love.graphics.setColor(255, 0, 0)
+        love.graphics.print("Barren World", 30, 150, 5.84685, 4, 4)
         love.graphics.setColor(0, 0, 0)
-
-        love.graphics.printf("Barren World", -480, 60, 100, "center", 0, 3, 3, -155)
-        love.graphics.printf("Created by Danny Harris and Ori Taylor", -380, 600, 1020, "center")
+        love.graphics.print("Created by Danny Harris and Ori Taylor", 30, 600, 0)
 
     end
 
@@ -242,8 +247,6 @@ function menu.update(dt)
 
     menuMapMoveDelay = menuMapMoveDelay - dt
 
-    print(menuMapMoveDelay)
-
     if moveDirection == 0 and menuMapMoveDelay <= 1 then
         menu.moveMap(moveSpeed * tileSize, 0)
         moveDirection = 1
@@ -260,12 +263,6 @@ function menu.update(dt)
         moveDirection = 0
         menuMapMoveDelay = 2
     end
-    --[[
-    menu.moveMap(0, -moveSpeed * tileSize) -- Up
-    menu.moveMap(0, moveSpeed * tileSize) -- Down
-    menu.moveMap(-moveSpeed * tileSize, 0) -- Left
-    menu.moveMap(moveSpeed * tileSize, 0) -- Right
-    ]]
 
 end
 
