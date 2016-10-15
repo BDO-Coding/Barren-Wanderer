@@ -3,8 +3,8 @@ require"images"
 
 function player.load()
 
-	playerSpeed = 0.002
-	playerSpeedDiagonal = 0.001
+	playerSpeed = 0.2 --0.002
+	playerSpeedDiagonal = 0.1 -- 0.001
 	doOnce = true
 	playerSizeX = 2
 	playerSizeY = 2

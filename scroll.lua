@@ -37,14 +37,26 @@ function scroll.setupMap()
     end
 -- Pro Gen
     for x=1,mapWidth do
-        for y=1,mapHeight do
-              --if map[x][y]+1 == 2 then Is killing all sand
+        for y=1,10 do
+            map[x][y] = 0
+        end
+    end
 
-                if map[x][y] == 2 then
-               map[x][y] = 2 
-           end
-             
-              
+        for x=1,10 do
+        for y=1,mapHeight do
+            map[x][y] = 0
+        end
+    end
+
+        for x=1,mapWidth do
+        for y=0,10 do
+            map[x][y] = 0
+        end
+    end
+
+        for x=mapWidth-10,mapWidth do
+        for y=1,mapHeight do
+            map[x][y] = 0
         end
     end
 
