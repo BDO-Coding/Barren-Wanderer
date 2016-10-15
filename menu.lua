@@ -3,6 +3,7 @@ require "scroll"
 require "player"
 require "images"
 require "monster"
+require "biome"
 
 local menuMap -- stores tiledata
 local menuMapWidth, menuMapHeight -- width and height in tiles
@@ -75,7 +76,7 @@ function menu.draw()
         love.graphics.rectangle("line", 170, 150, 220, 60)
         love.graphics.rectangle("line", 170, 250, 220, 60)
 
-        love.graphics.print("Play", 255, 160, 0, 2, 3)
+        love.graphics.print("New Game", 255, 160, 0, 2, 3)
         love.graphics.print("Options", 232, 260, 0, 2, 3)
 
     end
@@ -291,6 +292,7 @@ function love.mousepressed(x, y, button, istouch)
                 scroll.load()
                 player.load()
                 monster.load()
+                biome.load()
             end
             if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 then
                 options = true

@@ -1,5 +1,6 @@
 scroll={}
 require "player"
+require "biome"
 
 local map -- stores tiledata
 local mapWidth, mapHeight -- width and height in tiles
@@ -28,6 +29,14 @@ function scroll.setupMap()
     mapHeight = 220-----------------------------------------------------------USEFUL
 
     map = {}
+
+    for x=1,mapWidth do
+       map[x] = {}
+        for y=1,mapHeight do
+           map[x][y] = 0
+        end
+    end
+   --[[
     --Random Gen
     for x=1,mapWidth do
         map[x] = {}
@@ -61,7 +70,7 @@ function scroll.setupMap()
 
         end
     end
-
+]]--
     --Inserted
     map[1][1] = 5
     map[1][2] = 5
