@@ -1,11 +1,10 @@
 scroll={}
 require "player"
-require "biome"
 
 local map -- stores tiledata
-local mapWidth, mapHeight -- width and height in tiles
  
 local mapX, mapY -- view x,y in tiles. can be a fractional value like 3.25.
+local mapWidth, mapHeight -- Width and Height in pixels
  
 local tilesDisplayWidth, tilesDisplayHeight -- number of tiles to show
 local zoomX, zoomY
@@ -23,16 +22,29 @@ function scroll.load()
     
 end
 
+function scroll.biome()
+
+    for x=1, mapWidth do
+        biomeArray[x] = {}
+        for y=1, mapHeight do
+            biomeArray[x][y] = 1
+        end
+    end
+
+end
+
 function scroll.setupMap()
 
     mapWidth = 280
-    mapHeight = 220-----------------------------------------------------------USEFUL
+    mapHeight = 220
+
+    scroll.biome()
 
     map = {}
 
-    for x=1,mapWidth do
+    for x=1, mapWidth do
        map[x] = {}
-        for y=1,mapHeight do
+        for y=1, mapHeight do
            map[x][y] = biomeArray[x][y]
         end
     end
@@ -70,7 +82,7 @@ function scroll.setupMap()
 
         end
     end
-]]--
+]]
     --Inserted
     map[1][1] = 5
     map[1][2] = 5

@@ -3,7 +3,6 @@ require "scroll"
 require "player"
 require "images"
 require "monster"
-require "biome"
 
 local menuMap -- stores tiledata
 local menuMapWidth, menuMapHeight -- width and height in tiles
@@ -299,7 +298,6 @@ function love.mousepressed(x, y, button, istouch)
                 inmenu = false
                 ingame = true
 
-                biome.load()
                 scroll.load()
                 player.load()
                 monster.load()

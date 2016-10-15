@@ -9,6 +9,8 @@ function love.load()
 	ingame = false
 	inmenu = true
 
+	biomeArray = {}
+
 	menu.load()
 
 end
@@ -19,7 +21,6 @@ function love.update(dt)
 	    UPDATE_SCROLL(dt)
 	    UPDATE_PLAYER(dt)
 	    UPDATE_MONSTER(dt)
-	    UPDATE_BIOME(dt)
 	end
 
 	UPDATE_MENU(dt)
@@ -34,7 +35,6 @@ function love.draw()
 	    DRAW_SCROLL()
 	    DRAW_PLAYER()
 	    DRAW_MONSTER()
-	    DRAW_BIOME()
 	end
 
 	DRAW_MENU()
