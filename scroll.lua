@@ -27,7 +27,7 @@ function scroll.biome()
     for x=1, mapWidth do
         biomeArray[x] = {}
         for y=1, mapHeight do
-            biomeArray[x][y] = 1
+            biomeArray[x][y] = love.math.random(0,13)
         end
     end
 
