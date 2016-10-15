@@ -15,4 +15,5 @@ This is our Barren World TODO List:
 -Add monsters in-game (currently only have the class with a basic array)
 -Add a quest system
 -Add weapons
+-Add reputation level
 -ADD STUFF TO THIS LIST
