@@ -23,4 +23,5 @@ This is our Barren World TODO List:
 -Stop player spawning at the side of the map
 -Make map bigger
 -Add different dimensions (this is kinda the same as the biome arrays one, or at least part of it)
+-Add food
 -ADD STUFF TO THIS LIST
