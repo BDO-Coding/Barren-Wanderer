@@ -20,5 +20,5 @@ This is our Barren World TODO List:
 -Add reputation level
 -Add hidden/shown xp level
 -Add level up applience points if we are showing xp level
--Stop player spawning at the side
+-Stop player spawning at the side of the map
 -ADD STUFF TO THIS LIST
