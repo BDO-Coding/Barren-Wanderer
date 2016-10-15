@@ -21,7 +21,7 @@ function love.update(dt)
 	    UPDATE_MONSTER(dt)
 	end
 
-	UPDATE_MENU()
+	UPDATE_MENU(dt)
 
 end
  
