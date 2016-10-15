@@ -33,7 +33,7 @@ function scroll.setupMap()
     for x=1,mapWidth do
        map[x] = {}
         for y=1,mapHeight do
-           map[x][y] = 0
+           map[x][y] = biomeArray[x][y]
         end
     end
    --[[

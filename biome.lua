@@ -2,12 +2,12 @@ biome={}
 
 function biome.load()
 
-
+	local biomeArray
     biomeArray = {}
 
-    for x=1,228 do
+    for x=0,228 do
        biomeArray[x] = {}
-        for y=1,220 do
+        for y=0,220 do
            biomeArray[x][y] = 1
         end
     end

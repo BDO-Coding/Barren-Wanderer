@@ -289,10 +289,11 @@ function love.mousepressed(x, y, button, istouch)
                 inmenu = false
                 ingame = true
 
+                biome.load()
                 scroll.load()
                 player.load()
                 monster.load()
-                biome.load()
+                
             end
             if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 then
                 options = true
