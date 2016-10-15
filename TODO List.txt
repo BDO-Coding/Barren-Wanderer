@@ -26,5 +26,10 @@ This is our Barren World TODO List:
 -Add farming
 	-Add food
 		-Potatos
+		-Chicken
+		-Carrots
+		-Lots more
+	-Add animals
+	-Add fences
 -Add potions
 -ADD STUFF TO THIS LIST
