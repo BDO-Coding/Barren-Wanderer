@@ -35,8 +35,8 @@ end
 
 function scroll.setupMap()
 
-    mapWidth = 280
-    mapHeight = 220
+    mapWidth = 480
+    mapHeight = 420
 
     scroll.biome()
 
