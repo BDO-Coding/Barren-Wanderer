@@ -17,4 +17,5 @@ This is our Barren World TODO List:
 -Add weapons
 -Add reputation level
 -Add hidden/shown xp level
+-Add level up applience point
 -ADD STUFF TO THIS LIST
