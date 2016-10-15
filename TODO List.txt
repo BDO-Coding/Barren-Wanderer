@@ -12,6 +12,7 @@ This is our Barren World TODO List:
 	-etc..
 -Make terrain generation more preportioned
 	-Stop islands being square
+	-Add ruined town/village
 -Add powas (YAY)
 -Add monsters in-game (currently only have the class with a basic array)
 -Add a quest system
@@ -19,4 +20,5 @@ This is our Barren World TODO List:
 -Add reputation level
 -Add hidden/shown xp level
 -Add level up applience points if we are showing xp level
+-Stop player spawning at the side
 -ADD STUFF TO THIS LIST
