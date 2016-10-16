@@ -37,18 +37,14 @@ General:
 	-Add fences
 -Add building
 -Add potions
+-Game Saving
+	-Make world seed save
+	-Add save menu
+-World Generation
+	-Make variable biome sizes
+	-Textured Biome edges
+	-Seed
+	-Rivers
+	-3rd layer biome map (oceans = edges, mountains = middle)
+	-saving
 -ADD STUFF TO THIS LIST :)
-I have:
-
-Game Saving:
--Make world seed save
--Add save menu
-
-World Generation:
-
--Make variable biome sizes
--Textured Biome edges
--Seed
--Rivers
--3rd layer biome map (oceans = edges, mountains = middle)
--saving
