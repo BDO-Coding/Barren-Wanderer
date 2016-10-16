@@ -41,6 +41,13 @@ function love.draw()
 
 	DRAW_MENU()
 
-    love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20) --FPS Counter
-      love.graphics.print(_VERSION, 10, 120) --Lua Version
+
+	love.graphics.print("Version: " .._VERSION, 10, 40) --Lua Version
+	
+	if fps == true then
+		--love.graphics.print("FPS is on", 10, 30)
+    	love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20) --FPS Counter	
+    --elseif fps == false then
+		--love.graphics.print("FPS is off", 10, 30)
+    end
 end

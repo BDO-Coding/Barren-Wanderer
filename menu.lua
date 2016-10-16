@@ -43,6 +43,8 @@ function menu.load()
     menu.setupMapView()
     menu.setupTileset()
 
+    fps = false
+
 end
 
 function menu.draw()
@@ -60,7 +62,12 @@ function menu.draw()
         love.graphics.rotate(-5.84685)
         love.graphics.setColor(255, 0, 0)
         love.graphics.print("Barren World", 30, 150, 5.84685, 4, 4)
-
+        --[[if fps == true then
+            love.graphics.print("Fps is on", 30, 600, 0, 4, 4)        
+        elseif fps == false then
+            love.graphics.print("Fps is off", 30, 600, 0, 4, 4)
+        end]]
+         
     end
 
     if inmenu == true and options == false and ingame == false and credits == false then
@@ -327,6 +334,8 @@ function menu.update(dt)
         end
     end
 
+
+
 end
 
 function menu.options()
@@ -341,9 +350,22 @@ function menu.options()
             love.graphics.rectangle("fill", 170, 500, 220, 60)
         end
 
-        love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle("line", 170, 500, 220, 60)
+        if mouseX > 170 and mouseX < 390 and mouseY > 200 and mouseY < 260 then
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 200, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 200, 220, 60)
+        end
 
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle("line", 170, 200, 220, 60)
+        if fps == true then
+            love.graphics.print("FPS:On", 249, 210, 0, 2, 3)
+        elseif fps == false then
+            love.graphics.print("FPS:Off", 249, 210, 0, 2, 3)
+        end
+        love.graphics.rectangle("line", 170, 500, 220, 60)
         love.graphics.print("Back", 249, 510, 0, 2, 3)
 
     end
@@ -408,10 +430,15 @@ function love.mousepressed(x, y, button, istouch)
                 options = false
                 credits = false
                 playerImageDelay = 4
+                
             end
 
             if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false then
                 credits = true
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 200 and y < 260 and options == true then
+                fps = not fps
             end
         else
             if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 then
@@ -420,11 +447,13 @@ function love.mousepressed(x, y, button, istouch)
 
             if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 then
                 options = true
-            end
-
+            end          
+            
             if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then
                 options = false
             end
+
+
         end
         
     end
