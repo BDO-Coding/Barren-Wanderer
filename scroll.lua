@@ -13,8 +13,8 @@ local tilesetImage
 local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
-
-local biomeNum = 1000 --has to be a square number
+local biomeNum = 25600 --has to be a square number 57600
+local setBiomeSize = 5
 local biomeSize
 
 function scroll.load()
@@ -34,13 +34,22 @@ function scroll.biome()
         end
     end
 
-
+biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
 biomeSize = mapWidth/math.sqrt(biomeNum)
-    for x=1, biomeSize do
-        for y=1, biomeSize do
-            biomeArray[x][y] = 8--love.math.random(0,13)
+for biomeX=1,math.sqrt(biomeNum) do
+    for biomeY=1,math.sqrt(biomeNum) do
+xStart =biomeX*biomeSize - biomeSize +1
+yStart =biomeY*biomeSize - biomeSize +1
+xMax = biomeX*biomeSize
+yMax = biomeY*biomeSize
+biomeType = love.math.random(0,13)
+    for x=xStart, xMax do
+        for y=yStart, yMax do
+            biomeArray[x][y] = biomeType--love.math.random(0,13)
         end
-    end
+    end -- x=xstart
+end
+end
 
 end
 
