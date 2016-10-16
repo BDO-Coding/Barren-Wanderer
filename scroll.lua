@@ -37,24 +37,22 @@ function scroll.biome()
         end
     end
 
-
-biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
-biomeSize = mapWidth/math.sqrt(biomeNum)
-for biomeX=1,math.sqrt(biomeNum) do
-    for biomeY=1,math.sqrt(biomeNum) do
-xStart =biomeX*biomeSize - biomeSize +1
-yStart =biomeY*biomeSize - biomeSize +1
-xMax = biomeX*biomeSize
-yMax = biomeY*biomeSize
-biomeType = love.math.random(0,13)
-    for x=xStart, xMax do
-        for y=yStart, yMax do
-            biomeArray[x][y] = biomeType--love.math.random(0,13)
-
+    biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
+    biomeSize = mapWidth/math.sqrt(biomeNum)
+    for biomeX=1,math.sqrt(biomeNum) do
+        for biomeY=1,math.sqrt(biomeNum) do
+            xStart =biomeX*biomeSize - biomeSize +1
+            yStart =biomeY*biomeSize - biomeSize +1
+            xMax = biomeX*biomeSize
+            yMax = biomeY*biomeSize
+            biomeType = love.math.random(0,13)
+            for x=xStart, xMax do
+                for y=yStart, yMax do
+                    biomeArray[x][y] = biomeType--love.math.random(0,13)
+                end
+            end
         end
-    end -- x=xstart
-end
-end
+    end
 
 end
 
