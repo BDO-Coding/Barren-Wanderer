@@ -41,7 +41,6 @@ function love.draw()
 
 	DRAW_MENU()
 
-
 	love.graphics.print("Version: " .._VERSION, 10, 40) --Lua Version
 	
 	if fps == true then

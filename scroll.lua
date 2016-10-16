@@ -24,7 +24,6 @@ function scroll.load()
     scroll.setupMap()
     scroll.setupMapView()
     scroll.setupTileset()
-    
 
 end
 
@@ -38,7 +37,6 @@ function scroll.biome()
             biomeArray[x][y] = 3--love.math.random(0,13)
         end
     end
-
 
     biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
     biomeSize = mapWidth/math.sqrt(biomeNum)
@@ -58,11 +56,6 @@ function scroll.biome()
     end
 
 end
---[[
-function scroll.lfsr()
-     bit  = (((lfsr & 2^16-1) >> 0) ^ ((lfsr & 2^16-1) >> 2) ^ ((lfsr & 2^16-1) >> 3) ^ ((lfsr & 2^16-1) >> 5) ) & 1
-    return lfsr =  ((lfsr & 2^16-1) >> 1) | (bit << 15)
-end]]
 
 
 function scroll.setupMap()
@@ -106,8 +99,13 @@ function scroll.setupMap()
                 else
                     map[x][y] = 12
                 end
-            else 
-                map[x][y] = 13 --Jungle 1
+            else
+                if random == 0 then 
+                    map[x][y] = 14 --Jungle 1
+                else
+                    map[x][y] = 13 --Jungle 2
+                end
+                
             end
             
         end
@@ -166,7 +164,7 @@ function scroll.setupMap()
     map[7][12] = 5
     map[7][14] = 5
     map[6][13] = 5
-    --Inserted
+
 end
  
 function scroll.setupMapView()
@@ -230,7 +228,10 @@ function scroll.setupTileset()
     tilesetImage:getWidth(), tilesetImage:getHeight())
     --JungleTree
     tileQuads[13] = love.graphics.newQuad(13 * tileSize, 0 * tileSize, tileSize, tileSize,
-    tilesetImage:getWidth(), tilesetImage:getHeight())        
+    tilesetImage:getWidth(), tilesetImage:getHeight())
+    --JungleGrass
+    tileQuads[14] = love.graphics.newQuad(14 * tileSize, 0 * tileSize, tileSize, tileSize,
+    tilesetImage:getWidth(), tilesetImage:getHeight())   
 
     tilesetBatch = love.graphics.newSpriteBatch(tilesetImage, tilesDisplayWidth * tilesDisplayHeight)
 
