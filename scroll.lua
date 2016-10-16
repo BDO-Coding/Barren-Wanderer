@@ -14,7 +14,7 @@ local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 local biomeNum = 25600 --has to be a square number 57600
-local setBiomeSize = 5
+local setBiomeSize = 20
 local biomeSize
 
 function scroll.load()
@@ -46,7 +46,7 @@ xStart =biomeX*biomeSize - biomeSize +1
 yStart =biomeY*biomeSize - biomeSize +1
 xMax = biomeX*biomeSize
 yMax = biomeY*biomeSize
-biomeType = love.math.random(0,13)
+biomeType = love.math.random(0,5)
     for x=xStart, xMax do
         for y=yStart, yMax do
             biomeArray[x][y] = biomeType
@@ -67,11 +67,45 @@ function scroll.setupMap()
     map = {}
 
     for x=1, mapWidth do
-       map[x] = {}
+      map[x] = {}
         for y=1, mapHeight do
-           map[x][y] = biomeArray[x][y]
+            random = love.math.random(0,3)
+            if biomeArray[x][y] == 0 then --Ocean 1
+                map[x][y] = 0     
+            elseif biomeArray[x][y] == 1 then -- Grass 1
+                if random == 0 then 
+                    map[x][y] = 8
+                elseif random == 1 then
+                    map[x][y] = 9
+                else
+                    map[x][y] = 10
+                end
+            elseif biomeArray[x][y] == 2 then --Deset 1
+                if random == 0 then 
+                    map[x][y] = 7
+                else
+                    map[x][y] = 6
+                end
+            elseif biomeArray[x][y] == 3 then --Beach 1
+                map[x][y] = 1
+            elseif biomeArray[x][y] == 4 then --Forest 1
+                if random == 0 then 
+                    map[x][y] = 8
+                elseif random == 1 then
+                    map[x][y] = 9
+                elseif random == 2 then
+                    map[x][y] = 11
+                else
+                    map[x][y] = 12
+                end
+            else 
+                map[x][y] = 13 --Jungle 1
+            end
+            
         end
+
     end
+
 
     --[[Random Gen
     for x=1,mapWidth do
