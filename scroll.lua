@@ -62,8 +62,8 @@ function scroll.setupMap()
            map[x][y] = biomeArray[x][y]
         end
     end
-   --[[
-    --Random Gen
+
+    --[[Random Gen
     for x=1,mapWidth do
         map[x] = {}
         for y=1,mapHeight do
@@ -95,9 +95,9 @@ function scroll.setupMap()
             map[x][y] = 0
 
         end
-    end
-]]
-    --Inserted
+    end]]
+
+    --Name Signiture
     map[1][1] = 5
     map[1][2] = 5
     map[1][3] = 5
@@ -228,7 +228,7 @@ end
 
 function scroll.update(dt)
 
-    if inmenu == false then
+    if inmenu == false and loadScreen == false then
         if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
 
             scroll.moveMap(0, -playerSpeedDiagonal * tileSize)

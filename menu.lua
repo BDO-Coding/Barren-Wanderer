@@ -21,6 +21,11 @@ function menu.load()
     options = false
     credits = false
 
+    loadScreen = false
+    loadDelay = 10
+
+    doLoadScreen = true -------------------------------------------------------------USEFUL, THIS IS A DEVELOPER TOOL FOR MAKING IT QUICKER TO PLAY THE GAME (You don't have to wait for loads)
+
     mouseX = love.mouse.getX()
     mouseY = love.mouse.getY()
 
@@ -299,19 +304,23 @@ end
 
 function menu.update(dt)
 
-    moveDelay = moveDelay - moveTime
-    playerImageDelay = playerImageDelay - dt
+    if loadScreen == true then
+        loadDelay = loadDelay - dt
+    elseif ingame == false then
+        moveDelay = moveDelay - moveTime
+        playerImageDelay = playerImageDelay - dt
 
-    if moveDelay > 15 then
-        menu.moveMap(moveSpeed * tileSize, 0)
-    elseif moveDelay > 10 then
-        menu.moveMap(0, moveSpeed * tileSize)
-    elseif moveDelay > 5 then
-        menu.moveMap(-moveSpeed * tileSize, 0)
-    elseif moveDelay > 0 then
-        menu.moveMap(0, -moveSpeed * tileSize)
-    elseif moveDelay < 0 then
-        moveDelay = 20
+        if moveDelay > 15 then
+            menu.moveMap(moveSpeed * tileSize, 0)
+        elseif moveDelay > 10 then
+            menu.moveMap(0, moveSpeed * tileSize)
+        elseif moveDelay > 5 then
+            menu.moveMap(-moveSpeed * tileSize, 0)
+        elseif moveDelay > 0 then
+            menu.moveMap(0, -moveSpeed * tileSize)
+        elseif moveDelay < 0 then
+            moveDelay = 20
+        end
     end
 
 end
@@ -337,6 +346,38 @@ function menu.options()
 
 end
 
+function menu.loadScreen()
+
+    if loadScreen == true then
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle("fill", 0, 0, 1200, 750)
+        love.graphics.setColor(255, 255, 255)
+        if loadDelay > 9 then
+            love.graphics.print("Loading", 510, 320, 0, 3, 3)
+        elseif loadDelay > 8 then
+            love.graphics.print("Loading.", 510, 320, 0, 3, 3)
+        elseif loadDelay > 7 then
+            love.graphics.print("Loading..", 510, 320, 0, 3, 3)
+        elseif loadDelay > 6 then
+            love.graphics.print("Loading...", 510, 320, 0, 3, 3)
+        elseif loadDelay > 5 then
+            love.graphics.print("Loading", 510, 320, 0, 3, 3)
+        elseif loadDelay > 4 then
+            love.graphics.print("Loading.", 510, 320, 0, 3, 3)
+        elseif loadDelay > 3 then
+            love.graphics.print("Loading..", 510, 320, 0, 3, 3)
+        elseif loadDelay > 2 then
+            love.graphics.print("Loading...", 510, 320, 0, 3, 3)
+        elseif loadDelay > 1 then
+            love.graphics.print("Loading", 510, 320, 0, 3, 3)
+        elseif loadDelay > 0 then
+            loadScreen = false
+            loadDelay = 10
+        end
+    end
+
+end
+
 function love.mousepressed(x, y, button, istouch)
 
     if inmenu == true then
@@ -344,6 +385,10 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false then
                 inmenu = false
                 ingame = true
+
+                if doLoadScreen == true then
+                    loadScreen = true
+                end
 
                 scroll.load()
                 player.load()
@@ -357,6 +402,7 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 then
                 options = false
                 credits = false
+                playerImageDelay = 4
             end
 
             if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false then
@@ -383,10 +429,7 @@ end
 function UPDATE_MENU(dt)
 
     love.mousepressed()
-
-    if ingame == false then
-        menu.update(dt)
-    end
+    menu.update(dt)
 
 end
 
@@ -394,5 +437,6 @@ function DRAW_MENU()
 
     menu.draw()
     menu.options()
+    menu.loadScreen()
 
 end
