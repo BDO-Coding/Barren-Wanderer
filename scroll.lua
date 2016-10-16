@@ -27,12 +27,16 @@ function scroll.load()
 end
 
 function scroll.biome()
+
+    biomeArray = {}
+
     for x=1, 480 do
         biomeArray[x] = {}
         for y=1, 480 do
             biomeArray[x][y] = 3--love.math.random(0,13)
         end
     end
+
 
 biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
 biomeSize = mapWidth/math.sqrt(biomeNum)
@@ -46,6 +50,7 @@ biomeType = love.math.random(0,13)
     for x=xStart, xMax do
         for y=yStart, yMax do
             biomeArray[x][y] = biomeType--love.math.random(0,13)
+
         end
     end -- x=xstart
 end
@@ -68,8 +73,8 @@ function scroll.setupMap()
            map[x][y] = biomeArray[x][y]
         end
     end
-   --[[
-    --Random Gen
+
+    --[[Random Gen
     for x=1,mapWidth do
         map[x] = {}
         for y=1,mapHeight do
@@ -101,9 +106,9 @@ function scroll.setupMap()
             map[x][y] = 0
 
         end
-    end
-]]
-    --Inserted
+    end]]
+
+    --Name Signiture
     map[1][1] = 5
     map[1][2] = 5
     map[1][3] = 5
@@ -234,7 +239,7 @@ end
 
 function scroll.update(dt)
 
-    if inmenu == false then
+    if inmenu == false and loadScreen == false then
         if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
 
             scroll.moveMap(0, -playerSpeedDiagonal * tileSize)

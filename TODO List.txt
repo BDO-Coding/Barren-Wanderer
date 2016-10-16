@@ -17,6 +17,7 @@ This is our Barren World TODO List:
 -Add monsters in-game (currently only have the class with a basic array)
 -Add a quest system
 -Add weapons
+-Add inventory / hotbar
 -Add reputation level
 -Add hidden/shown xp level
 -Add level up applience points if we are showing xp level
