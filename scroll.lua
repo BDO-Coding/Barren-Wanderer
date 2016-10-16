@@ -57,6 +57,12 @@ function scroll.biome()
 
 end
 
+function scroll.lfsr(dt)
+
+
+
+end
+
 function scroll.setupMap()
 
     mapWidth = 480
@@ -106,41 +112,6 @@ function scroll.setupMap()
 
     end
 
-
-    --[[Random Gen
-    for x=1,mapWidth do
-        map[x] = {}
-        for y=1,mapHeight do
-           map[x][y] = love.math.random(0,13)
-        end
-    end
-    --Pro Gen
-    for x=1,mapWidth do
-        for y=1,10 do
-            map[x][y] = 0
-        end
-    end
-
-        for x=1,10 do
-        for y=1,mapHeight do
-
-            map[x][y] = 0
-        end
-    end
-
-        for x=1,mapWidth do
-        for y=0,10 do
-            map[x][y] = 0
-        end
-    end
-
-        for x=mapWidth-10,mapWidth do
-        for y=1,mapHeight do
-            map[x][y] = 0
-
-        end
-    end]]
-
     --Name Signiture
     map[1][1] = 5
     map[1][2] = 5
@@ -171,6 +142,28 @@ function scroll.setupMap()
     map[7][6] = 5
     map[6][7] = 5
     map[6][8] = 5
+
+    map[1][11] = 5
+    map[1][12] = 5
+    map[1][13] = 5
+    map[1][14] = 5
+    map[1][15] = 5
+    map[2][11] = 5
+    map[2][15] = 5
+    map[3][12] = 5
+    map[3][14] = 5
+    map[2][13] = 5
+
+    map[5][11] = 5
+    map[5][12] = 5
+    map[5][13] = 5
+    map[5][14] = 5
+    map[5][15] = 5
+    map[6][11] = 5
+    map[6][15] = 5
+    map[7][12] = 5
+    map[7][14] = 5
+    map[6][13] = 5
     --Inserted
 end
  
@@ -322,7 +315,8 @@ end
 
 function UPDATE_SCROLL(dt)
 
-    scroll.update()
+    scroll.update(dt)
+    scroll.lfsr(dt)
 
 end
 
