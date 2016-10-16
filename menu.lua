@@ -164,9 +164,10 @@ function menu.draw()
         love.graphics.setColor(0, 255, 255)
         love.graphics.rectangle("fill", 300, 100, 800, 390, 10)
         love.graphics.setColor(0, 0, 0)
-        love.graphics.print("Coded by: \n         Danny Harris and Ori Taylor", 320, 120, 0, 3, 3)
-        love.graphics.print("Art by: \n         Danny Harris and Ori Taylor", 320, 200, 0, 3, 3)
-        love.graphics.print("Programs used: \n         LÖVE for Lua\n         paint.net\n         Sublime Text", 320, 300, 0, 3, 3)
+        love.graphics.print("Coded by: \n         Danny Harris, Benjamin Broadbent and Ori Taylor", 320, 120, 0, 2, 2)
+        love.graphics.print("Art by: \n         Danny Harris, Benjamin Broadbent and Ori Taylor", 320, 200, 0, 2, 2)
+        love.graphics.print("Sound by: \n         Nobody", 320, 280, 0, 2, 2)
+        love.graphics.print("Programs used: \n         LÖVE for Lua\n         paint.net\n         Sublime Text", 320, 360, 0, 2, 2)
 
         if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then
             love.graphics.setColor(30, 125, 49)
@@ -304,7 +305,9 @@ function menu.moveMap(dx, dy)
 end
 
 function menu.update(dt)
-
+ if love.keyboard.isDown("d")then
+    doLoadScreen = false
+ end
     if loadScreen == true then
         loadDelay = loadDelay - dt
     elseif ingame == false then

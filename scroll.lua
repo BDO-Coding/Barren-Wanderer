@@ -14,8 +14,10 @@ local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 local biomeNum = 25600 --has to be a square number 57600
-local setBiomeSize = 5
+local setBiomeSize = 20
 local biomeSize
+
+math.randomseed(1234)
 
 function scroll.load()
 
@@ -37,6 +39,7 @@ function scroll.biome()
         end
     end
 
+
     biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
     biomeSize = mapWidth/math.sqrt(biomeNum)
     for biomeX=1,math.sqrt(biomeNum) do
@@ -45,7 +48,7 @@ function scroll.biome()
             yStart =biomeY*biomeSize - biomeSize +1
             xMax = biomeX*biomeSize
             yMax = biomeY*biomeSize
-            biomeType = love.math.random(0,13)
+            biomeType = math.random(0,5)
             for x=xStart, xMax do
                 for y=yStart, yMax do
                     biomeArray[x][y] = biomeType--love.math.random(0,13)
@@ -55,6 +58,12 @@ function scroll.biome()
     end
 
 end
+--[[
+function scroll.lfsr()
+     bit  = (((lfsr & 2^16-1) >> 0) ^ ((lfsr & 2^16-1) >> 2) ^ ((lfsr & 2^16-1) >> 3) ^ ((lfsr & 2^16-1) >> 5) ) & 1
+    return lfsr =  ((lfsr & 2^16-1) >> 1) | (bit << 15)
+end]]
+
 
 function scroll.setupMap()
 
@@ -66,45 +75,44 @@ function scroll.setupMap()
     map = {}
 
     for x=1, mapWidth do
-       map[x] = {}
+      map[x] = {}
         for y=1, mapHeight do
-           map[x][y] = biomeArray[x][y]
+            random = math.random(0,3)
+            if biomeArray[x][y] == 0 then --Ocean 1
+                map[x][y] = 0     
+            elseif biomeArray[x][y] == 1 then -- Grass 1
+                if random == 0 then 
+                    map[x][y] = 8
+                elseif random == 1 then
+                    map[x][y] = 9
+                else
+                    map[x][y] = 10
+                end
+            elseif biomeArray[x][y] == 2 then --Deset 1
+                if random == 0 then 
+                    map[x][y] = 7
+                else
+                    map[x][y] = 6
+                end
+            elseif biomeArray[x][y] == 3 then --Beach 1
+                map[x][y] = 1
+            elseif biomeArray[x][y] == 4 then --Forest 1
+                if random == 0 then 
+                    map[x][y] = 8
+                elseif random == 1 then
+                    map[x][y] = 9
+                elseif random == 2 then
+                    map[x][y] = 11
+                else
+                    map[x][y] = 12
+                end
+            else 
+                map[x][y] = 13 --Jungle 1
+            end
+            
         end
+
     end
-
-    --[[Random Gen
-    for x=1,mapWidth do
-        map[x] = {}
-        for y=1,mapHeight do
-           map[x][y] = love.math.random(0,13)
-        end
-    end
-    --Pro Gen
-    for x=1,mapWidth do
-        for y=1,10 do
-            map[x][y] = 0
-        end
-    end
-
-        for x=1,10 do
-        for y=1,mapHeight do
-
-            map[x][y] = 0
-        end
-    end
-
-        for x=1,mapWidth do
-        for y=0,10 do
-            map[x][y] = 0
-        end
-    end
-
-        for x=mapWidth-10,mapWidth do
-        for y=1,mapHeight do
-            map[x][y] = 0
-
-        end
-    end]]
 
     --Name Signiture
     map[1][1] = 5
@@ -136,6 +144,29 @@ function scroll.setupMap()
     map[7][6] = 5
     map[6][7] = 5
     map[6][8] = 5
+
+    map[1][11] = 5
+    map[1][12] = 5
+    map[1][13] = 5
+    map[1][14] = 5
+    map[1][15] = 5
+    map[2][11] = 5
+    map[2][15] = 5
+    map[3][12] = 5
+    map[3][14] = 5
+    map[2][13] = 5
+
+    map[5][11] = 5
+    map[5][12] = 5
+    map[5][13] = 5
+    map[5][14] = 5
+    map[5][15] = 5
+    map[6][11] = 5
+    map[6][15] = 5
+    map[7][12] = 5
+    map[7][14] = 5
+    map[6][13] = 5
+    
 end
  
 function scroll.setupMapView()
@@ -286,8 +317,7 @@ end
 
 function UPDATE_SCROLL(dt)
 
-    scroll.update()
-
+    scroll.update(dt)
 end
 
 function DRAW_SCROLL()

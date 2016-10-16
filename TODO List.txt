@@ -1,5 +1,8 @@
 This is our Barren World TODO List:
 
+
+General:
+
 -Add more menu options:
 	-Settings
 	-Credits
@@ -34,4 +37,14 @@ This is our Barren World TODO List:
 	-Add fences
 -Add building
 -Add potions
+-Game Saving
+	-Make world seed save
+	-Add save menu
+-World Generation
+	-Make variable biome sizes
+	-Textured Biome edges
+	-Seed
+	-Rivers
+	-3rd layer biome map (oceans = edges, mountains = middle)
+	-saving
 -ADD STUFF TO THIS LIST :)
