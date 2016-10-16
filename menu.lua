@@ -304,7 +304,9 @@ function menu.moveMap(dx, dy)
 end
 
 function menu.update(dt)
-
+ if love.keyboard.isDown("d")then
+    doLoadScreen = false
+ end
     if loadScreen == true then
         loadDelay = loadDelay - dt
     elseif ingame == false then

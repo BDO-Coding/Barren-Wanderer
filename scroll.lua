@@ -49,8 +49,7 @@ yMax = biomeY*biomeSize
 biomeType = love.math.random(0,13)
     for x=xStart, xMax do
         for y=yStart, yMax do
-            biomeArray[x][y] = biomeType--love.math.random(0,13)
-
+            biomeArray[x][y] = biomeType
         end
     end -- x=xstart
 end
