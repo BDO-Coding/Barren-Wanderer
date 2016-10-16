@@ -46,7 +46,7 @@ function scroll.biome()
             yStart =biomeY*biomeSize - biomeSize +1
             xMax = biomeX*biomeSize
             yMax = biomeY*biomeSize
-            biomeType = love.math.random(0,13)
+            biomeType = love.math.random(0,5)
             for x=xStart, xMax do
                 for y=yStart, yMax do
                     biomeArray[x][y] = biomeType--love.math.random(0,13)
