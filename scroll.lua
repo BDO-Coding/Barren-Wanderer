@@ -136,7 +136,6 @@ function scroll.setupMap()
     map[7][6] = 5
     map[6][7] = 5
     map[6][8] = 5
-    --Inserted
 end
  
 function scroll.setupMapView()
