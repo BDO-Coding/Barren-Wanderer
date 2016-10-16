@@ -2,6 +2,7 @@ menu = {}
 require "scroll"
 require "player"
 require "monster"
+require "hotbar"
 
 local menuMap -- stores tiledata
 local menuMapWidth, menuMapHeight -- width and height in tiles
@@ -393,6 +394,7 @@ function love.mousepressed(x, y, button, istouch)
                 scroll.load()
                 player.load()
                 monster.load()
+                hotbar.load()
                 
             end
             if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and options == false and credits == false then
