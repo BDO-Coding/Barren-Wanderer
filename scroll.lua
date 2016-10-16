@@ -17,6 +17,8 @@ local biomeNum = 25600 --has to be a square number 57600
 local setBiomeSize = 20
 local biomeSize
 
+math.randomseed(1234)
+
 function scroll.load()
 
     scroll.setupMap()
@@ -46,7 +48,7 @@ function scroll.biome()
             yStart =biomeY*biomeSize - biomeSize +1
             xMax = biomeX*biomeSize
             yMax = biomeY*biomeSize
-            biomeType = love.math.random(0,5)
+            biomeType = math.random(0,5)
             for x=xStart, xMax do
                 for y=yStart, yMax do
                     biomeArray[x][y] = biomeType--love.math.random(0,13)
@@ -56,12 +58,12 @@ function scroll.biome()
     end
 
 end
+--[[
+function scroll.lfsr()
+     bit  = (((lfsr & 2^16-1) >> 0) ^ ((lfsr & 2^16-1) >> 2) ^ ((lfsr & 2^16-1) >> 3) ^ ((lfsr & 2^16-1) >> 5) ) & 1
+    return lfsr =  ((lfsr & 2^16-1) >> 1) | (bit << 15)
+end]]
 
-function scroll.lfsr(dt)
-
-
-
-end
 
 function scroll.setupMap()
 
@@ -75,7 +77,7 @@ function scroll.setupMap()
     for x=1, mapWidth do
       map[x] = {}
         for y=1, mapHeight do
-            random = love.math.random(0,3)
+            random = math.random(0,3)
             if biomeArray[x][y] == 0 then --Ocean 1
                 map[x][y] = 0     
             elseif biomeArray[x][y] == 1 then -- Grass 1
@@ -316,8 +318,6 @@ end
 function UPDATE_SCROLL(dt)
 
     scroll.update(dt)
-    scroll.lfsr(dt)
-
 end
 
 function DRAW_SCROLL()

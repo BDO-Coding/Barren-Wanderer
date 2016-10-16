@@ -42,5 +42,5 @@ function love.draw()
 	DRAW_MENU()
 
     love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20) --FPS Counter
-  
+      love.graphics.print(_VERSION, 10, 120) --Lua Version
 end
