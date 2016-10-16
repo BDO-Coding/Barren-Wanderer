@@ -9,7 +9,7 @@ end
 function hotbar.update(dt)
 
 	function love.keypressed(numberKey)
-		if ingame == true and loadScreen == false then
+		if ingame == true and loadScreen == false then -----------AAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHH
 			if numberKey == "1" then
 				currentHotbarHand = 1
 			elseif numberKey == "2" then
