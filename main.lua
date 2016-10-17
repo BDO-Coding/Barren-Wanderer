@@ -63,7 +63,11 @@ function love.draw()
 		love.graphics.print("MouseX: "..love.mouse.getX(), 10, 40)
     	love.graphics.print("MouseY: "..love.mouse.getY(), 10, 50)
     end
+    
+    if seed_show == true then
     	love.graphics.print("Seed: "..seed, 10, 60)
+    end
+
 	if fps_show == true then
     	love.graphics.print("FPS: "..love.timer.getFPS(), 10, 10) --FPS Counter	
     end

@@ -47,6 +47,7 @@ function menu.load()
     version_show = false
     mouseCoord_show = false
     volume = 50
+    seed_show = false
 
 end
 
@@ -402,6 +403,14 @@ function menu.options()
         else
             love.graphics.setColor(31, 191, 63)
             love.graphics.rectangle("fill", 410, 200, 220, 60)
+        end        
+
+        if mouseX > 410 and mouseX < 630 and mouseY > 280 and mouseY < 340 then -- audio volume
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 410, 280, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 410, 280, 220, 60)
         end
 
         love.graphics.setColor(0, 0, 0)                         -- set colour to black for borders and text
@@ -412,8 +421,6 @@ function menu.options()
         elseif fps_show == false then
             love.graphics.print("FPS:Off", 249, 210, 0, 2, 3)   -- print fps:off
         end
-
-
 
         love.graphics.rectangle("line", 170, 280, 220, 60)      -- draw 'verison on/off' border
         if version_show == true then                            -- detect if fps is on or off
@@ -432,8 +439,15 @@ function menu.options()
         love.graphics.rectangle("line", 170, 500, 220, 60)      --draw 'back' border
         love.graphics.print("Back", 249, 510, 0, 2, 3)          --print back
 
-        love.graphics.rectangle("line", 410, 200, 220, 60)      --draw 'back' border
-        love.graphics.print("Audio: "..volume.."%", 430, 210, 0, 2, 3)          --print back
+        love.graphics.rectangle("line", 410, 200, 220, 60)      --draw 'Audio' border
+        love.graphics.print("Audio: "..volume.."%", 430, 210, 0, 2, 3)          --print Audio
+
+        love.graphics.rectangle("line", 410, 280, 220, 60)      -- draw 'mousecoords on/off' border
+        if seed_show == true then                            -- detect if mousecoords are on or off
+            love.graphics.print("Show Seed:On", 430, 290, 0, 2, 3) -- print mousecoords:on
+        elseif seed_show == false then
+            love.graphics.print("Show Seed:Off", 430, 290, 0, 2, 3) -- print Mousecoords:off
+        end   
 
     end
 
@@ -518,6 +532,10 @@ function love.mousepressed(x, y, button, istouch)
 
             if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and options == true then
                 mouseCoord_show = not mouseCoord_show
+            end
+
+            if button == 1 and x > 410 and x < 630 and y > 280 and y < 500 and options == true then
+                seed_show = not seed_show
             end
 
 			if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true then
