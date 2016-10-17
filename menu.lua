@@ -179,7 +179,7 @@ function menu.draw()
 
         love.graphics.print("Resume", 562, 160, 0, 2, 3)
         love.graphics.print("Options", 562, 260, 0, 2, 3)
-        love.graphics.print("Exit", 582, 360, 0, 2, 3)
+        love.graphics.print("Save and Exit", 582, 360, 0, 1, 3)
 
     end 
 
@@ -423,7 +423,7 @@ function menu.options()
         end
 
         love.graphics.rectangle("line", 170, 360, 220, 60)      -- draw 'mousecoords on/off' border
-        if mouseCoord_show == true then                            -- detect if fps is on or off
+        if mouseCoord_show == true then                            -- detect if mousecoords are on or off
             love.graphics.print("MouseCoords:On", 175, 370, 0, 2, 3) -- print mousecoords:on
         elseif mouseCoord_show == false then
             love.graphics.print("MouseCoords:Off", 175, 370, 0, 2, 3) -- print Mousecoords:off
