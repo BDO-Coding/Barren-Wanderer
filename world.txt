@@ -1,2 +1,0 @@
-This is the webpage for writing to files:
-http://www.ac-web.org/forums/showthread.php?71015-Tutorial-Writing-to-a-File-With-Lua
