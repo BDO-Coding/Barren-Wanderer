@@ -4,7 +4,7 @@ require "player"
 require "images"
 require "monster"
 require "hotbar"
-
+require "save"
  
 function love.load()
 
@@ -13,6 +13,7 @@ function love.load()
 
 	menu.load()
 	images.load()
+	save.load()
 	
 	bg_music = love.audio.newSource("test.wav") -- sound stuff - needs to go in own class
 	bg_music:play()
@@ -30,7 +31,7 @@ function love.update(dt)
 	    UPDATE_MONSTER(dt)
 	    UPDATE_HOTBAR(dt)
 	end
-
+    UPDATE_SAVE(dt)
 	UPDATE_MENU(dt)
 	love.audio.setVolume(volume/100)
 end
@@ -44,8 +45,9 @@ function love.draw()
 	    DRAW_PLAYER()
 	    DRAW_MONSTER()
 	    DRAW_HOTBAR()
-	end
 
+	end
+	DRAW_SAVE()
 	DRAW_MENU()
 
 
