@@ -43,7 +43,10 @@ function menu.load()
     menu.setupMapView()
     menu.setupTileset()
 
-    fps = false
+    fps_show = false
+    version_show = false
+    mouseCoord_show = false
+    volume = 50
 
 end
 
@@ -115,7 +118,7 @@ function menu.draw()
         love.graphics.print("Options", 232, 360, 0, 2, 3)
         love.graphics.print("Credits", 235, 460, 0, 2, 3)
 
-        if playerImageDelay > 3 then
+        --[[if playerImageDelay > 3 then
             menuPlayerImage = images.playerDown
             playerImageSize = 30
             playerImageX = 400
@@ -136,8 +139,11 @@ function menu.draw()
         end
 
         love.graphics.setColor(255, 255, 255)
-        love.graphics.draw(menuPlayerImage, playerImageX, -100, 0, playerImageSize, 30)
+        love.graphics.draw(menuPlayerImage, playerImageX, -100, 0, playerImageSize, 30)]]
 
+        menuPlayerImage = images.playerDownHiRes
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.draw(menuPlayerImage, 600, 20)
     end
 
     if inmenu == true and options == false and ingame == true then
@@ -156,16 +162,26 @@ function menu.draw()
         else
             love.graphics.setColor(31, 191, 63)
             love.graphics.rectangle("fill", 500, 250, 220, 60)
+        end        
+
+        if mouseX > 500 and mouseX < 720 and mouseY > 350 and mouseY < 410 then
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 500, 350, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 500, 350, 220, 60)
         end
 
         love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle("line", 500, 150, 220, 60)
         love.graphics.rectangle("line", 500, 250, 220, 60)
+        love.graphics.rectangle("line", 500, 350, 220, 60)
 
         love.graphics.print("Resume", 562, 160, 0, 2, 3)
         love.graphics.print("Options", 562, 260, 0, 2, 3)
+        love.graphics.print("Exit", 582, 360, 0, 2, 3)
 
-    end
+    end 
 
     if credits == true then
         love.graphics.setColor(0, 255, 255)
@@ -347,15 +363,8 @@ function menu.options()
 
     if inmenu == true and options == true then
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then
-            love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
-        else
-            love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
-        end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 200 and mouseY < 260 then
+        if mouseX > 170 and mouseX < 390 and mouseY > 200 and mouseY < 260 then -- FPS on/off
             love.graphics.setColor(30, 125, 49)
             love.graphics.rectangle("fill", 170, 200, 220, 60)
         else
@@ -363,15 +372,68 @@ function menu.options()
             love.graphics.rectangle("fill", 170, 200, 220, 60)
         end
 
-        love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle("line", 170, 200, 220, 60)
-        if fps == true then
-            love.graphics.print("FPS:On", 249, 210, 0, 2, 3)
-        elseif fps == false then
-            love.graphics.print("FPS:Off", 249, 210, 0, 2, 3)
+        if mouseX > 170 and mouseX < 390 and mouseY > 280 and mouseY < 340 then -- version on/off
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 280, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 280, 220, 60)
         end
-        love.graphics.rectangle("line", 170, 500, 220, 60)
-        love.graphics.print("Back", 249, 510, 0, 2, 3)
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- mousecoords on/off
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 360, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 360, 220, 60)
+        end        
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        end
+
+        if mouseX > 410 and mouseX < 630 and mouseY > 200 and mouseY < 260 then -- audio volume
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 410, 200, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 410, 200, 220, 60)
+        end
+
+        love.graphics.setColor(0, 0, 0)                         -- set colour to black for borders and text
+
+        love.graphics.rectangle("line", 170, 200, 220, 60)      -- draw 'FPS on/off' border
+        if fps_show == true then                                -- detect if fps is on or off 
+            love.graphics.print("FPS:On", 249, 210, 0, 2, 3)    -- print fps:on
+        elseif fps_show == false then
+            love.graphics.print("FPS:Off", 249, 210, 0, 2, 3)   -- print fps:off
+        end
+
+
+
+        love.graphics.rectangle("line", 170, 280, 220, 60)      -- draw 'verison on/off' border
+        if version_show == true then                            -- detect if fps is on or off
+            love.graphics.print("Version:On", 230, 290, 0, 2, 3) -- print version:on
+        elseif version_show == false then
+            love.graphics.print("Version:Off", 230, 290, 0, 2, 3) -- print version:off
+        end
+
+        love.graphics.rectangle("line", 170, 360, 220, 60)      -- draw 'mousecoords on/off' border
+        if mouseCoord_show == true then                            -- detect if fps is on or off
+            love.graphics.print("MouseCoords:On", 175, 370, 0, 2, 3) -- print mousecoords:on
+        elseif mouseCoord_show == false then
+            love.graphics.print("MouseCoords:Off", 175, 370, 0, 2, 3) -- print Mousecoords:off
+        end        
+
+        love.graphics.rectangle("line", 170, 500, 220, 60)      --draw 'back' border
+        love.graphics.print("Back", 249, 510, 0, 2, 3)          --print back
+
+        love.graphics.rectangle("line", 410, 200, 220, 60)      --draw 'back' border
+        love.graphics.print("Audio: "..volume.."%", 430, 210, 0, 2, 3)          --print back
 
     end
 
@@ -412,8 +474,11 @@ end
 function love.mousepressed(x, y, button, istouch)
 
     if inmenu == true then
+
         if ingame == false then
+
             if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false then
+
                 inmenu = false
                 ingame = true
 
@@ -427,6 +492,7 @@ function love.mousepressed(x, y, button, istouch)
                 hotbar.load()
                 
             end
+
             if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and options == false and credits == false then
                 options = true
             end
@@ -443,21 +509,72 @@ function love.mousepressed(x, y, button, istouch)
             end
 
             if button == 1 and x > 170 and x < 390 and y > 200 and y < 260 and options == true then
-                fps = not fps
+                fps_show = not fps_show
             end
-        else
-            if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 then
+
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == true then
+                version_show = not version_show
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and options == true then
+                mouseCoord_show = not mouseCoord_show
+            end
+
+			if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true then
+
+                if volume == 0 then
+                	volume = 25
+                elseif volume == 25 then
+                	volume = 50
+                elseif volume == 50 then
+                	volume = 75
+                elseif volume == 75 then
+                	volume = 100
+                elseif volume == 100 then
+                	volume = 0
+                end
+
+            end
+
+        elseif ingame == true then
+
+            if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 then							--pause menu resume
                 inmenu = false
             end
 
-            if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 then
+            if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 then							--pause menu options
                 options = true
             end          
             
-            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then
+            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then		--back from options
                 options = false
             end
 
+            if button == 1 and x > 170 and x < 390 and y > 200 and y < 260 and options == true then		--fps on/off
+                fps_show = not fps_show
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == true then		--show version
+                version_show = not version_show
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and options == true then		--show mouse coord
+                mouseCoord_show = not mouseCoord_show
+            end
+
+			if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true then		--volume
+                if volume == 0 then
+                	volume = 25
+                elseif volume == 25 then
+                	volume = 50
+                elseif volume == 50 then
+                	volume = 75
+                elseif volume == 75 then
+                	volume = 100
+                elseif volume == 100 then
+                	volume = 0
+                end
+            end      
 
         end
         

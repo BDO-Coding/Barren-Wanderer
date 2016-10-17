@@ -35,16 +35,6 @@ function player.update(dt)
         animeDelayS = animeDelayS - dt
     end
 
-    function love.keypressed(pressSlow)
-
-        if pressSlow == ("escape") and inmenu == false then
-            inmenu = true
-        elseif pressSlow == ("escape") and inmenu == true then
-            inmenu = false
-        end
-
-    end
-
 end
 
 function player.draw()
@@ -146,6 +136,8 @@ function player.draw()
             playerImage = images.playerUp
             playerSizeX = 2
             playerScreenX = 560
+        elseif releaseImage == "escape" then
+        	inmenu = not inmenu
         end
     end
 
