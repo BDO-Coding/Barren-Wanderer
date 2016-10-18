@@ -682,7 +682,7 @@ function menu.options()
 		end   
 
 	end
-=======
+
     if inmenu == true and options == true then
 
 
@@ -901,7 +901,6 @@ function love.mousepressed(x, y, button, istouch)
 			if button == 1 and x > 410 and x < 630 and y > 280 and y < 500 and options == true then
 				seed_show = not seed_show
 			end
-=======
     if inmenu == true then
 
         if ingame == false then
