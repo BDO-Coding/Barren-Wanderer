@@ -594,7 +594,6 @@ end
 
 function menu.options()
 
-<<<<<<< HEAD
 	if inmenu == true and options == true then
 
 
@@ -759,7 +758,7 @@ function menu.options()
         love.graphics.print("Audio: "..volume.."%", 430, 210, 0, 2, 3)          --print back
 
     end
->>>>>>> parent of bb77aed... Show seed option
+
 
 end
 
@@ -797,7 +796,6 @@ end
 
 function love.mousepressed(x, y, button, istouch)
 
-<<<<<<< HEAD
 	if inmenu == true then
 
 		if ingame == false then
@@ -951,10 +949,7 @@ function love.mousepressed(x, y, button, istouch)
                 mouseCoord_show = not mouseCoord_show
             end
 
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of bb77aed... Show seed option
 			if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true then
 
 				if volume == 0 then
