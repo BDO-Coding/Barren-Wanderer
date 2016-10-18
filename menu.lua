@@ -56,6 +56,9 @@ function menu.load()
     version_show = false
     mouseCoord_show = false
     volume = 50
+<<<<<<< HEAD
+>>>>>>> parent of bb77aed... Show seed option
+=======
 >>>>>>> parent of bb77aed... Show seed option
 
 end
@@ -953,6 +956,9 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and options == true then
                 mouseCoord_show = not mouseCoord_show
             end
+<<<<<<< HEAD
+>>>>>>> parent of bb77aed... Show seed option
+=======
 >>>>>>> parent of bb77aed... Show seed option
 
 			if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true then
