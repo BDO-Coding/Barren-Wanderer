@@ -951,7 +951,10 @@ function love.mousepressed(x, y, button, istouch)
                 mouseCoord_show = not mouseCoord_show
             end
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of bb77aed... Show seed option
 			if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true then
 
 				if volume == 0 then
