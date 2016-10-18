@@ -1029,4 +1029,4 @@ function DRAW_MENU()
 	menu.loadScreen()
 	menu.load_game()
 
-end
+end -- test
