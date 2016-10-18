@@ -53,6 +53,30 @@ function menu.load()
 
 end
 
+function menu.saveExit()
+
+	if saveExit == true then
+		menu.draw()
+
+		ingame = false
+		inmenu = true 
+		credits = false
+		options = false
+
+		local seed_to_be_saved
+
+		file = io.open("world.txt", "a")
+
+		io.output(file) 
+
+		io.write("\n"..seed)
+
+		print("save exit true")
+		saveExit = false
+	end
+
+end
+
 function menu.draw()
 
 	mouseX = love.mouse.getX()
@@ -845,6 +869,10 @@ function love.mousepressed(x, y, button, istouch)
 
 			if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 and options == false then							--pause menu options
 				options = true
+			end       			
+
+			if button == 1 and x > 500 and x < 720 and y > 350 and y < 510 and options == false then							--pause menu options
+				saveExit = true
 			end          
 			
 			if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then		--back from options
@@ -891,6 +919,7 @@ function UPDATE_MENU(dt)
 
 	love.mousepressed()
 	menu.update(dt)
+	menu.saveExit()
 
 end
 

@@ -137,7 +137,9 @@ function player.draw()
             playerSizeX = 2
             playerScreenX = 560
         elseif releaseImage == "escape" then
-        	inmenu = not inmenu
+        	if ingame == true then
+        		inmenu = not inmenu
+        	end
         end
     end
 
