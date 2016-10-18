@@ -967,11 +967,11 @@ function love.mousepressed(x, y, button, istouch)
 
 		elseif ingame == true then
 
-			if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 and options == false then							--pause menu resume
+			if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 and options == false then	--pause menu resume
 				inmenu = false
 			end
 
-			if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 and options == false then							--pause menu options
+			if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 and options == false then    --pause menu options
 				options = true
 			end          
 			
@@ -1007,12 +1007,9 @@ function love.mousepressed(x, y, button, istouch)
 				elseif volume == 100 then
 					volume = 0
 				end
-			end      
-
+			end 
 		end
-		
 	end
-
 end
 
 function UPDATE_MENU(dt)
