@@ -17,6 +17,7 @@ local biomeNum = 25600 --has to be a square number 57600
 local setBiomeSize = 20
 local biomeSize
 
+
 math.randomseed(1234)
 
 function scroll.load()
