@@ -8,7 +8,7 @@ function save.load()
 
     save.clear()
     local file = io.open("world.txt", "a")
-    file:write("Seed:\n1285\nhello\nmy\nname\nis\nDanny")
+    file:write("Seed:\n"..worldSeed.."\nhello\nmy\nname\nis\nDanny")
     file:close()
     save.read()
 
@@ -47,14 +47,14 @@ function save.read()
         
         count = count + 1
 
-          if seedNext == true then
+        if seedNext == true then
           	seed = line
           	seedNext = false
-          end
+        end
 
-          if line == "Seed:" then
+        if line == "Seed:" then
             seedNext = true
-          end
+        end
       
     end
 

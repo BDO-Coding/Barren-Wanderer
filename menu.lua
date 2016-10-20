@@ -1,8 +1,6 @@
 menu = {}
-require "scroll"
-require "player"
-require "monster"
-require "hotbar"
+
+local utf8 = require("utf8")
 
 local menuMap -- stores tiledata
 local menuMapWidth, menuMapHeight -- width and height in tiles
@@ -19,13 +17,20 @@ local tilesetSprite
 
 function menu.load()
 
+    worldSeed = "1234"
+
     options = false
     credits = false
+    newgame = false
+
+    worldName = "World 1"
+    worldNameType = false
+    worldSeedType = false
 
     loadScreen = false
     loadDelay = 10
 
-    doLoadScreen = true -------------------------------------------------------------USEFUL, THIS IS A DEVELOPER TOOL FOR MAKING IT QUICKER TO PLAY THE GAME (You don't have to wait for loads)
+    doLoadScreen = true
 
     mouseX = love.mouse.getX()
     mouseY = love.mouse.getY()
@@ -50,6 +55,8 @@ function menu.load()
     volume = 50
     seed_show = false
 
+    love.keyboard.setKeyRepeat(true)
+
 end
 
 function menu.draw()
@@ -70,7 +77,7 @@ function menu.draw()
          
     end
 
-    if inmenu == true and options == false and ingame == false and credits == false then
+    if inmenu == true and options == false and newgame == false and ingame == false and credits == false then
 
         if mouseX > 170 and mouseX < 390 and mouseY > 150 and mouseY < 210 then
             love.graphics.setColor(30, 125, 49)
@@ -181,7 +188,7 @@ function menu.draw()
 
         love.graphics.print("Resume", 562, 160, 0, 2, 3)
         love.graphics.print("Options", 562, 260, 0, 2, 3)
-        love.graphics.print("Save and Exit", 582, 360, 0, 1, 3)
+        love.graphics.print("Save", 580, 360, 0, 2, 3)
 
     end 
 
@@ -201,11 +208,6 @@ function menu.draw()
             love.graphics.setColor(31, 191, 63)
             love.graphics.rectangle("fill", 170, 500, 220, 60)
         end
-
-        love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle("line", 170, 500, 220, 60)
-
-        love.graphics.print("Back", 249, 510, 0, 2, 3)
     end
 
 end
@@ -213,7 +215,7 @@ end
 function menu.setupMap()
 
     menuMapWidth = 280
-    menuMapHeight = 220-----------------------------------------------------------USEFUL
+    menuMapHeight = 220
 
     menuMap = {}
     --Random Gen
@@ -226,7 +228,6 @@ function menu.setupMap()
     --Pro Gen
     for x=1, menuMapWidth do
         for y=1, menuMapHeight do
-            --if menuMap[x][y]+1 == 2 then -- Is killing all sand
             if menuMap[x][y] == 2 then
                 menuMap[x][y] = 2 
             end
@@ -357,7 +358,90 @@ function menu.update(dt)
         end
     end
 
+end
 
+function menu.newgame()
+
+    if newgame == true then
+
+        if mouseX > 170 and mouseX < 470 and mouseY > 200 and mouseY < 260 then -- World Name
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 200, 300, 60)
+            worldNameType = true
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 200, 300, 60)
+            worldNameType = false
+        end
+
+        if mouseX > 170 and mouseX < 470 and mouseY > 280 and mouseY < 340 then -- World Seed
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 280, 300, 60)
+            worldSeedType = true
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 280, 300, 60)
+            worldSeedType = false
+        end
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- Create Game
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 360, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 360, 220, 60)
+        end
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        end
+
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle("line", 170, 200, 300, 60)
+        love.graphics.rectangle("line", 170, 280, 300, 60)
+        love.graphics.rectangle("line", 170, 360, 220, 60)
+
+        love.graphics.print("World Name : "..worldName, 190, 210, 0, 2, 3)
+        love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
+        love.graphics.print("Create World", 200, 370, 0, 2, 3)
+
+        --worldSeedInt = tonumber(worldSeed)
+
+    end
+
+    function love.keypressed(backKey)
+
+        if backKey == "backspace" and worldNameType == true then
+            local byteoffset = utf8.offset(worldName, -1)
+     
+            if byteoffset then
+                worldName = string.sub(worldName, 1, byteoffset - 1)
+            end
+        elseif backKey == "backspace" and worldSeedType == true then
+            local byteoffset = utf8.offset(worldSeed, -1)
+     
+            if byteoffset then
+                worldSeed = string.sub(worldSeed, 1, byteoffset - 1)
+            end
+        end
+
+    end
+
+    function love.textinput(worldText)
+
+        if worldNameType == true and newgame == true then
+            worldName = worldName .. worldText
+        end
+
+        if worldSeedType == true and newgame == true then
+            worldSeed = worldSeed .. worldText
+        end
+
+    end
 
 end
 
@@ -381,14 +465,6 @@ function menu.options()
             love.graphics.rectangle("fill", 170, 280, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
-            love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
-        else
-            love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
-        end
-
         if mouseX > 410 and mouseX < 630 and mouseY > 200 and mouseY < 260 then -- audio volume
             love.graphics.setColor(30, 125, 49)
             love.graphics.rectangle("fill", 410, 200, 220, 60)
@@ -403,6 +479,14 @@ function menu.options()
         else
             love.graphics.setColor(31, 191, 63)
             love.graphics.rectangle("fill", 410, 280, 220, 60)
+        end
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
         end
 
         love.graphics.setColor(0, 0, 0)                         -- set colour to black for borders and text
@@ -420,9 +504,6 @@ function menu.options()
         elseif version_show == false then
             love.graphics.print("Version:Off", 217, 290, 0, 2, 3) -- print version:off
         end
-
-        love.graphics.rectangle("line", 170, 500, 220, 60)      --draw 'back' border
-        love.graphics.print("Back", 249, 510, 0, 2, 3)          --print back
 
         love.graphics.rectangle("line", 410, 200, 220, 60)      --draw 'Audio' border
         love.graphics.print("Audio: "..volume.."%", 455, 210, 0, 2, 3)    --print Audio
@@ -468,6 +549,14 @@ function menu.loadScreen()
         end
     end
 
+    if inmenu == true then
+        if credits == true or options == true or newgame == true then
+            love.graphics.setColor(0, 0, 0)
+            love.graphics.rectangle("line", 170, 500, 220, 60)      --draw 'back' border
+            love.graphics.print("Back", 249, 510, 0, 2, 3)          --print back
+        end
+    end
+
 end
 
 function love.mousepressed(x, y, button, istouch)
@@ -477,19 +566,8 @@ function love.mousepressed(x, y, button, istouch)
 		if ingame == false then
 
             if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false then
-
-                inmenu = false
-                ingame = true
-
-                if doLoadScreen == true then
-                    loadScreen = true
-                end
-
-                scroll.load()
-                player.load()
-                monster.load()
-                hotbar.load()
-                
+                newgame = true
+                love.timer.sleep(0.1)
             end        
 
 			--[[if button == 1 and options == false and credits == false and load_game == true then
@@ -548,24 +626,34 @@ function love.mousepressed(x, y, button, istouch)
 				load_game = true
 			end
 
-			if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true or button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and credits == true and load_game == false then
-				options = false
-				credits = false
-				playerImageDelay = 4
-			end
-
-			if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false then
+			if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false then
                 credits = true
+                love.timer.sleep(0.1)
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and options == false and credits == false then
+            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and options == false and credits == false and newgame == false then
                 options = true
+                love.timer.sleep(0.1)
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true then
+                inmenu = false
+                ingame = true
+
+                if doLoadScreen == true then
+                    loadScreen = true
+                end
+
+                loadFunctions = true
+                newgame = false
             end
 
             if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 then
                 options = false
                 credits = false
+                newgame = false
                 playerImageDelay = 4
+                love.timer.sleep(0.1)
             end
 
         elseif ingame == true then
@@ -576,10 +664,17 @@ function love.mousepressed(x, y, button, istouch)
 
             if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 and options == false then    --pause menu options
                 options = true
+                love.timer.sleep(0.3)
             end          
             
             if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then     --back from options
                 options = false
+                love.timer.sleep(0.1)
+            end
+
+            if button == 1 and x > 500 and x < 720 and y > 350 and y < 410 then
+                save.load()
+                love.timer.sleep(0.1)
             end
 
         end
@@ -627,6 +722,7 @@ function DRAW_MENU()
 
     menu.draw()
     menu.options()
+    menu.newgame()
     menu.loadScreen()
 
 end

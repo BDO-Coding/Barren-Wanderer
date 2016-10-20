@@ -138,6 +138,7 @@ function player.draw()
             playerScreenX = 560
         elseif releaseImage == "escape" then
         	inmenu = not inmenu
+            options = false
         end
     end
 

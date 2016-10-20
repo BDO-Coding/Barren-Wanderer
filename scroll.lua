@@ -1,5 +1,6 @@
 scroll={}
 require "player"
+require "menu"
 
 local map -- stores tiledata
  
@@ -16,8 +17,6 @@ local tilesetSprite
 local biomeNum = 25600 --has to be a square number 57600
 local setBiomeSize = 20
 local biomeSize
-
-math.randomseed(1234)
 
 function scroll.load()
 
@@ -42,14 +41,14 @@ function scroll.biome()
     biomeSize = mapWidth/math.sqrt(biomeNum)
     for biomeX=1,math.sqrt(biomeNum) do
         for biomeY=1,math.sqrt(biomeNum) do
-            xStart =biomeX*biomeSize - biomeSize +1
-            yStart =biomeY*biomeSize - biomeSize +1
+            xStart =biomeX*biomeSize - biomeSize + 1
+            yStart =biomeY*biomeSize - biomeSize + 1
             xMax = biomeX*biomeSize
             yMax = biomeY*biomeSize
             biomeType = math.random(0,5)
             for x=xStart, xMax do
                 for y=yStart, yMax do
-                    biomeArray[x][y] = biomeType--love.math.random(0,13)
+                    biomeArray[x][y] = biomeType
                 end
             end
         end
@@ -267,6 +266,10 @@ function scroll.moveMap(dx, dy)
 end
 
 function scroll.update(dt)
+
+    worldSeedInt = tonumber(worldSeed)
+
+    math.randomseed(worldSeedInt)
 
     if inmenu == false and loadScreen == false then
         if love.keyboard.isDown("w") and love.keyboard.isDown("d") then

@@ -10,6 +10,7 @@ function love.load()
 
 	ingame = false
 	inmenu = true
+	loadFunctions = false
 
 	menu.load()
 	images.load()
@@ -18,8 +19,6 @@ function love.load()
 	bg_music = love.audio.newSource("test.wav") -- sound stuff - needs to go in own class
 	bg_music:play()
 	bg_music:setLooping(true)
-
-	--love.mouse.setGrabbed(true)  --{Benjamin MESSAGE}- prevents mouse leaving game alt+f4 to quit {ORI MESSAGE}- AND WHY DO WE NEED THIS??!?!?!?!?!?!??!?!?!?!?!?!??!?!?!??!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?
 
 end
  
@@ -34,6 +33,19 @@ function love.update(dt)
     UPDATE_SAVE(dt)
 	UPDATE_MENU(dt)
 	love.audio.setVolume(volume/100)
+
+	if loadFunctions == true then
+
+		save.load()
+		scroll.load()
+		player.load()
+        monster.load()
+        hotbar.load()
+
+        loadFunctions = false
+
+	end
+
 end
  
 function love.draw()
