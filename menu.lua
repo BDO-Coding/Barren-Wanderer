@@ -1,4 +1,5 @@
 menu = {}
+require("save")
 
 local utf8 = require("utf8")
 
@@ -17,15 +18,13 @@ local tilesetSprite
 
 function menu.load()
 
-    worldName = "World"
-    worldSeed = "0000"
-
     options = false
     credits = false
     newgame = false
     loading = false
 
     clickDelay = 0.5
+    doThisOnce = true
 
     worldName = "World"
     worldNameType = false
@@ -376,6 +375,12 @@ end
 function menu.newgame()
 
     if newgame == true then
+
+        if doThisOnce == true then
+            worldName = "World"
+            worldSeed = "0000"
+            doThisOnce = false
+        end
 
         if mouseX > 170 and mouseX < 840 and mouseY > 200 and mouseY < 260 then -- World Name
             love.graphics.setColor(30, 125, 49)
@@ -729,6 +734,32 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and loading == true and clickDelay < 0 then
                 inmenu = false
                 ingame = true
+
+                worldName = "World"
+                worldSeed = "0000"
+
+                local count = 1
+                local line = io.read()
+                local file = io.open(worldName..".txt", "r")
+                io.input(file)
+                seedNext = false
+
+                for i = 1, 2 do
+                    if line == nil then
+                        break
+                    end
+
+                    count = count + 1
+
+                    if seedNext == true then
+                        worldSeed = line
+                        seedNext = false
+                    end
+
+                    if line == "Seed:" then
+                        seedNext = true
+                    end
+                end
 
                 worldName = worldLoadName
 

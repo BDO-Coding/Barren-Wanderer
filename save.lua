@@ -1,7 +1,6 @@
 save={}
 require "player"
 require "scroll"
-require "menu"
 
 seed = 0
 
@@ -17,9 +16,13 @@ end
 
 function save.update(dt)
 
-    if autoSave == true then
-
-    end
+    --[[if autoSave == true then
+        save.clear()
+        local file = io.open(worldName..".txt", "a")
+        file:write("Seed:\n"..worldSeed.."\nName:\n"..worldName)
+        file:close()
+        save.read()
+    end]]
 
 end
 
