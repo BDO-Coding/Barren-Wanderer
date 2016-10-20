@@ -19,7 +19,7 @@ function love.load()
 	bg_music:play()
 	bg_music:setLooping(true)
 
-	love.mouse.setGrabbed(true)  --prevents mouse leaving game alt+f4 to quit
+	--love.mouse.setGrabbed(true)  --{Benjamin MESSAGE}- prevents mouse leaving game alt+f4 to quit {ORI MESSAGE}- AND WHY DO WE NEED THIS??!?!?!?!?!?!??!?!?!?!?!?!??!?!?!??!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?
 
 end
  
@@ -51,7 +51,8 @@ function love.draw()
 	DRAW_MENU()
 
 
-	love.graphics.setColor(0,0,0)
+	love.graphics.setColor(255, 0, 0)
+
 	if version_show == true then
 		local major, minor, revision, codename = love.getVersion()
 	    local str = string.format("Love Version %d.%d.%d - %s", major, minor, revision, codename)
@@ -59,12 +60,19 @@ function love.draw()
 		love.graphics.print("Lua Version: " .._VERSION, 10, 30) --Lua Version
 	end
 
-	if mouseCoord_show == true then
-		love.graphics.print("MouseX: "..love.mouse.getX(), 10, 40)
-    	love.graphics.print("MouseY: "..love.mouse.getY(), 10, 50)
+	if doLoadScreen == false then
+		love.graphics.print("MouseX: "..love.mouse.getX(), 10, 50)
+    	love.graphics.print("MouseY: "..love.mouse.getY(), 10, 60)
     end
-    	love.graphics.print("Seed: "..seed, 10, 60)
+
+    if seed_show == true and ingame == true then
+    	love.graphics.print("Seed: "..seed, 10, 40)
+    elseif seed_show == true and ingame == false then
+    	love.graphics.print("Seed: N/A", 10, 40)
+    end
+
 	if fps_show == true then
     	love.graphics.print("FPS: "..love.timer.getFPS(), 10, 10) --FPS Counter	
     end
+
 end
