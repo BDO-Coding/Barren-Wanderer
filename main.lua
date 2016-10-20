@@ -35,7 +35,7 @@ function love.update(dt)
 
 	if loadFunctions == true then
 
-		--save.load()
+		save.load()
 		scroll.load()
 		player.load()
         monster.load()

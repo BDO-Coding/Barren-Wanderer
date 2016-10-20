@@ -64,6 +64,7 @@ function menu.load()
     version_show = false
     volume = 50
     seed_show = false
+    autoSave = false
 
     love.keyboard.setKeyRepeat(true)
 
@@ -253,7 +254,7 @@ function menu.setupMapView()
     tilesDisplayHeight = 26
 
     zoomX = 2
-    zoomY = 2 -----------------------------------------------------------------USEFUL
+    zoomY = 2
 
 end
 
@@ -543,6 +544,14 @@ function menu.options()
             love.graphics.rectangle("fill", 410, 280, 220, 60)
         end
 
+        if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- Auto save
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 360, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 360, 220, 60)
+        end
+
         if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
             love.graphics.setColor(30, 125, 49)
             love.graphics.rectangle("fill", 170, 500, 220, 60)
@@ -556,14 +565,14 @@ function menu.options()
         love.graphics.rectangle("line", 170, 200, 220, 60)      -- draw 'FPS on/off' border
         if fps_show == true then                                -- detect if fps is on or off 
             love.graphics.print("FPS:On", 239, 210, 0, 2, 3)    -- print fps:on
-        elseif fps_show == false then
+        else
             love.graphics.print("FPS:Off", 239, 210, 0, 2, 3)   -- print fps:off
         end
 
         love.graphics.rectangle("line", 170, 280, 220, 60)      -- draw 'verison on/off' border
         if version_show == true then                            -- detect if fps is on or off
             love.graphics.print("Version:On", 217, 290, 0, 2, 3) -- print version:on
-        elseif version_show == false then
+        else
             love.graphics.print("Version:Off", 217, 290, 0, 2, 3) -- print version:off
         end
 
@@ -573,9 +582,18 @@ function menu.options()
         love.graphics.rectangle("line", 410, 280, 220, 60)      -- draw 'Seed on/off' border
         if seed_show == true then                            -- detect if Seed are on or off
             love.graphics.print("Show Seed:On", 430, 290, 0, 2, 3) -- print Seed:on
-        elseif seed_show == false then
+        else
             love.graphics.print("Show Seed:Off", 430, 290, 0, 2, 3) -- print Seed:off
-        end   
+        end
+
+        love.graphics.rectangle("line", 170, 360, 220, 60)
+
+        if ingame == true and autoSave == true then
+            love.graphics.print("Auto-Save:On", 200, 370, 0, 2, 3)
+        elseif ingame == true and autoSave == false then
+            love.graphics.print("Auto-Save:On", 200, 370, 0, 2, 3)
+        end
+
 
     end
 
@@ -672,9 +690,9 @@ end
 
 function love.mousepressed(x, y, button, istouch)
 
-	if inmenu == true then
+    if inmenu == true then
 
-		if ingame == false then
+        if ingame == false then
 
             if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false and loading == false and clickDelay < 0 then
                 newgame = true
@@ -686,7 +704,7 @@ function love.mousepressed(x, y, button, istouch)
                 clickDelay = 0.5
             end
 
-			if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false and loading == false and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false and loading == false and clickDelay < 0 then
                 credits = true
                 clickDelay = 0.5
             end
@@ -750,6 +768,10 @@ function love.mousepressed(x, y, button, istouch)
             end
 
         elseif ingame == true then
+
+            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and options == true and clickDelay < 0 then
+                autoSave = not autoSave
+            end
 
             if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 and options == false and clickDelay < 0 then    --pause menu resume
                 inmenu = false

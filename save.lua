@@ -1,6 +1,7 @@
 save={}
 require "player"
 require "scroll"
+require "menu"
 
 seed = 0
 
@@ -15,6 +16,10 @@ function save.load()
 end
 
 function save.update(dt)
+
+    if autoSave == true then
+
+    end
 
 end
 
