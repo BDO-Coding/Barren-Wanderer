@@ -24,6 +24,8 @@ function menu.load()
     newgame = false
     loading = false
 
+    clickDelay = 0.5
+
     worldName = "World"
     worldNameType = false
     worldNameNum = 5
@@ -339,6 +341,8 @@ end
 
 function menu.update(dt)
 
+    clickDelay = clickDelay - dt
+
     if doLoadScreen == true or loadScreen == true then
         if love.keyboard.isDown("x")then
             doLoadScreen = false
@@ -489,7 +493,7 @@ function love.textinput(worldText)
     end
 
     if worldLoadType == true and loading == true then
-        worldLoadName = worldLoadName .. worldLoadText
+        worldLoadName = worldLoadName .. worldText
         worldLoadNum = worldLoadNum + 1
     end
 
@@ -671,29 +675,27 @@ function love.mousepressed(x, y, button, istouch)
 
 		if ingame == false then
 
-            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false and loading == false then
+            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false and loading == false and clickDelay < 0 then
                 newgame = true
-                love.timer.sleep(0.1)
+                clickDelay = 0.5
             end
 
-			if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 and options == false and credits == false and loading == false then
-				load_game = true
-			end
-
-            if button == 1 and mouseX > 170 and mouseX < 390 and mouseY > 250 and mouseY < 310 and options == false and newgame == false then
+            if button == 1 and mouseX > 170 and mouseX < 390 and mouseY > 250 and mouseY < 310 and options == false and newgame == false and clickDelay < 0 then
                 loading = true
+                clickDelay = 0.5
             end
 
-			if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false and loading == false then
+			if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false and loading == false and clickDelay < 0 then
                 credits = true
+                clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and credits == false and newgame == false and loading == false then
+            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and credits == false and newgame == false and loading == false and clickDelay < 0 then
                 options = true
-                love.timer.sleep(0.1)
+                clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true then
+            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true and clickDelay < 0 then
                 inmenu = false
                 ingame = true
 
@@ -705,7 +707,7 @@ function love.mousepressed(x, y, button, istouch)
                 newgame = false
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and loading == true then
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and loading == true and clickDelay < 0 then
                 inmenu = false
                 ingame = true
 
@@ -717,9 +719,35 @@ function love.mousepressed(x, y, button, istouch)
 
                 loadFunctions = true
                 loading = false
+
+                local count = 1
+                local file = io.open(worldName..".txt", "r")
+                seedNext = false
+                io.input(file)
+
+                while true do
+
+                    local line = io.read()
+
+                    if line == nil then
+                        break
+                    end
+                    
+                    count = count + 1
+
+                    if seedNext == true then
+                        seed = line
+                        seedNext = false
+                    end
+
+                    if line == "Seed:" then
+                        seedNext = true
+                    end
+                  
+                end
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 then
+            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and clickDelay < 0 then
                 options = false
                 credits = false
                 newgame = false
@@ -729,58 +757,58 @@ function love.mousepressed(x, y, button, istouch)
                 worldSeedType = false
                 worldNameType = false
                 worldLoadType = false
+                clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 and newgame == true then
+            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 and newgame == true and clickDelay < 0 then
                 worldNameType = not worldNameType
                 worldSeedType = false
             end
 
-            if button == 1 and x > 170 and x < 840 and y > 280 and y < 340 and newgame == true then
+            if button == 1 and x > 170 and x < 840 and y > 280 and y < 340 and newgame == true and clickDelay < 0 then
                 worldSeedType = not worldSeedType
                 worldNameType = false
             end
 
-            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 and loading == true then
+            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 and loading == true and clickDelay < 0 then
                 worldLoadType = not worldLoadType
             end
 
         elseif ingame == true then
 
-            if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 and options == false then    --pause menu resume
+            if button == 1 and x > 500 and x < 720 and y > 150 and y < 210 and options == false and clickDelay < 0 then    --pause menu resume
                 inmenu = false
             end
 
-            if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 and options == false then    --pause menu options
+            if button == 1 and x > 500 and x < 720 and y > 250 and y < 310 and options == false and clickDelay < 0 then    --pause menu options
                 options = true
-                love.timer.sleep(0.3)
+                clickDelay = 0.5
             end          
             
-            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true then     --back from options
+            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and options == true and clickDelay < 0 then     --back from options
                 options = false
-                love.timer.sleep(0.1)
+                clickDelay = 0.5
             end
 
-            if button == 1 and x > 500 and x < 720 and y > 350 and y < 410 then
+            if button == 1 and x > 500 and x < 720 and y > 350 and y < 410 and clickDelay < 0 then
                 save.load()
-                love.timer.sleep(0.1)
             end
 
         end
 
-        if button == 1 and x > 410 and x < 630 and y > 280 and y < 500 and options == true then
+        if button == 1 and x > 410 and x < 630 and y > 280 and y < 500 and options == true and clickDelay < 0 then
             seed_show = not seed_show
         end
 
-        if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == true then     --show version
+        if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == true and clickDelay < 0 then     --show version
             version_show = not version_show
         end
 
-        if button == 1 and x > 170 and x < 390 and y > 200 and y < 260 and options == true then     --fps on/off
+        if button == 1 and x > 170 and x < 390 and y > 200 and y < 260 and options == true and clickDelay < 0 then     --fps on/off
             fps_show = not fps_show
         end
 
-        if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true then
+        if button == 1 and x > 410 and x < 630 and y > 200 and y < 260 and options == true and clickDelay < 0 then
 
             if volume == 0 then
                 volume = 25
