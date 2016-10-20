@@ -14,7 +14,6 @@ function love.load()
 
 	menu.load()
 	images.load()
-	save.load()
 	
 	bg_music = love.audio.newSource("test.wav") -- sound stuff - needs to go in own class
 	bg_music:play()

@@ -22,12 +22,17 @@ function menu.load()
     options = false
     credits = false
     newgame = false
+    loading = false
 
     worldName = "World"
     worldNameType = false
     worldNameNum = 5
     worldSeedType = false
     worldSeedNum = 4
+
+    worldLoadType = false
+    worldLoadName = "World"
+    worldLoadNum = 5
 
     loadScreen = false
     loadDelay = 10
@@ -79,7 +84,7 @@ function menu.draw()
          
     end
 
-    if inmenu == true and options == false and newgame == false and ingame == false and credits == false then
+    if inmenu == true and options == false and newgame == false and ingame == false and credits == false and loading == false then
 
         if mouseX > 170 and mouseX < 390 and mouseY > 150 and mouseY < 210 then
             love.graphics.setColor(30, 125, 49)
@@ -382,7 +387,7 @@ function menu.newgame()
             love.graphics.rectangle("fill", 170, 280, 670, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- Create Game
+        if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- Create World
             love.graphics.setColor(30, 125, 49)
             love.graphics.rectangle("fill", 170, 360, 220, 60)
         else
@@ -443,7 +448,7 @@ function menu.newgame()
 
     function love.keypressed(backKey)
 
-        if backKey == "backspace" and worldNameType == true then
+        if backKey == "backspace" and worldNameType == true and newgame == true then
             local byteoffset = utf8.offset(worldName, -1)
      
             if byteoffset then
@@ -452,7 +457,7 @@ function menu.newgame()
             if worldNameNum > 0 then
                 worldNameNum = worldNameNum - 1
             end
-        elseif backKey == "backspace" and worldSeedType == true then
+        elseif backKey == "backspace" and worldSeedType == true and newgame == true then
             local byteoffset = utf8.offset(worldSeed, -1)
      
             if byteoffset then
@@ -559,6 +564,79 @@ end
 
 function menu.loadScreen()
 
+    if loading == true then
+        if mouseX > 170 and mouseX < 840 and mouseY > 200 and mouseY < 260 then -- World Name
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 200, 670, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 200, 670, 60)
+        end
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 280 and mouseY < 340 then -- Load Game
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 280, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 280, 220, 60)
+        end
+
+        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
+            love.graphics.setColor(30, 125, 49)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        else
+            love.graphics.setColor(31, 191, 63)
+            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        end
+
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.rectangle("fill", 360, 205, 475, 50)
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle("line", 170, 200, 670, 60)
+        love.graphics.rectangle("line", 170, 280, 220, 60)
+
+        if worldLoadType == true then
+            love.graphics.print("World Name-: "..worldLoadName, 190, 210, 0, 2, 3)
+        else
+            love.graphics.print("World Name : "..worldLoadName, 190, 210, 0, 2, 3)
+        end
+
+        love.graphics.print("Load World", 212, 290, 0, 2, 3)
+
+        if worldLoadNum > 20 then
+            local byteoffset = utf8.offset(worldLoadName, -1)
+     
+            if byteoffset then
+                worldLoadName = string.sub(worldLoadName, 1, byteoffset - 1)
+            end
+            worldLoadNum = worldLoadNum - 1
+        end
+    end
+
+    function love.keypressed(backKey)
+
+        if backKey == "backspace" and worldLoadType == true and loading == true then
+            local byteoffset = utf8.offset(worldLoadName, -1)
+     
+            if byteoffset then
+                worldLoadName = string.sub(worldLoadName, 1, byteoffset - 1)
+            end
+            if worldLoadNum > 0 then
+                worldLoadNum = worldLoadNum - 1
+            end
+        end
+
+    end
+
+    function love.textinput(worldLoadText)
+
+        if worldLoadType == true and loading == true then
+            worldLoadName = worldLoadName .. worldLoadText
+            worldLoadNum = worldLoadNum + 1
+        end
+
+    end
+
     if loadScreen == true then
         love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle("fill", 0, 0, 1200, 750)
@@ -588,7 +666,7 @@ function menu.loadScreen()
     end
 
     if inmenu == true then
-        if credits == true or options == true or newgame == true then
+        if credits == true or options == true or newgame == true or loading == true then
             love.graphics.setColor(0, 0, 0)
             love.graphics.rectangle("line", 170, 500, 220, 60)      --draw 'back' border
             love.graphics.print("Back", 249, 510, 0, 2, 3)          --print back
@@ -603,10 +681,10 @@ function love.mousepressed(x, y, button, istouch)
 
 		if ingame == false then
 
-            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false then
+            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false and loading == false then
                 newgame = true
                 love.timer.sleep(0.1)
-            end        
+            end
 
 			--[[if button == 1 and options == false and credits == false and load_game == true then
 
@@ -660,16 +738,19 @@ function love.mousepressed(x, y, button, istouch)
 
 			end]]
 
-			if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 and options == false and credits == false and load_game == false then
+			if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 and options == false and credits == false and loading == false then
 				load_game = true
 			end
 
-			if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false then
-                credits = true
-                love.timer.sleep(0.1)
+            if button == 1 and mouseX > 170 and mouseX < 390 and mouseY > 250 and mouseY < 310 and options == false and newgame == false then
+                loading = true
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and options == false and credits == false and newgame == false then
+			if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false and loading == false then
+                credits = true
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and credits == false and newgame == false and loading == false then
                 options = true
                 love.timer.sleep(0.1)
             end
@@ -686,22 +767,44 @@ function love.mousepressed(x, y, button, istouch)
                 newgame = false
             end
 
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and loading == true then
+                inmenu = false
+                ingame = true
+
+                worldName = worldLoadName
+
+                if doLoadScreen == true then
+                    loadScreen = true
+                end
+
+                loadFunctions = true
+                loading = false
+            end
+
             if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 then
                 options = false
                 credits = false
                 newgame = false
+                loading = false
                 playerImageDelay = 4
                 love.timer.sleep(0.1)
+                worldSeedType = false
+                worldNameType = false
+                worldLoadType = false
             end
 
-            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 then
+            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 and newgame == true then
                 worldNameType = not worldNameType
                 worldSeedType = false
             end
 
-            if button == 1 and x > 170 and x < 840 and y > 280 and y < 340 then
+            if button == 1 and x > 170 and x < 840 and y > 280 and y < 340 and newgame == true then
                 worldSeedType = not worldSeedType
                 worldNameType = false
+            end
+
+            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 and loading == true then
+                worldLoadType = not worldLoadType
             end
 
         elseif ingame == true then
