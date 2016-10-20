@@ -8,7 +8,7 @@ function save.load()
 
     save.clear()
     local file = io.open("world.txt", "a")
-    file:write("Seed:\n"..worldSeed.."\nhello\nmy\nname\nis\nDanny")
+    file:write("Seed:\n"..worldSeed.."\nName:\n"..worldName)
     file:close()
     save.read()
 

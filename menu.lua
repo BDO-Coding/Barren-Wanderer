@@ -17,15 +17,17 @@ local tilesetSprite
 
 function menu.load()
 
-    worldSeed = "1234"
+    worldSeed = "0000"
 
     options = false
     credits = false
     newgame = false
 
-    worldName = "World 1"
+    worldName = "World"
     worldNameType = false
+    worldNameNum = 5
     worldSeedType = false
+    worldSeedNum = 4
 
     loadScreen = false
     loadDelay = 10
@@ -364,24 +366,20 @@ function menu.newgame()
 
     if newgame == true then
 
-        if mouseX > 170 and mouseX < 470 and mouseY > 200 and mouseY < 260 then -- World Name
+        if mouseX > 170 and mouseX < 840 and mouseY > 200 and mouseY < 260 then -- World Name
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 200, 300, 60)
-            worldNameType = true
+            love.graphics.rectangle("fill", 170, 200, 670, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 200, 300, 60)
-            worldNameType = false
+            love.graphics.rectangle("fill", 170, 200, 670, 60)
         end
 
-        if mouseX > 170 and mouseX < 470 and mouseY > 280 and mouseY < 340 then -- World Seed
+        if mouseX > 170 and mouseX < 840 and mouseY > 280 and mouseY < 340 then -- World Seed
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 280, 300, 60)
-            worldSeedType = true
+            love.graphics.rectangle("fill", 170, 280, 670, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 280, 300, 60)
-            worldSeedType = false
+            love.graphics.rectangle("fill", 170, 280, 670, 60)
         end
 
         if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- Create Game
@@ -400,16 +398,46 @@ function menu.newgame()
             love.graphics.rectangle("fill", 170, 500, 220, 60)
         end
 
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.rectangle("fill", 360, 205, 475, 50)
+        love.graphics.rectangle("fill", 355, 285, 480, 50)
+
         love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle("line", 170, 200, 300, 60)
-        love.graphics.rectangle("line", 170, 280, 300, 60)
+        love.graphics.rectangle("line", 170, 200, 670, 60)
+        love.graphics.rectangle("line", 170, 280, 670, 60)
         love.graphics.rectangle("line", 170, 360, 220, 60)
 
-        love.graphics.print("World Name : "..worldName, 190, 210, 0, 2, 3)
-        love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
+        if worldNameType == true then
+            love.graphics.print("World Name-: "..worldName, 190, 210, 0, 2, 3)
+        else
+            love.graphics.print("World Name : "..worldName, 190, 210, 0, 2, 3)
+        end
+
+        if worldSeedType == true then
+            love.graphics.print("World Seed-: "..worldSeed, 190, 290, 0, 2, 3)
+        else
+            love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
+        end
+        
         love.graphics.print("Create World", 200, 370, 0, 2, 3)
 
-        --worldSeedInt = tonumber(worldSeed)
+        if worldNameNum > 20 then
+            local byteoffset = utf8.offset(worldName, -1)
+     
+            if byteoffset then
+                worldName = string.sub(worldName, 1, byteoffset - 1)
+            end
+            worldNameNum = worldNameNum - 1
+        end
+
+        if worldSeedNum > 30 then
+            local byteoffset = utf8.offset(worldSeed, -1)
+     
+            if byteoffset then
+                worldSeed = string.sub(worldSeed, 1, byteoffset - 1)
+            end
+            worldSeedNum = worldSeedNum - 1
+        end
 
     end
 
@@ -421,11 +449,17 @@ function menu.newgame()
             if byteoffset then
                 worldName = string.sub(worldName, 1, byteoffset - 1)
             end
+            if worldNameNum > 0 then
+                worldNameNum = worldNameNum - 1
+            end
         elseif backKey == "backspace" and worldSeedType == true then
             local byteoffset = utf8.offset(worldSeed, -1)
      
             if byteoffset then
                 worldSeed = string.sub(worldSeed, 1, byteoffset - 1)
+            end
+            if worldSeedNum > 0 then
+                worldSeedNum = worldSeedNum - 1
             end
         end
 
@@ -435,10 +469,14 @@ function menu.newgame()
 
         if worldNameType == true and newgame == true then
             worldName = worldName .. worldText
+            worldNameNum = worldNameNum + 1
         end
 
-        if worldSeedType == true and newgame == true then
-            worldSeed = worldSeed .. worldText
+        if worldText == "1" or worldText == "2" or worldText == "3" or worldText == "4" or worldText == "5" or worldText == "6" or worldText == "7" or worldText == "8" or worldText == "9" or worldText == "0" then
+            if worldSeedType == true and newgame == true then
+                worldSeed = worldSeed .. worldText
+                worldSeedNum = worldSeedNum + 1
+            end
         end
 
     end
@@ -654,6 +692,16 @@ function love.mousepressed(x, y, button, istouch)
                 newgame = false
                 playerImageDelay = 4
                 love.timer.sleep(0.1)
+            end
+
+            if button == 1 and x > 170 and x < 840 and y > 200 and y < 260 then
+                worldNameType = not worldNameType
+                worldSeedType = false
+            end
+
+            if button == 1 and x > 170 and x < 840 and y > 280 and y < 340 then
+                worldSeedType = not worldSeedType
+                worldNameType = false
             end
 
         elseif ingame == true then

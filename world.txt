@@ -1,7 +1,4 @@
 Seed:
-1234
-hello
-my
-name
-is
-Danny
+0000
+Name:
+World
