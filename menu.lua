@@ -17,6 +17,7 @@ local tilesetSprite
 
 function menu.load()
 
+    worldName = "World"
     worldSeed = "0000"
 
     options = false
@@ -719,32 +720,6 @@ function love.mousepressed(x, y, button, istouch)
 
                 loadFunctions = true
                 loading = false
-
-                local count = 1
-                local file = io.open(worldName..".txt", "r")
-                seedNext = false
-                io.input(file)
-
-                while true do
-
-                    local line = io.read()
-
-                    if line == nil then
-                        break
-                    end
-                    
-                    count = count + 1
-
-                    if seedNext == true then
-                        seed = line
-                        seedNext = false
-                    end
-
-                    if line == "Seed:" then
-                        seedNext = true
-                    end
-                  
-                end
             end
 
             if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and clickDelay < 0 then

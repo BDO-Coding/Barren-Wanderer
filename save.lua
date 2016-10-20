@@ -18,10 +18,6 @@ function save.update(dt)
 
 end
 
-function save.draw()
-
-end
-
 function save.clear()
 
     local file = io.open(worldName..".txt", "w")
@@ -63,11 +59,5 @@ end
 function UPDATE_SAVE(dt)
 
 	save.update(dt)
-
-end
-
-function DRAW_SAVE()
-
-	save.draw()
 
 end

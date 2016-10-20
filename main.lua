@@ -35,7 +35,7 @@ function love.update(dt)
 
 	if loadFunctions == true then
 
-		save.load()
+		--save.load()
 		scroll.load()
 		player.load()
         monster.load()
@@ -58,9 +58,7 @@ function love.draw()
 	    DRAW_HOTBAR()
 
 	end
-	DRAW_SAVE()
 	DRAW_MENU()
-
 
 	love.graphics.setColor(255, 0, 0)
 
