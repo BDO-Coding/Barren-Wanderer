@@ -446,44 +446,58 @@ function menu.newgame()
 
     end
 
-    function love.keypressed(backKey)
+end
 
-        if backKey == "backspace" and worldNameType == true and newgame == true then
-            local byteoffset = utf8.offset(worldName, -1)
-     
-            if byteoffset then
-                worldName = string.sub(worldName, 1, byteoffset - 1)
-            end
-            if worldNameNum > 0 then
-                worldNameNum = worldNameNum - 1
-            end
-        elseif backKey == "backspace" and worldSeedType == true and newgame == true then
-            local byteoffset = utf8.offset(worldSeed, -1)
-     
-            if byteoffset then
-                worldSeed = string.sub(worldSeed, 1, byteoffset - 1)
-            end
-            if worldSeedNum > 0 then
-                worldSeedNum = worldSeedNum - 1
-            end
+function love.keypressed(backKey)
+
+    if backKey == "backspace" and worldNameType == true and newgame == true then
+        local byteoffset = utf8.offset(worldName, -1)
+ 
+        if byteoffset then
+            worldName = string.sub(worldName, 1, byteoffset - 1)
         end
-
+        if worldNameNum > 0 then
+            worldNameNum = worldNameNum - 1
+        end
+    elseif backKey == "backspace" and worldSeedType == true and newgame == true then
+        local byteoffset = utf8.offset(worldSeed, -1)
+ 
+        if byteoffset then
+            worldSeed = string.sub(worldSeed, 1, byteoffset - 1)
+        end
+        if worldSeedNum > 0 then
+            worldSeedNum = worldSeedNum - 1
+        end
+    elseif backKey == "backspace" and worldLoadType == true and loading == true then
+        local byteoffset = utf8.offset(worldLoadName, -1)
+ 
+        if byteoffset then
+            worldLoadName = string.sub(worldLoadName, 1, byteoffset - 1)
+        end
+        if worldLoadNum > 0 then
+            worldLoadNum = worldLoadNum - 1
+        end
     end
 
-    function love.textinput(worldText)
+end
 
-        if worldNameType == true and newgame == true then
-            worldName = worldName .. worldText
-            worldNameNum = worldNameNum + 1
+function love.textinput(worldText)
+
+    if worldNameType == true and newgame == true then
+        worldName = worldName .. worldText
+        worldNameNum = worldNameNum + 1
+    end
+
+    if worldLoadType == true and loading == true then
+        worldLoadName = worldLoadName .. worldLoadText
+        worldLoadNum = worldLoadNum + 1
+    end
+
+    if worldText == "1" or worldText == "2" or worldText == "3" or worldText == "4" or worldText == "5" or worldText == "6" or worldText == "7" or worldText == "8" or worldText == "9" or worldText == "0" then
+        if worldSeedType == true and newgame == true then
+            worldSeed = worldSeed .. worldText
+            worldSeedNum = worldSeedNum + 1
         end
-
-        if worldText == "1" or worldText == "2" or worldText == "3" or worldText == "4" or worldText == "5" or worldText == "6" or worldText == "7" or worldText == "8" or worldText == "9" or worldText == "0" then
-            if worldSeedType == true and newgame == true then
-                worldSeed = worldSeed .. worldText
-                worldSeedNum = worldSeedNum + 1
-            end
-        end
-
     end
 
 end
@@ -613,30 +627,6 @@ function menu.loadScreen()
         end
     end
 
-    function love.keypressed(backKey)
-
-        if backKey == "backspace" and worldLoadType == true and loading == true then
-            local byteoffset = utf8.offset(worldLoadName, -1)
-     
-            if byteoffset then
-                worldLoadName = string.sub(worldLoadName, 1, byteoffset - 1)
-            end
-            if worldLoadNum > 0 then
-                worldLoadNum = worldLoadNum - 1
-            end
-        end
-
-    end
-
-    function love.textinput(worldLoadText)
-
-        if worldLoadType == true and loading == true then
-            worldLoadName = worldLoadName .. worldLoadText
-            worldLoadNum = worldLoadNum + 1
-        end
-
-    end
-
     if loadScreen == true then
         love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle("fill", 0, 0, 1200, 750)
@@ -685,58 +675,6 @@ function love.mousepressed(x, y, button, istouch)
                 newgame = true
                 love.timer.sleep(0.1)
             end
-
-			--[[if button == 1 and options == false and credits == false and load_game == true then
-
-				if x > 250 and x < 470 and y > 150 and y < 210 then
-					if seed_array[1] ~= nil then
-						seed = seed_array[1]
-					end
-				elseif  x > 250 and x < 470 and y > 250 and y < 310 then
-					if seed_array[2] ~= nil then
-						seed = seed_array[2]
-					end
-				elseif  x > 250 and x < 470 and y > 350 and y < 410 then
-					if seed_array[3] ~= nil then
-						seed = seed_array[3]
-					end
-				elseif  x > 250 and x < 470 and y > 450 and y < 510 then
-					if seed_array[4] ~= nil then
-						seed = seed_array[4]
-					end
-				elseif  x > 250 and x < 470 and y > 550 and y < 610 then
-					if seed_array[5] ~= nil then
-						seed = seed_array[5]
-					end
-				elseif  x > 650 and x < 870 and y > 150 and y < 210 then
-					if seed_array[6] ~= nil then
-						seed = seed_array[6]
-					end
-				elseif  x > 650 and x < 870 and y > 250 and y < 310 then
-					if seed_array[7] ~= nil then
-						seed = seed_array[7]
-					end
-				elseif  x > 650 and x < 870 and y > 350 and y < 410 then
-					if seed_array[8] ~= nil then
-						seed = seed_array[8]
-					end
-				elseif  x > 650 and x < 870 and y > 450 and y < 510 then
-					if seed_array[9] ~= nil then
-						seed = seed_array[9]
-					end
-				elseif  x > 650 and x < 870 and y > 550 and y < 610 then
-					if seed_array[10] ~= nil then
-						seed = seed_array[10]
-					end
-				end
-
-				if x > 250 and x < 870 and y > 670 and y < 730 then
-
-					load_game = false
-
-				end
-
-			end]]
 
 			if button == 1 and x > 170 and x < 390 and y > 250 and y < 310 and options == false and credits == false and loading == false then
 				load_game = true
