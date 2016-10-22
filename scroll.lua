@@ -14,8 +14,15 @@ local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 local biomeNum = 25600 --has to be a square number 57600
-local setBiomeSize = 20
+local setBiomeSize = 40
 local biomeSize
+local mapDrawn = false
+local currentBiome
+
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
 
 function scroll.load()
 
@@ -163,6 +170,7 @@ function scroll.setupMap()
     map[7][14] = 5
     map[6][13] = 5
 
+    mapDrawn = true
 end
  
 function scroll.setupMapView()
@@ -265,7 +273,9 @@ function scroll.moveMap(dx, dy)
 end
 
 function scroll.update(dt)
-
+    if mapDrawn == true then
+ --   currentBiome = biomeArray[mapX][mapY]
+end
     worldSeedInt = tonumber(worldSeed)
 
     math.randomseed(worldSeedInt)
@@ -316,8 +326,11 @@ function scroll.draw()
 
     love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
 
-    love.graphics.print("X: "..maX, 10, 100)
+    love.graphics.print("X: "..mapX, 10, 100)
     love.graphics.print("Y: "..mapY, 10, 110)
+    if mapDrawn == true then
+    love.graphics.print("Biome: "..biomeArray[(math.floor(mapX+0.5))][(math.floor(mapY+0.5))], 10, 120)
+end
 end
 
 function UPDATE_SCROLL(dt)
