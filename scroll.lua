@@ -17,7 +17,7 @@ local biomeNum = 25600 --has to be a square number 57600
 local setBiomeSize = 40
 local biomeSize
 local mapDrawn = false
-local currentBiome
+
 
 function round(num, idp)
   local mult = 10^(idp or 0)
@@ -274,8 +274,11 @@ end
 
 function scroll.update(dt)
     if mapDrawn == true then
- --   currentBiome = biomeArray[mapX][mapY]
+  currentBiome = biomeArray[(math.floor(mapX+0.5))][(math.floor(mapY+0.5))]
 end
+    playerX = mapX
+    playerY = mapY
+
     worldSeedInt = tonumber(worldSeed)
 
     math.randomseed(worldSeedInt)
@@ -326,11 +329,6 @@ function scroll.draw()
 
     love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
 
-    love.graphics.print("X: "..mapX, 10, 100)
-    love.graphics.print("Y: "..mapY, 10, 110)
-    if mapDrawn == true then
-    love.graphics.print("Biome: "..biomeArray[(math.floor(mapX+0.5))][(math.floor(mapY+0.5))], 10, 120)
-end
 end
 
 function UPDATE_SCROLL(dt)

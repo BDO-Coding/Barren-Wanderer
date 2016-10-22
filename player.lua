@@ -21,6 +21,10 @@ function player.load()
     alternateS = true
     alternateD = true
 
+    playerX = 1
+    playerY = 1
+    currentBiome = 1
+
 end
 
 function player.update(dt)
