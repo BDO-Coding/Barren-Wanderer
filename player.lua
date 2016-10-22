@@ -132,9 +132,17 @@ function player.draw()
     if love.keyboard.isDown("lctrl") then
     	playerSpeed = playerDefaultSpeed*playerSprint
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
+            if currentTile == 7 then
+        playerSpeed = 0
+        playerSpeedDiagonal = 0
+    end
     else
     	playerSpeed = playerDefaultSpeed
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal
+            if currentTile == 7 then
+        playerSpeed = 0
+        playerSpeedDiagonal = 0
+    end
     end
 
     function love.keyreleased(releaseImage)
