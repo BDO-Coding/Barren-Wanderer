@@ -273,12 +273,15 @@ function scroll.moveMap(dx, dy)
 end
 
 function scroll.update(dt)
-    if mapDrawn == true then
-  currentBiome = biomeArray[(math.floor(mapX+0.5))][(math.floor(mapY+0.5))]
-  currentTile = map[(math.floor(mapX+0.5))][(math.floor(mapY+0.5))]
-    end
+
     playerX = mapX
     playerY = mapY
+
+    if mapDrawn == true then
+  currentBiome = biomeArray[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+  currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+    end
+
 
     worldSeedInt = tonumber(worldSeed)
 
@@ -307,7 +310,7 @@ function scroll.update(dt)
 
         else
             if love.keyboard.isDown("w")  then
-                scroll.moveMap(0, -playerSpeed * tileSize)
+                scroll.moveMap(0, - playerSpeed * tileSize)
             end
 
             if love.keyboard.isDown("s")  then

@@ -3,8 +3,13 @@ require"images"
 
 function player.load()
 
-	playerSpeed = 0.2 --0.002
-	playerSpeedDiagonal = 0.1 -- 0.001
+	playerDefaultSpeed = 0.002
+	playerDefaultSpeedDiagonal = 0.001
+    playerSprint = 2.5
+
+    playerSpeed = 1
+    playerSpeedDiagonal = 1
+
 	doOnce = true
 	playerSizeX = 2
 	playerSizeY = 2
@@ -125,11 +130,11 @@ function player.draw()
     end
 
     if love.keyboard.isDown("lctrl") then
-    	playerSpeed = 0.004
-    	playerSpeedDiagonal = 0.003
+    	playerSpeed = playerDefaultSpeed*playerSprint
+    	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
     else
-    	playerSpeed = 0.002
-    	playerSpeedDiagonal = 0.001
+    	playerSpeed = playerDefaultSpeed
+    	playerSpeedDiagonal = playerDefaultSpeedDiagonal
     end
 
     function love.keyreleased(releaseImage)
