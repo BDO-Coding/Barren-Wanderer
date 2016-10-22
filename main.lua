@@ -87,9 +87,8 @@ function love.draw()
     if ingame == true then
     love.graphics.print("X: "..playerX, 10, 100)
     love.graphics.print("Y: "..playerY, 10, 110)
-   -- if mapDrawn == true then
+    love.graphics.print("Tile: "..currentTile, 10, 130)
     love.graphics.print("Biome: "..currentBiome, 10, 120)
-    --end
 end
 
 end

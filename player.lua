@@ -24,6 +24,7 @@ function player.load()
     playerX = 1
     playerY = 1
     currentBiome = 1
+    currentTile = 1
 
 end
 

@@ -275,7 +275,8 @@ end
 function scroll.update(dt)
     if mapDrawn == true then
   currentBiome = biomeArray[(math.floor(mapX+0.5))][(math.floor(mapY+0.5))]
-end
+  currentTile = map[(math.floor(mapX+0.5))][(math.floor(mapY+0.5))]
+    end
     playerX = mapX
     playerY = mapY
 
