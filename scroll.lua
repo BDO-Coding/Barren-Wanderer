@@ -316,6 +316,8 @@ function scroll.draw()
 
     love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
 
+    love.graphics.print("X: "..maX, 10, 100)
+    love.graphics.print("Y: "..mapY, 10, 110)
 end
 
 function UPDATE_SCROLL(dt)
