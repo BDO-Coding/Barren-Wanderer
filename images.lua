@@ -18,6 +18,7 @@ function images.load()
 	images.hotbar = love.graphics.newImage("images/player/hotbar.png")
 	images.health = love.graphics.newImage("images/player/health.png")
 	images.stamina = love.graphics.newImage("images/player/stamina.png")
+	images.hunger = love.graphics.newImage("images/player/hunger.png")
 	images.guiBar = love.graphics.newImage("images/player/bar.png")
 	images.guiBarInside = love.graphics.newImage("images/player/barInside.png")
 
