@@ -31,6 +31,8 @@ function player.load()
     currentBiome = 1
     currentTile = 1
 
+    maxStamina = 100
+    stamina = 100
     maxHealth = 100
     health = 100
     alive = true
@@ -140,14 +142,14 @@ function player.draw()
         end
     end
 
-    if love.keyboard.isDown("lctrl") then
+    if love.keyboard.isDown("lctrl") and stamina > 0 then
     	playerSpeed = playerDefaultSpeed*playerSprint
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
         if currentTile == 7 then
             playerSpeed = 0
             playerSpeedDiagonal = 0
         end
-        health = health - 0.1
+        stamina = stamina - 0.1
     else
     	playerSpeed = playerDefaultSpeed
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal
@@ -155,6 +157,7 @@ function player.draw()
             playerSpeed = 0
             playerSpeedDiagonal = 0
         end
+        if stamina <= maxStamina then stamina = stamina + 0.05 end
     end
 
     function love.keyreleased(releaseImage)

@@ -6,10 +6,28 @@ function hotbar.load()
 	currentHotbarHand = 1
 	hotbarXCoord = 500
 	healthLength = 8
+	staminaLength = 8
 
 end
 
 function hotbar.update(dt)
+
+	divideHealth = maxHealth/10
+	divideStamina = maxStamina/10
+
+	smallerHealth = maxHealth*0.8
+	smallerStamina = maxStamina*0.8
+
+	healthLength = health/divideHealth
+	staminaLength = stamina/divideHealth
+
+	if health >= smallerHealth then healthLength = 8 end
+	if health <= 0 then healthLength = 0 end
+
+	if stamina >= smallerStamina then staminaLength = 8 end
+	if stamina <= 0 then staminaLength = 0 end
+
+	print(staminaLength)
 
 	function love.keypressed(numberKey)
 		if ingame == true and loadScreen == false then
@@ -42,11 +60,8 @@ end
 function hotbar.draw()
 
 	hotbarXCoord = 500
-	healthLength = health/10
 
 	if alive == true then
-		if health >= 80 then healthLength = 8 end
-		if health <= 0 then healthLength = 0 end
 
 		for i = 1, 10 do
 			if i == currentHotbarHand then
@@ -63,10 +78,14 @@ function hotbar.draw()
 		end
 		love.graphics.setColor(255, 0, 0)
 		love.graphics.draw(images.guiBarInside, 100, 650, 0, healthLength, 2)
+		love.graphics.setColor(10, 255, 10)
+		love.graphics.draw(images.guiBarInside, 100, 680, 0, staminaLength, 2)
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.draw(images.guiBar, 100, 650, 0, 8, 2)
+		love.graphics.draw(images.guiBar, 100, 680, 0, 8, 2)
 		love.graphics.draw(images.health, 60, 650, 0, 2, 1.8)
 		love.graphics.print((math.floor(health)).."/"..maxHealth, 268, 660)
+		love.graphics.print((math.floor(stamina)).."/"..maxStamina, 268, 690)
 	end
 
 end

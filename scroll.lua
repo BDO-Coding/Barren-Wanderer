@@ -183,7 +183,7 @@ function scroll.setupMapView()
     tilesDisplayHeight = 26
 
     zoomX = 2
-    zoomY = 2 -----------------------------------------------------------------USEFUL
+    zoomY = 2
 
 end
  
@@ -260,8 +260,7 @@ function scroll.updateTilesetBatch()
 
 end
  
--- central function for moving the map
-function scroll.moveMap(dx, dy)
+function scroll.moveMap(dx, dy) -- Central function for moving the map
 
     oldMapX = mapX
     oldMapY = mapY
@@ -280,8 +279,8 @@ function scroll.update(dt)
     playerY = mapY
 
     if mapDrawn == true then
-  currentBiome = biomeArray[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
-  currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+        currentBiome = biomeArray[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+        currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
     end
 
 
