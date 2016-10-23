@@ -3,6 +3,7 @@ require "scroll"
 require "player"
 require "images"
 require "monster"
+require "item"
 require "hotbar"
 require "save"
  
@@ -29,6 +30,7 @@ function love.update(dt)
 		scroll.load()
 		player.load()
         monster.load()
+        item.load()
         hotbar.load()
 
         loadFunctions = false
@@ -39,6 +41,7 @@ function love.update(dt)
 	    UPDATE_SCROLL(dt)
 	    UPDATE_PLAYER(dt)
 	    UPDATE_MONSTER(dt)
+	    UPDATE_ITEM(dt)
 	    UPDATE_HOTBAR(dt)
 	end
     UPDATE_SAVE(dt)
@@ -55,6 +58,7 @@ function love.draw()
 	    DRAW_SCROLL()
 	    DRAW_PLAYER()
 	    DRAW_MONSTER()
+	    DRAW_ITEM()
 	    DRAW_HOTBAR()
 
 	end
