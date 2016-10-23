@@ -4,7 +4,8 @@ require "player"
 function hotbar.load()
 
 	currentHotbarHand = 1
-	hotbarXCoord = 10
+	hotbarXCoord = 500
+	healthLength = 8
 
 end
 
@@ -40,7 +41,9 @@ end
 
 function hotbar.draw()
 
-	hotbarXCoord = 10
+	hotbarXCoord = 500
+
+	love.graphics.draw(images.health, 60, 650, 0, 2, 2)
 
 	for i = 1, 10 do
 		if i == currentHotbarHand then
@@ -48,15 +51,16 @@ function hotbar.draw()
 			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
 			love.graphics.print(i, hotbarXCoord + 5, 655)
 			hotbarXCoord = hotbarXCoord + 67
-			love.graphics.setColor(255, 255, 255)
 		else
+			love.graphics.setColor(255, 255, 255)
 			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
 			love.graphics.print(i, hotbarXCoord + 5, 655)
 			hotbarXCoord = hotbarXCoord + 67
-
 		end
 	end
-
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.draw(images.guiBar, 100, 650, 0, healthLength, 2.24)
+	love.graphics.setColor(255, 255, 255)
 end
 
 function UPDATE_HOTBAR(dt)

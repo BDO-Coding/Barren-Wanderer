@@ -1,4 +1,4 @@
 Seed:
-000011
+0000
 Name:
 World

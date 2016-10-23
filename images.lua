@@ -14,8 +14,10 @@ function images.load()
 	images.playerUpAnimeD = love.graphics.newImage("images/player/playerUpAnimeD.png")
 	images.playerSide = love.graphics.newImage("images/player/playerSide.png")
 
-	--Inventory
+	--Hotbar & Other GUI
 	images.hotbar = love.graphics.newImage("images/player/hotbar.png")
+	images.health = love.graphics.newImage("images/player/health.png")
+	images.guiBar = love.graphics.newImage("images/player/bar.png")
 end
 
 function UPDATE_IMAGES(dt)
