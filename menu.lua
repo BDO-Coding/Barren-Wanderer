@@ -1,5 +1,6 @@
 menu = {}
 require("save")
+require("images")
 
 local utf8 = require("utf8")
 
@@ -15,6 +16,10 @@ local tilesetImage
 local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
+
+local r = 200
+local b = 200
+local g = 200
 
 function menu.load()
 
@@ -75,14 +80,7 @@ function menu.draw()
     if ingame == false then
 
         love.graphics.draw(tilesetBatch, math.floor(-zoomX*(menuMapX%1)*tileSize), math.floor(-zoomY*(menuMapY%1)*tileSize), 0, zoomX, zoomY)
-
-        love.graphics.setColor(0, 255, 255)
-        love.graphics.rotate(5.84685)
-        love.graphics.rectangle("fill", -40, 145, 335, 60, 10)
-        love.graphics.rotate(-5.84685)
-        love.graphics.setColor(255, 0, 0)
-        love.graphics.print("Barren World", 30, 150, 5.84685, 4, 4)
-         
+  
     end
 
     if inmenu == true and options == false and newgame == false and ingame == false and credits == false and loading == false then
@@ -210,6 +208,11 @@ function menu.draw()
         end
     end
 
+        if ingame == false then
+        love.graphics.setColor(r, b, g)
+        love.graphics.draw(images.title, 30, 0, 0, 2, 2)
+    end
+
 end
 
 function menu.setupMap()
@@ -331,6 +334,11 @@ function menu.moveMap(dx, dy)
 end
 
 function menu.update(dt)
+
+    r = r + love.math.random(-10,10)
+    b = b + love.math.random(-10,10)
+    g = g + love.math.random(-10,10)
+
 
     clickDelay = clickDelay - dt
 
