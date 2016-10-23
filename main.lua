@@ -69,11 +69,6 @@ function love.draw()
 		love.graphics.print("Lua Version: " .._VERSION, 10, 30) --Lua Version
 	end
 
-	if doLoadScreen == false then
-		love.graphics.print("MouseX: "..love.mouse.getX(), 10, 50)
-    	love.graphics.print("MouseY: "..love.mouse.getY(), 10, 60)
-    end
-
     if seed_show == true and ingame == true then
     	love.graphics.print("Seed: "..seed, 10, 40)
     elseif seed_show == true and ingame == false then
@@ -84,11 +79,16 @@ function love.draw()
     	love.graphics.print("FPS: "..love.timer.getFPS(), 10, 10) --FPS Counter	
     end
 
+    if doLoadScreen == false then
+		love.graphics.print("MouseX: "..love.mouse.getX(), 10, 50)
+    	love.graphics.print("MouseY: "..love.mouse.getY(), 10, 60)
+    end
+
     if ingame == true and doLoadScreen == false then
-	    love.graphics.print("X: "..playerX, 10, 100)
-	    love.graphics.print("Y: "..playerY, 10, 110)
-	    love.graphics.print("Tile: "..currentTile, 10, 130)
-	    love.graphics.print("Biome: "..currentBiome, 10, 120)
+	    love.graphics.print("X: "..playerX, 10, 70)
+	    love.graphics.print("Y: "..playerY, 10, 80)
+	    love.graphics.print("Tile: "..currentTile, 10, 90)
+	    love.graphics.print("Biome: "..currentBiome, 10, 100)
 	end
 
 end

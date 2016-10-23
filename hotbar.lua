@@ -44,27 +44,30 @@ function hotbar.draw()
 	hotbarXCoord = 500
 	healthLength = health/10
 
-	if health >= 80 then healthLength = 8 end
-	if health <= 0 then healthLength = 0 end
+	if alive == true then
+		if health >= 80 then healthLength = 8 end
+		if health <= 0 then healthLength = 0 end
 
-	for i = 1, 10 do
-		if i == currentHotbarHand then
-			love.graphics.setColor(50, 50, 50)
-			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
-			love.graphics.print(i, hotbarXCoord + 5, 655)
-			hotbarXCoord = hotbarXCoord + 67
-		else
-			love.graphics.setColor(255, 255, 255)
-			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
-			love.graphics.print(i, hotbarXCoord + 5, 655)
-			hotbarXCoord = hotbarXCoord + 67
+		for i = 1, 10 do
+			if i == currentHotbarHand then
+				love.graphics.setColor(50, 50, 50)
+				love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
+				love.graphics.print(i, hotbarXCoord + 5, 655)
+				hotbarXCoord = hotbarXCoord + 67
+			else
+				love.graphics.setColor(255, 255, 255)
+				love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
+				love.graphics.print(i, hotbarXCoord + 5, 655)
+				hotbarXCoord = hotbarXCoord + 67
+			end
 		end
+		love.graphics.setColor(255, 0, 0)
+		love.graphics.draw(images.guiBarInside, 100, 650, 0, healthLength, 2)
+		love.graphics.setColor(255, 255, 255)
+		love.graphics.draw(images.guiBar, 100, 650, 0, 8, 2)
+		love.graphics.draw(images.health, 60, 650, 0, 2, 1.8)
 	end
-	love.graphics.setColor(255, 0, 0)
-	love.graphics.draw(images.guiBarInside, 100, 650, 0, healthLength, 2)
-	love.graphics.setColor(255, 255, 255)
-	love.graphics.draw(images.guiBar, 100, 650, 0, 8, 2)
-	love.graphics.draw(images.health, 60, 650, 0, 2, 1.8)
+
 end
 
 function UPDATE_HOTBAR(dt)

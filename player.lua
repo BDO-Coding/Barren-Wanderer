@@ -13,7 +13,7 @@ function player.load()
 	doOnce = true
 	playerSizeX = 2
 	playerSizeY = 2
-	playerScreenX = 560
+	playerScreenX = 550
 	playerScreenY = 350
 
     animeDelayW = 0.1
@@ -48,14 +48,16 @@ function player.update(dt)
         animeDelayS = animeDelayS - dt
     end
 
-    if health < 1 then
-        alive = false
-        health = 0
-    end
-
 end
 
 function player.draw()
+
+    if health < 1 then
+        alive = false
+        love.graphics.setColor(255, 0, 0)
+        love.graphics.print("You died", 330, 300, 0, 10, 10)
+        love.graphics.setBackgroundColor(50, 50, 50)
+    end
 
 	if doOnce == true then
 		playerImage = images.playerDown
@@ -67,7 +69,7 @@ function player.draw()
         if love.keyboard.isDown("w") and alternateW == true then
             playerImage = images.playerUpAnimeA
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
             if animeDelayW <= 0 then
                 alternateW = false
                 animeDelayW = 0.4
@@ -75,7 +77,7 @@ function player.draw()
         elseif love.keyboard.isDown("w") and alternateW == false then
             playerImage = images.playerUpAnimeD
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
             if animeDelayW <= 0 then
                 alternateW = true
                 animeDelayW = 0.4
@@ -85,7 +87,7 @@ function player.draw()
         if love.keyboard.isDown("s") and alternateS == true then
             playerImage = images.playerDownAnimeA
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
             if animeDelayS <= 0 then
                 alternateS = false
                 animeDelayS = 0.4
@@ -93,7 +95,7 @@ function player.draw()
         elseif love.keyboard.isDown("s") and alternateS == false then
             playerImage = images.playerDownAnimeD
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
             if animeDelayS <= 0 then
                 alternateS = true
                 animeDelayS = 0.4
@@ -121,7 +123,7 @@ function player.draw()
         if love.keyboard.isDown("d") and alternateD == true then
             playerImage = images.playerDownAnimeD
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
             if animeDelayD <= 0 then
                 alternateD = false
                 animeDelayD = 0.4
@@ -129,7 +131,7 @@ function player.draw()
         elseif love.keyboard.isDown("d") and alternateD == false then
             playerImage = images.playerSide
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
             if animeDelayD <= 0 then
                 alternateD = true
                 animeDelayD = 0.4
@@ -158,11 +160,11 @@ function player.draw()
         if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" and inmenu == false and alive == true then
             playerImage = images.playerDown
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
         elseif releaseImage == "w" and inmenu == false and alive == true then
             playerImage = images.playerUp
             playerSizeX = 2
-            playerScreenX = 560
+            playerScreenX = 550
         elseif releaseImage == "escape" then
         	inmenu = not inmenu
             options = false

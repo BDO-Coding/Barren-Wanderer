@@ -20,8 +20,10 @@ local mapDrawn = false
 
 
 function round(num, idp)
-  local mult = 10^(idp or 0)
-  return math.floor(num * mult + 0.5) / mult
+
+    local mult = 10^(idp or 0)
+    return math.floor(num * mult + 0.5) / mult
+
 end
 
 function scroll.load()
@@ -331,7 +333,9 @@ end
 
 function scroll.draw()
 
-    love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
+    if alive == true then
+        love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
+    end
 
 end
 
