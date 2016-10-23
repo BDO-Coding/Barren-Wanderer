@@ -543,14 +543,6 @@ function menu.options()
             love.graphics.rectangle("fill", 410, 280, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- Auto save
-            love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 360, 220, 60)
-        else
-            love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 360, 220, 60)
-        end
-
         if ingame == false then
             if mouseX > 170 and mouseX < 390 and mouseY > 600 and mouseY < 660 then -- Back
                 love.graphics.setColor(30, 125, 49)
@@ -567,6 +559,16 @@ function menu.options()
                 love.graphics.setColor(31, 191, 63)
                 love.graphics.rectangle("fill", 170, 500, 220, 60)
             end
+
+            if mouseX > 170 and mouseX < 390 and mouseY > 360 and mouseY < 420 then -- Auto save
+                love.graphics.setColor(30, 125, 49)
+                love.graphics.rectangle("fill", 170, 360, 220, 60)
+            else
+                love.graphics.setColor(31, 191, 63)
+                love.graphics.rectangle("fill", 170, 360, 220, 60)
+            end
+            love.graphics.setColor(0, 0, 0)
+            love.graphics.rectangle("line", 170, 360, 220, 60)
         end
 
         love.graphics.setColor(0, 0, 0)                         -- set colour to black for borders and text
@@ -595,12 +597,10 @@ function menu.options()
             love.graphics.print("Show Seed:Off", 430, 290, 0, 2, 3) -- print Seed:off
         end
 
-        love.graphics.rectangle("line", 170, 360, 220, 60)
-
         if ingame == true and autoSave == true then
             love.graphics.print("Auto-Save:On", 200, 370, 0, 2, 3)
         elseif ingame == true and autoSave == false then
-            love.graphics.print("Auto-Save:On", 200, 370, 0, 2, 3)
+            love.graphics.print("Auto-Save:Off", 200, 370, 0, 2, 3)
         end
 
 
@@ -688,10 +688,15 @@ function menu.loadScreen()
     end
 
     if inmenu == true then
+        love.graphics.setColor(0, 0, 0)
         if credits == true or options == true or newgame == true or loading == true then
-            love.graphics.setColor(0, 0, 0)
-            love.graphics.rectangle("line", 170, 600, 220, 60)      --draw 'back' border
-            love.graphics.print("Back", 249, 610, 0, 2, 3)          --print back
+            if ingame == false then
+                love.graphics.rectangle("line", 170, 600, 220, 60)      --draw 'back' border
+                love.graphics.print("Back", 249, 610, 0, 2, 3)          --print back
+            elseif ingame == true then
+                love.graphics.rectangle("line", 170, 500, 220, 60)      --draw 'back' border
+                love.graphics.print("Back", 249, 510, 0, 2, 3)          --print back
+            end
         end
     end
 

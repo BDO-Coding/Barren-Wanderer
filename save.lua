@@ -16,13 +16,13 @@ end
 
 function save.update(dt)
 
-    --[[if autoSave == true then
+    if autoSave == true and ingame == true and loading == false then
         save.clear()
         local file = io.open(worldName..".txt", "a")
         file:write("Seed:\n"..worldSeed.."\nName:\n"..worldName)
         file:close()
         save.read()
-    end]]
+    end
 
 end
 
