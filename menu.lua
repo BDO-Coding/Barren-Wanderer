@@ -130,26 +130,26 @@ function menu.draw()
 
         if playerImageDelay > 3 then
             menuPlayerImage = images.playerDownHiRes
-            playerImageSizeX = 1
+            playerImageSizeX = 0.85
             playerImageX = 600
         elseif playerImageDelay > 2 then
             menuPlayerImage = images.playerSideHiRes
-            playerImageSizeX = 1
+            playerImageSizeX = 0.85
             playerImageX = 600
         elseif playerImageDelay > 1 then
             menuPlayerImage = images.playerUpHiRes
-            playerImageSizeX = 1
+            playerImageSizeX = 0.85
             playerImageX = 600
         elseif playerImageDelay > 0 then
             menuPlayerImage = images.playerSideHiRes
-            playerImageSizeX = -1
-            playerImageX = 1150
+            playerImageSizeX = -0.85
+            playerImageX = 1050
         elseif playerImageDelay > -1 then
             playerImageDelay = 4
         end
 
         love.graphics.setColor(255, 255, 255)
-        love.graphics.draw(menuPlayerImage, playerImageX, 20, 0, playerImageSizeX, 1)
+        love.graphics.draw(menuPlayerImage, playerImageX, 150, 0, playerImageSizeX, 0.85)
 
     end
 
