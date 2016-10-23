@@ -287,7 +287,7 @@ function scroll.update(dt)
 
     math.randomseed(worldSeedInt)
 
-    if inmenu == false and loadScreen == false then
+    if inmenu == false and loadScreen == false and alive == true then
         if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
 
             scroll.moveMap(0, -playerSpeedDiagonal * tileSize)

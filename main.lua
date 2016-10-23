@@ -23,16 +23,6 @@ end
  
 function love.update(dt)
 
-	if ingame == true then
-	    UPDATE_SCROLL(dt)
-	    UPDATE_PLAYER(dt)
-	    UPDATE_MONSTER(dt)
-	    UPDATE_HOTBAR(dt)
-	end
-    UPDATE_SAVE(dt)
-	UPDATE_MENU(dt)
-	love.audio.setVolume(volume/100)
-
 	if loadFunctions == true then
 
         save.load()
@@ -44,6 +34,16 @@ function love.update(dt)
         loadFunctions = false
 
 	end
+
+	if ingame == true then
+	    UPDATE_SCROLL(dt)
+	    UPDATE_PLAYER(dt)
+	    UPDATE_MONSTER(dt)
+	    UPDATE_HOTBAR(dt)
+	end
+    UPDATE_SAVE(dt)
+	UPDATE_MENU(dt)
+	love.audio.setVolume(volume/100)
 
 end
  

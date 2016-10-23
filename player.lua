@@ -1,5 +1,5 @@
 player={}
-require"images"
+require "images"
 
 function player.load()
 
@@ -31,6 +31,9 @@ function player.load()
     currentBiome = 1
     currentTile = 1
 
+    health = 100
+    alive = true
+
 end
 
 function player.update(dt)
@@ -45,6 +48,11 @@ function player.update(dt)
         animeDelayS = animeDelayS - dt
     end
 
+    if health < 1 then
+        alive = false
+        health = 0
+    end
+
 end
 
 function player.draw()
@@ -54,7 +62,7 @@ function player.draw()
 		doOnce = false
 	end
 
-    if inmenu == false then
+    if inmenu == false and alive == true then
 
         if love.keyboard.isDown("w") and alternateW == true then
             playerImage = images.playerUpAnimeA
@@ -136,6 +144,7 @@ function player.draw()
             playerSpeed = 0
             playerSpeedDiagonal = 0
         end
+        health = health - 1
     else
     	playerSpeed = playerDefaultSpeed
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal
@@ -146,11 +155,11 @@ function player.draw()
     end
 
     function love.keyreleased(releaseImage)
-        if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" and inmenu == false then
+        if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" and inmenu == false and alive == true then
             playerImage = images.playerDown
             playerSizeX = 2
             playerScreenX = 560
-        elseif releaseImage == "w" and inmenu == false then
+        elseif releaseImage == "w" and inmenu == false and alive == true then
             playerImage = images.playerUp
             playerSizeX = 2
             playerScreenX = 560
