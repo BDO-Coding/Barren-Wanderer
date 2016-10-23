@@ -66,6 +66,7 @@ function hotbar.draw()
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.draw(images.guiBar, 100, 650, 0, 8, 2)
 		love.graphics.draw(images.health, 60, 650, 0, 2, 1.8)
+		love.graphics.print((math.floor(health)).."/"..maxHealth, 268, 660)
 	end
 
 end

@@ -173,10 +173,8 @@ function player.draw()
     end
 
     if alive == true then
-
-    love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)            
-    love.graphics.print((math.floor(health)).."/"..maxHealth, 10, 660)
-end
+        love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
+    end
 end
 
 function UPDATE_PLAYER(dt)
