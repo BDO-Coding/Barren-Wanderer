@@ -140,22 +140,22 @@ function menu.draw()
             playerImageY = 20
         elseif playerImageDelay > 2 then
             menuPlayerImage = images.playerSideHiRes
-            playerImageSizeX = 30
-            playerImageSizeY = 30
-            playerImageX = 400
-            playerImageY = -100
+            playerImageSizeX = 1
+            playerImageSizeY = 1
+            playerImageX = 600
+            playerImageY = 20
         elseif playerImageDelay > 1 then
             menuPlayerImage = images.playerUpHiRes
-            playerImageSizeX = 30
-            playerImageSizeY = 30
-            playerImageX = 400
-            playerImageY = -100
+            playerImageSizeX = 1
+            playerImageSizeY = 1
+            playerImageX = 600
+            playerImageY = 20
         elseif playerImageDelay > 0 then
             menuPlayerImage = images.playerSideHiRes
-            playerImageSizeX = -30
-            playerImageSizeY = 30
-            playerImageX = 1350
-            playerImageY = -100
+            playerImageSizeX = -1
+            playerImageSizeY = 1
+            playerImageX = 1200
+            playerImageY = 20
         elseif playerImageDelay > -1 then
             playerImageDelay = 4
         end
