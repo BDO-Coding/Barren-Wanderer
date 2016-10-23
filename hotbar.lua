@@ -84,6 +84,7 @@ function hotbar.draw()
 		love.graphics.draw(images.guiBar, 100, 650, 0, 8, 2)
 		love.graphics.draw(images.guiBar, 100, 680, 0, 8, 2)
 		love.graphics.draw(images.health, 60, 650, 0, 2, 1.8)
+		love.graphics.draw(images.stamina, 60, 680, 0, 2, 1.8)
 		love.graphics.print((math.floor(health)).."/"..maxHealth, 268, 660)
 		love.graphics.print((math.floor(stamina)).."/"..maxStamina, 268, 690)
 	end

@@ -3,9 +3,9 @@ require "images"
 
 function player.load()
 
-	playerDefaultSpeed = 0.002
-	playerDefaultSpeedDiagonal = 0.001
-    playerSprint = 2.5
+	playerDefaultSpeed = 0.001
+	playerDefaultSpeedDiagonal = 0.0005
+    playerSprint = 3
 
     playerSpeed = 1
     playerSpeedDiagonal = 1
@@ -33,13 +33,19 @@ function player.load()
 
     maxStamina = 100
     stamina = 100
+    staminaRegen = 0.05
     maxHealth = 100
     health = 100
+    healthRegen = 0.01
     alive = true
 
 end
 
 function player.update(dt)
+
+    if health < maxHealth then
+        health = health + healthRegen
+    end
 
     if love.keyboard.isDown("a")then
 	    animeDelayA = animeDelayA - dt
@@ -90,7 +96,7 @@ function player.draw()
         if love.keyboard.isDown("s") and alternateS == true then
             playerImage = images.playerDownAnimeA
             playerSizeX = 2
-            playerScreenX = 550
+           playerScreenX = 550
             if animeDelayS <= 0 then
                 alternateS = false
                 animeDelayS = 0.4
@@ -149,7 +155,7 @@ function player.draw()
             playerSpeed = 0
             playerSpeedDiagonal = 0
         end
-        stamina = stamina - 0.1
+        stamina = stamina - 0.25
     else
     	playerSpeed = playerDefaultSpeed
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal
@@ -157,7 +163,7 @@ function player.draw()
             playerSpeed = 0
             playerSpeedDiagonal = 0
         end
-        if stamina <= maxStamina then stamina = stamina + 0.05 end
+        if stamina <= maxStamina then stamina = stamina + staminaRegen end
     end
 
     function love.keyreleased(releaseImage)
