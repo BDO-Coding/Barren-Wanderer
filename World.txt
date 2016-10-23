@@ -1,4 +1,8 @@
 Seed:
+<<<<<<< HEAD
 0000
+=======
+000011
+>>>>>>> origin/master
 Name:
 World
