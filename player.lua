@@ -161,7 +161,7 @@ function player.draw()
     end
 
 	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
-  --  love.graphics.draw(hotbar, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
+    love.graphics.draw(images.hotbar, 0, 650, 0,2,2)
 end
 
 function UPDATE_PLAYER(dt)
