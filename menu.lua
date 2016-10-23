@@ -80,53 +80,55 @@ function menu.draw()
     if ingame == false then
 
         love.graphics.draw(tilesetBatch, math.floor(-zoomX*(menuMapX%1)*tileSize), math.floor(-zoomY*(menuMapY%1)*tileSize), 0, zoomX, zoomY)
+        love.graphics.setColor(r, b, g)
+        love.graphics.draw(images.title, 30, 0, 0, 2, 2)
   
     end
 
     if inmenu == true and options == false and newgame == false and ingame == false and credits == false and loading == false then
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 150 and mouseY < 210 then
+        if mouseX > 170 and mouseX < 390 and mouseY > 180 and mouseY < 240 then
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 150, 220, 60)
+            love.graphics.rectangle("fill", 170, 180, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 150, 220, 60)
+            love.graphics.rectangle("fill", 170, 180, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 250 and mouseY < 310 then
+        if mouseX > 170 and mouseX < 390 and mouseY > 280 and mouseY < 340 then
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 250, 220, 60)
+            love.graphics.rectangle("fill", 170, 280, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 250, 220, 60)
+            love.graphics.rectangle("fill", 170, 280, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 350 and mouseY < 410 then
+        if mouseX > 170 and mouseX < 390 and mouseY > 380 and mouseY < 440 then
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 350, 220, 60)
+            love.graphics.rectangle("fill", 170, 380, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 350, 220, 60)
+            love.graphics.rectangle("fill", 170, 380, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 450 and mouseY < 510 then
+        if mouseX > 170 and mouseX < 390 and mouseY > 480 and mouseY < 540 then
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 450, 220, 60)
+            love.graphics.rectangle("fill", 170, 480, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 450, 220, 60)
+            love.graphics.rectangle("fill", 170, 480, 220, 60)
         end
 
         love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle("line", 170, 150, 220, 60)
-        love.graphics.rectangle("line", 170, 250, 220, 60)
-        love.graphics.rectangle("line", 170, 350, 220, 60)
-        love.graphics.rectangle("line", 170, 450, 220, 60)
+        love.graphics.rectangle("line", 170, 180, 220, 60)
+        love.graphics.rectangle("line", 170, 280, 220, 60)
+        love.graphics.rectangle("line", 170, 380, 220, 60)
+        love.graphics.rectangle("line", 170, 480, 220, 60)
 
-        love.graphics.print("New Game", 218, 160, 0, 2, 3)
-        love.graphics.print("Load Game", 214, 260, 0, 2, 3)
-        love.graphics.print("Options", 232, 360, 0, 2, 3)
-        love.graphics.print("Credits", 235, 460, 0, 2, 3)
+        love.graphics.print("New Game", 218, 190, 0, 2, 3)
+        love.graphics.print("Load Game", 214, 290, 0, 2, 3)
+        love.graphics.print("Options", 232, 390, 0, 2, 3)
+        love.graphics.print("Credits", 235, 490, 0, 2, 3)
 
         if playerImageDelay > 3 then
             menuPlayerImage = images.playerDownHiRes
@@ -192,25 +194,20 @@ function menu.draw()
 
     if credits == true then
         love.graphics.setColor(0, 255, 255)
-        love.graphics.rectangle("fill", 300, 100, 800, 390, 10)
+        love.graphics.rectangle("fill", 300, 200, 800, 390, 10)
         love.graphics.setColor(0, 0, 0)
-        love.graphics.print("Coded by: \n         Danny Harris, Benjamin Broadbent and Ori Taylor", 320, 120, 0, 2, 2)
-        love.graphics.print("Art by: \n         Danny Harris, Benjamin Broadbent and Ori Taylor", 320, 200, 0, 2, 2)
-        love.graphics.print("Sound by: \n         Nobody", 320, 280, 0, 2, 2)
-        love.graphics.print("Programs used: \n         LÖVE for Lua\n         paint.net\n         Sublime Text", 320, 360, 0, 2, 2)
+        love.graphics.print("Coded by: \n         Danny Harris, Benjamin Broadbent and Ori Taylor", 320, 220, 0, 2, 2)
+        love.graphics.print("Art by: \n         Danny Harris, Benjamin Broadbent and Ori Taylor", 320, 300, 0, 2, 2)
+        love.graphics.print("Sound by: \n         Nobody", 320, 380, 0, 2, 2)
+        love.graphics.print("Programs used: \n         LÖVE for Lua\n         paint.net\n         Sublime Text", 320, 460, 0, 2, 2)
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then
+        if mouseX > 170 and mouseX < 390 and mouseY > 600 and mouseY < 660 then -- Back
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+            love.graphics.rectangle("fill", 170, 600, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+            love.graphics.rectangle("fill", 170, 600, 220, 60)
         end
-    end
-
-        if ingame == false then
-        love.graphics.setColor(r, b, g)
-        love.graphics.draw(images.title, 30, 0, 0, 2, 2)
     end
 
 end
@@ -335,10 +332,9 @@ end
 
 function menu.update(dt)
 
-    r = r + love.math.random(-10,10)
-    b = b + love.math.random(-10,10)
-    g = g + love.math.random(-10,10)
-
+    r = r + love.math.random(-10, 10)
+    b = b + love.math.random(-10, 10)
+    g = g + love.math.random(-10, 10)
 
     clickDelay = clickDelay - dt
 
@@ -404,12 +400,12 @@ function menu.newgame()
             love.graphics.rectangle("fill", 170, 360, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
+        if mouseX > 170 and mouseX < 390 and mouseY > 600 and mouseY < 660 then -- Back
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+            love.graphics.rectangle("fill", 170, 600, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+            love.graphics.rectangle("fill", 170, 600, 220, 60)
         end
 
         love.graphics.setColor(255, 255, 255)
@@ -555,12 +551,22 @@ function menu.options()
             love.graphics.rectangle("fill", 170, 360, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
-            love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+        if ingame == false then
+            if mouseX > 170 and mouseX < 390 and mouseY > 600 and mouseY < 660 then -- Back
+                love.graphics.setColor(30, 125, 49)
+                love.graphics.rectangle("fill", 170, 600, 220, 60)
+            else
+                love.graphics.setColor(31, 191, 63)
+                love.graphics.rectangle("fill", 170, 600, 220, 60)
+            end
         else
-            love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+            if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
+                love.graphics.setColor(30, 125, 49)
+                love.graphics.rectangle("fill", 170, 500, 220, 60)
+            else
+                love.graphics.setColor(31, 191, 63)
+                love.graphics.rectangle("fill", 170, 500, 220, 60)
+            end
         end
 
         love.graphics.setColor(0, 0, 0)                         -- set colour to black for borders and text
@@ -621,12 +627,12 @@ function menu.loadScreen()
             love.graphics.rectangle("fill", 170, 280, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 500 and mouseY < 560 then -- Back
+        if mouseX > 170 and mouseX < 390 and mouseY > 600 and mouseY < 660 then -- Back
             love.graphics.setColor(30, 125, 49)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+            love.graphics.rectangle("fill", 170, 600, 220, 60)
         else
             love.graphics.setColor(31, 191, 63)
-            love.graphics.rectangle("fill", 170, 500, 220, 60)
+            love.graphics.rectangle("fill", 170, 600, 220, 60)
         end
 
         love.graphics.setColor(255, 255, 255)
@@ -684,8 +690,8 @@ function menu.loadScreen()
     if inmenu == true then
         if credits == true or options == true or newgame == true or loading == true then
             love.graphics.setColor(0, 0, 0)
-            love.graphics.rectangle("line", 170, 500, 220, 60)      --draw 'back' border
-            love.graphics.print("Back", 249, 510, 0, 2, 3)          --print back
+            love.graphics.rectangle("line", 170, 600, 220, 60)      --draw 'back' border
+            love.graphics.print("Back", 249, 610, 0, 2, 3)          --print back
         end
     end
 
@@ -697,23 +703,23 @@ function love.mousepressed(x, y, button, istouch)
 
         if ingame == false then
 
-            if button == 1 and x > 170 and x < 390 and y > 150 and y < 210 and options == false and credits == false and loading == false and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 180 and y < 240 and options == false and credits == false and loading == false and clickDelay < 0 then
                 newgame = true
                 clickDelay = 0.5
             end
 
-            if button == 1 and mouseX > 170 and mouseX < 390 and mouseY > 250 and mouseY < 310 and options == false and newgame == false and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == false and newgame == false and clickDelay < 0 then
                 loading = true
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 450 and y < 510 and options == false and newgame == false and loading == false and clickDelay < 0 then
-                credits = true
+            if button == 1 and x > 170 and x < 390 and y > 380 and y < 440 and credits == false and newgame == false and loading == false and clickDelay < 0 then
+                options = true
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 350 and y < 410 and credits == false and newgame == false and loading == false and clickDelay < 0 then
-                options = true
+            if button == 1 and x > 170 and x < 390 and y > 480 and y < 540 and options == false and newgame == false and loading == false and clickDelay < 0 then
+                credits = true
                 clickDelay = 0.5
             end
 
@@ -735,30 +741,6 @@ function love.mousepressed(x, y, button, istouch)
 
                 worldName = "World"
                 worldSeed = "0000"
-
-                local count = 1
-                local line = io.read()
-                local file = io.open(worldName..".txt", "r")
-                io.input(file)
-                seedNext = false
-
-                for i = 1, 2 do
-                    if line == nil then
-                        break
-                    end
-
-                    count = count + 1
-
-                    if seedNext == true then
-                        worldSeed = line
-                        seedNext = false
-                    end
-
-                    if line == "Seed:" then
-                        seedNext = true
-                    end
-                end
-
                 worldName = worldLoadName
 
                 if doLoadScreen == true then
@@ -769,7 +751,7 @@ function love.mousepressed(x, y, button, istouch)
                 loading = false
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 500 and y < 560 and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 600 and y < 660 and clickDelay < 0 then
                 options = false
                 credits = false
                 newgame = false
