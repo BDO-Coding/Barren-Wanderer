@@ -1,4 +1,0 @@
-Seed:
-36748
-Name:
-Death

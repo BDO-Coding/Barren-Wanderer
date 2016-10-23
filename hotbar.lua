@@ -1,8 +1,10 @@
 hotbar={}
+require "player"
 
 function hotbar.load()
 
 	currentHotbarHand = 1
+	hotbarXCoord = 10
 
 end
 
@@ -37,6 +39,23 @@ function hotbar.update(dt)
 end
 
 function hotbar.draw()
+
+	hotbarXCoord = 10
+
+	for i = 1, 10 do
+		if i == currentHotbarHand then
+			love.graphics.setColor(0, 0, 0)
+			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
+			love.graphics.print(i, hotbarXCoord + 5, 655)
+			hotbarXCoord = hotbarXCoord + 67
+			love.graphics.setColor(255, 255, 255)
+		else
+			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
+			love.graphics.print(i, hotbarXCoord + 5, 655)
+			hotbarXCoord = hotbarXCoord + 67
+
+		end
+	end
 
 end
 

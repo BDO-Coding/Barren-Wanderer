@@ -132,17 +132,17 @@ function player.draw()
     if love.keyboard.isDown("lctrl") then
     	playerSpeed = playerDefaultSpeed*playerSprint
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
-            if currentTile == 7 then
-        playerSpeed = 0
-        playerSpeedDiagonal = 0
-    end
+        if currentTile == 7 then
+            playerSpeed = 0
+            playerSpeedDiagonal = 0
+        end
     else
     	playerSpeed = playerDefaultSpeed
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal
-            if currentTile == 7 then
-        playerSpeed = 0
-        playerSpeedDiagonal = 0
-    end
+        if currentTile == 7 then
+            playerSpeed = 0
+            playerSpeedDiagonal = 0
+        end
     end
 
     function love.keyreleased(releaseImage)
@@ -161,7 +161,6 @@ function player.draw()
     end
 
 	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
-    love.graphics.draw(images.hotbar, 0, 650, 0,2,2)
 end
 
 function UPDATE_PLAYER(dt)
