@@ -31,6 +31,7 @@ function player.load()
     currentBiome = 1
     currentTile = 1
 
+    maxHealth = 100
     health = 100
     alive = true
 
@@ -146,7 +147,7 @@ function player.draw()
             playerSpeed = 0
             playerSpeedDiagonal = 0
         end
-        health = health - 1
+        health = health - 0.1
     else
     	playerSpeed = playerDefaultSpeed
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal
@@ -171,7 +172,11 @@ function player.draw()
         end
     end
 
-	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
+    if alive == true then
+
+    love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)            
+    love.graphics.print((math.floor(health)).."/"..maxHealth, 10, 660)
+end
 end
 
 function UPDATE_PLAYER(dt)
