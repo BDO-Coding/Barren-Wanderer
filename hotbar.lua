@@ -17,7 +17,7 @@ function hotbar.update(dt)
 	if health <= 0 then healthLength = 0 end
 
 	if stamina <= 0 then staminaLength = 0 end
-
+--trst
 	print(staminaLength)
 
 	function love.keypressed(numberKey)
