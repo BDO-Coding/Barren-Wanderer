@@ -95,7 +95,12 @@ function scroll.setupMap()
                     map[x][y] = 6
                 end
             elseif biomeArray[x][y] == 3 then --Beach 1
-                map[x][y] = 1
+                                if random == 0 then 
+                    map[x][y] = 0
+                else
+                    map[x][y] = 1
+                end
+
             elseif biomeArray[x][y] == 4 then --Forest 1
                 if random == 0 then 
                     map[x][y] = 8
