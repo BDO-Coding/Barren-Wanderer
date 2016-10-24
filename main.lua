@@ -7,7 +7,7 @@ require "item"
 require "hotbar"
 require "save"
  
-function love.load()
+function love.load()gh
 
 	ingame = false
 	inmenu = true
