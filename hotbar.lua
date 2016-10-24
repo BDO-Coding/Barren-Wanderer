@@ -5,26 +5,17 @@ function hotbar.load()
 
 	currentHotbarHand = 1
 	hotbarXCoord = 500
-	healthLength = 8
-	staminaLength = 8
-
+	barLength = 4
+	barHeight = 2
 end
 
 function hotbar.update(dt)
 
-	divideHealth = maxHealth/10
-	divideStamina = maxStamina/10
+	healthLength = (health/maxHealth)*barLength
+	staminaLength = (stamina/maxStamina)*barLength
 
-	smallerHealth = maxHealth*0.8
-	smallerStamina = maxStamina*0.8
-
-	healthLength = health/divideHealth
-	staminaLength = stamina/divideHealth
-
-	if health >= smallerHealth then healthLength = 8 end
 	if health <= 0 then healthLength = 0 end
 
-	if stamina >= smallerStamina then staminaLength = 8 end
 	if stamina <= 0 then staminaLength = 0 end
 
 	print(staminaLength)
@@ -77,16 +68,16 @@ function hotbar.draw()
 			end
 		end
 		love.graphics.setColor(255, 0, 0)
-		love.graphics.draw(images.guiBarInside, 100, 650, 0, healthLength, 2)
+		love.graphics.draw(images.guiBarInside, 100, 650, 0, healthLength, barHeight)
 		love.graphics.setColor(10, 255, 10)
-		love.graphics.draw(images.guiBarInside, 100, 680, 0, staminaLength, 2)
+		love.graphics.draw(images.guiBarInside, 100, 680, 0, staminaLength, barHeight)
 		love.graphics.setColor(255, 255, 255)
-		love.graphics.draw(images.guiBar, 100, 650, 0, 8, 2)
-		love.graphics.draw(images.guiBar, 100, 680, 0, 8, 2)
-		love.graphics.draw(images.health, 60, 650, 0, 2, 1.8)
-		love.graphics.draw(images.stamina, 60, 680, 0, 2, 1.8)
-		love.graphics.print((math.floor(health)).."/"..maxHealth, 268, 660)
-		love.graphics.print((math.floor(stamina)).."/"..maxStamina, 268, 690)
+		love.graphics.draw(images.guiBar, 100, 650, 0, barLength, barHeight)
+		love.graphics.draw(images.guiBar, 100, 680, 0, barLength, barHeight)
+		love.graphics.draw(images.health, 60, 650, 0, barHeight, barHeight-(barHeight)*0.1)
+		love.graphics.draw(images.stamina, 60, 680, 0, barHeight, barHeight-(barHeight)*0.1)
+		love.graphics.print((math.floor(health)).."/"..maxHealth, 120, 660)
+		love.graphics.print((math.floor(stamina)).."/"..maxStamina, 120, 690)
 	end
 
 end
