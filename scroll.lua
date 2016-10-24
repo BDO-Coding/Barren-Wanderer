@@ -14,11 +14,17 @@ local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 local biomeNum = 25600 --has to be a square number 57600
-local setBiomeSize = 20
+local setBiomeSize = 40
 local biomeSize
+local mapDrawn = false
 
 
-math.randomseed(1234)
+function round(num, idp)
+
+    local mult = 10^(idp or 0)
+    return math.floor(num * mult + 0.5) / mult
+
+end
 
 function scroll.load()
 
@@ -43,14 +49,14 @@ function scroll.biome()
     biomeSize = mapWidth/math.sqrt(biomeNum)
     for biomeX=1,math.sqrt(biomeNum) do
         for biomeY=1,math.sqrt(biomeNum) do
-            xStart =biomeX*biomeSize - biomeSize +1
-            yStart =biomeY*biomeSize - biomeSize +1
+            xStart =biomeX*biomeSize - biomeSize + 1
+            yStart =biomeY*biomeSize - biomeSize + 1
             xMax = biomeX*biomeSize
             yMax = biomeY*biomeSize
             biomeType = math.random(0,5)
             for x=xStart, xMax do
                 for y=yStart, yMax do
-                    biomeArray[x][y] = biomeType--love.math.random(0,13)
+                    biomeArray[x][y] = biomeType
                 end
             end
         end
@@ -166,6 +172,7 @@ function scroll.setupMap()
     map[7][14] = 5
     map[6][13] = 5
 
+    mapDrawn = true
 end
  
 function scroll.setupMapView()
@@ -176,7 +183,7 @@ function scroll.setupMapView()
     tilesDisplayHeight = 26
 
     zoomX = 2
-    zoomY = 2 -----------------------------------------------------------------USEFUL
+    zoomY = 2
 
 end
  
@@ -253,8 +260,7 @@ function scroll.updateTilesetBatch()
 
 end
  
--- central function for moving the map
-function scroll.moveMap(dx, dy)
+function scroll.moveMap(dx, dy) -- Central function for moving the map
 
     oldMapX = mapX
     oldMapY = mapY
@@ -269,7 +275,20 @@ end
 
 function scroll.update(dt)
 
-    if inmenu == false and loadScreen == false then
+    playerX = mapX
+    playerY = mapY
+
+    if mapDrawn == true then
+        currentBiome = biomeArray[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+        currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+    end
+
+
+    worldSeedInt = tonumber(worldSeed)
+
+    math.randomseed(worldSeedInt)
+
+    if inmenu == false and loadScreen == false and alive == true then
         if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
 
             scroll.moveMap(0, -playerSpeedDiagonal * tileSize)
@@ -292,7 +311,7 @@ function scroll.update(dt)
 
         else
             if love.keyboard.isDown("w")  then
-                scroll.moveMap(0, -playerSpeed * tileSize)
+                scroll.moveMap(0, - playerSpeed * tileSize)
             end
 
             if love.keyboard.isDown("s")  then
@@ -313,7 +332,9 @@ end
 
 function scroll.draw()
 
-    love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
+    if alive == true then
+        love.graphics.draw(tilesetBatch, math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize), 0, zoomX, zoomY)
+    end
 
 end
 
