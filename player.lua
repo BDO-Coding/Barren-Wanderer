@@ -3,11 +3,11 @@ require"images"
 
 function player.load()
 
-	playerSpeed = 0.2 --0.002
-	playerSpeedDiagonal = 0.1 -- 0.001
-    playerSprint = 0.1
-    playerDefaultSpeed = 0.2
-    playerDefaultSpeedDiagonal = 0.1
+	playerSpeed = 0.002 --0.002
+	playerSpeedDiagonal = 0.001 -- 0.001
+    playerSprint = 2
+    playerDefaultSpeed = 0.002
+    playerDefaultSpeedDiagonal = 0.001
 	doOnce = true
 	playerSizeX = 2
 	playerSizeY = 2
@@ -36,8 +36,8 @@ function player.load()
     health = 100
     healthRegen = 0.01
 
-    maxMana = 50
-    mana = 50
+    maxMana = 0
+    mana = 0
     manaRegen = 0.05
 
     maxHunger = 100
@@ -45,9 +45,12 @@ function player.load()
     hungerRegen = 0.05
 
     alive = true
+    canRun = true
+
 end
 
 function player.update(dt)
+
     if health < maxHealth then
         health = health + healthRegen
     end
@@ -150,25 +153,25 @@ function player.draw()
         end
     end
 
-    if love.keyboard.isDown("lctrl") and stamina > 1 then
-        if love.keyboard.isDown("w") or love.keyboard.isDown("a") or love.keyboard.isDown("s") or love.keyboard.isDown("d") then
+    if love.keyboard.isDown("w") or love.keyboard.isDown("a") or love.keyboard.isDown("s") or love.keyboard.isDown("d") then
+        if currentTile == 7 then
+            playerSpeed = 0.0002
+            playerSpeedDiagonal = 0.0001
+        end
+        if love.keyboard.isDown("lctrl") and canRun == true then
         	playerSpeed = playerDefaultSpeed*playerSprint
         	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
-            if currentTile == 7 then
-                playerSpeed = 0
-                playerSpeedDiagonal = 0
-            end
             stamina = stamina - 0.25
         end
     end
 
-    if love.keyboard.isDown("lctrl") then
-    	playerSpeed = 0.004
-    	playerSpeedDiagonal = 0.003
-    else
-    	playerSpeed = 0.002
-    	playerSpeedDiagonal = 0.001
+    if love.keyboard.isDown("lctrl") then elseif stamina < maxStamina then
+        stamina = stamina + staminaRegen
+        playerSpeed = playerDefaultSpeed
+        playerSpeedDiagonal = playerDefaultSpeedDiagonal
     end
+
+    if love.keyboard.isDown("lctrl") then else canRun = true end
 
     function love.keyreleased(releaseImage)
         if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" and inmenu == false then

@@ -342,6 +342,7 @@ function menu.update(dt)
         if love.keyboard.isDown("x")then
             doLoadScreen = false
             loadDelay = 0.5
+            volume = 0
         end
     end
 

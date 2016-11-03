@@ -283,7 +283,6 @@ function scroll.update(dt)
         currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
     end
 
-
     worldSeedInt = tonumber(worldSeed)
 
     math.randomseed(worldSeedInt)

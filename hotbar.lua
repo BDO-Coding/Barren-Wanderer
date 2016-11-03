@@ -7,8 +7,20 @@ function hotbar.load()
 	hotbarXCoord = 500
 	barLength = 4
 	barHeight = 2
-	leftX = 140
-	rightX = 373
+
+	leftX = 155
+	rightX = 385
+
+	healthX = 10
+	staminaX = 0
+	manaX = 0
+	hungerX = 20
+
+end
+
+function hotbar.goback()
+
+
 
 end
 
@@ -21,7 +33,10 @@ function hotbar.update(dt)
 
 	if health <= 0 then healthLength = 0 end
 
-	if stamina <= 0 then staminaLength = 0 end
+	if stamina <= 0 then
+		staminaLength = 0
+		canRun = false
+	end
 
 	if mana <= 0 then manaLength = 0 end
 
@@ -90,10 +105,10 @@ function hotbar.draw()
 		love.graphics.draw(images.stamina, 33.6, 680, 0, barHeight, barHeight-(barHeight)*0.1)
 		love.graphics.draw(images.mana, 263.6, 650, 0, barHeight, barHeight-(barHeight)*0.1)
 		love.graphics.draw(images.hunger, 263.6, 680, 0, barHeight, barHeight-(barHeight)*0.1)
-		love.graphics.print((math.floor(health)).."/"..maxHealth, leftX, 660)
-		love.graphics.print((math.floor(stamina)).."/"..maxStamina, leftX, 690)
-		love.graphics.print((math.floor(mana)).."/"..maxMana, rightX, 660)
-		love.graphics.print((math.floor(hunger)).."/"..maxHunger, rightX, 690)
+		love.graphics.print((math.floor(health)).."/"..maxHealth, leftX-healthX, 660)
+		love.graphics.print((math.floor(stamina)).."/"..maxStamina, leftX-staminaX, 690)
+		love.graphics.print((math.floor(mana)).."/"..maxMana, rightX-manaX, 660)
+		love.graphics.print((math.floor(hunger)).."/"..maxHunger, rightX-hungerX, 690)
 	end
 
 end
