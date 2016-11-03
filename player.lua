@@ -34,19 +34,9 @@ function player.load()
     maxStamina = 100
     stamina = 100
     staminaRegen = 0.05
-
     maxHealth = 100
     health = 100
     healthRegen = 0.01
-
-    maxMana = 50
-    mana = 50
-    manaRegen = 0.05
-
-    maxHunger = 100
-    hunger = 100
-    hungerRegen = 0.05
-
     alive = true
 
 end
@@ -55,10 +45,6 @@ function player.update(dt)
 
     if health < maxHealth then
         health = health + healthRegen
-    end
-
-    if mana < maxMana then
-        mana = mana + manaRegen
     end
 
     if love.keyboard.isDown("a")then
@@ -162,16 +148,14 @@ function player.draw()
         end
     end
 
-    if love.keyboard.isDown("lctrl") and stamina > 1 then
-        if love.keyboard.isDown("w") or love.keyboard.isDown("a") or love.keyboard.isDown("s") or love.keyboard.isDown("d") then
-        	playerSpeed = playerDefaultSpeed*playerSprint
-        	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
-            if currentTile == 7 then
-                playerSpeed = 0
-                playerSpeedDiagonal = 0
-            end
-            stamina = stamina - 0.25
+    if love.keyboard.isDown("lctrl") and stamina > 0 then
+    	playerSpeed = playerDefaultSpeed*playerSprint
+    	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
+        if currentTile == 7 then
+            playerSpeed = 0
+            playerSpeedDiagonal = 0
         end
+        stamina = stamina - 0.25
     else
     	playerSpeed = playerDefaultSpeed
     	playerSpeedDiagonal = playerDefaultSpeedDiagonal
