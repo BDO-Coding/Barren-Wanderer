@@ -45,7 +45,6 @@ function player.load()
     hungerRegen = 0.05
 
     alive = true
-    canRun = true
 
 end
 
@@ -158,20 +157,23 @@ function player.draw()
             playerSpeed = 0.0002
             playerSpeedDiagonal = 0.0001
         end
-        if love.keyboard.isDown("lctrl") and canRun == true then
-        	playerSpeed = playerDefaultSpeed*playerSprint
-        	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
-            stamina = stamina - 0.25
+        if love.keyboard.isDown("lctrl") then
+            if stamina >= 0.75 then
+            	playerSpeed = playerDefaultSpeed*playerSprint
+            	playerSpeedDiagonal = playerDefaultSpeedDiagonal*playerSprint
+                stamina = stamina - 0.25
+            else
+                playerSpeed = playerDefaultSpeed
+                playerSpeedDiagonal = playerDefaultSpeedDiagonal
+            end
+        else
+            if stamina < maxStamina then
+                stamina = stamina + staminaRegen
+                playerSpeed = playerDefaultSpeed
+                playerSpeedDiagonal = playerDefaultSpeedDiagonal
+            end
         end
     end
-
-    if love.keyboard.isDown("lctrl") then elseif stamina < maxStamina then
-        stamina = stamina + staminaRegen
-        playerSpeed = playerDefaultSpeed
-        playerSpeedDiagonal = playerDefaultSpeedDiagonal
-    end
-
-    if love.keyboard.isDown("lctrl") then else canRun = true end
 
     function love.keyreleased(releaseImage)
         if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" and inmenu == false then
