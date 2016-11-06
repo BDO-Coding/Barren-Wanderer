@@ -28,9 +28,10 @@ function player.load()
     currentBiome = 1
     currentTile = 1
 
-    weaponXOffset = 44
+    weaponXOffset = 43
     weaponYOffset = 10
     weaponRotation = 0
+    weaponXSize = 2
     currentWeapon = images.woodenSword
 
     maxStamina = 100
@@ -64,22 +65,42 @@ function player.update(dt)
     end
 
     if love.mouse.isDown(1) and inmenu == false then
-        weaponRotation = weaponRotation + 0.3926991
+        weaponRotation = weaponRotation + 0.09817477
     elseif inmenu == false then
         weaponRotation = 0
     end
 
     if love.keyboard.isDown("a")then
 	    animeDelayA = animeDelayA - dt
-        weaponXOffset = -20
+        a = true
+        d = false
+        s = false
+        w = false
     elseif love.keyboard.isDown("d")then
         animeDelayD = animeDelayD - dt
+        a = false
+        d = true
+        s = false
+        w = false
     elseif love.keyboard.isDown("w")then
         animeDelayW = animeDelayW - dt
-        weaponXOffset = 44
+        a = false
+        d = false
+        s = false
+        w = true
     elseif love.keyboard.isDown("s")then
         animeDelayS = animeDelayS - dt
+        a = false
+        d = false
+        s = true
+        w = false
     end
+
+    if a == true then weaponXOffset = -20
+    weaponXSize = 2 end
+    if d == true then weaponXOffset = 43 end
+    if s == true then weaponXOffset = 43 end
+    if w == true then weaponXOffset = 43 end
 
 end
 
