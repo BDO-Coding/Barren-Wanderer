@@ -28,6 +28,11 @@ function player.load()
     currentBiome = 1
     currentTile = 1
 
+    weaponXOffset = 44
+    weaponYOffset = 10
+    weaponRotation = 0
+    currentWeapon = images.woodenSword
+
     maxStamina = 100
     stamina = 100
     staminaRegen = 0.05
@@ -59,12 +64,20 @@ function player.update(dt)
         mana = mana + manaRegen
     end
 
+    if love.mouse.isDown(1) and inmenu == false then
+        weaponRotation = weaponRotation + 0.3926991
+    elseif inmenu == false then
+        weaponRotation = 0
+    end
+
     if love.keyboard.isDown("a")then
 	    animeDelayA = animeDelayA - dt
+        weaponXOffset = -20
     elseif love.keyboard.isDown("d")then
         animeDelayD = animeDelayD - dt
     elseif love.keyboard.isDown("w")then
         animeDelayW = animeDelayW - dt
+        weaponXOffset = 44
     elseif love.keyboard.isDown("s")then
         animeDelayS = animeDelayS - dt
     end
@@ -171,8 +184,6 @@ function player.draw()
         playerSpeedDiagonal = playerDefaultSpeedDiagonal
     end
 
-    if love.keyboard.isDown("lctrl") then else canRun = true end
-
     function love.keyreleased(releaseImage)
         if releaseImage == "a" or releaseImage == "s" or releaseImage == "d" and inmenu == false then
             playerImage = images.playerDown
@@ -190,6 +201,7 @@ function player.draw()
     end
 
 	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
+    love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, playerSizeX, playerSizeY)
 
 end
 

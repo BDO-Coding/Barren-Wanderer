@@ -60,8 +60,8 @@ function love.draw()
 	    DRAW_MONSTER()
 	    DRAW_ITEM()
 	    DRAW_HOTBAR()
-
 	end
+	
 	DRAW_MENU()
 
 	love.graphics.setColor(255, 0, 0)
