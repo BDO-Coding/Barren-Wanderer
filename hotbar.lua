@@ -35,7 +35,7 @@ function hotbar.update(dt)
 
 	if stamina <= 0 then
 		staminaLength = 0
-		stamina = 0
+		canRun = false
 	end
 
 	if mana <= 0 then manaLength = 0 end
