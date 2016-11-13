@@ -1,56 +1,42 @@
 This is our Barren World TODO List:
 
-Who does what (Lua classes):
+	Who does what (Lua classes):
 
-Ori : Monster, Player, Hotbar
-Danny : Scroll, Item
-Benjamin : Menu, Save, Sound (does not exist yet)
-All : Main, Images, Conf
+		Ori : Monster, Player, Hotbar
+		Danny : Scroll, Item
+		Benjamin : Menu, Save, Sound (does not exist yet)
+		All : Main, Images, Conf
 
-General:
+	General:
 
--Add more menu options:
-	-Settings
-	-Credits
-	-New Game / Load Game instead of play button
--Add biomes to the array:
-	-Grassland
-	-Jungle
-	-Ocean
-	-Oblivion
-	-etc..
--Make terrain generation more preportioned
-	-Stop islands being square
-	-Add ruined town/village
--Add powas (YAY)
--Add monsters in-game (currently only have the class with a basic array)
--Add a quest system
--Add weapons
--Add inventory / hotbar
--Add reputation level
--Add hidden/shown xp level
--Add level up applience points if we are showing xp level
--Stop player spawning at the side of the map
--Make map bigger
--Add different dimensions (this is kinda the same as the biome arrays one, or at least part of it)
--Add farming
-	-Add food
-		-Potatos
-		-Chicken
-		-Carrots
-		-Lots more
-	-Add animals
-	-Add fences
--Add building
--Add potions
--Game Saving
-	-Make world seed save
-	-Add save menu
--World Generation
-	-Make variable biome sizes
-	-Textured Biome edges
-	-Seed
-	-Rivers
-	-3rd layer biome map (oceans = edges, mountains = middle)
-	-saving
--ADD STUFF TO THIS LIST :)
+		-Make Load Game work
+		-Make terrain generation more preportioned
+			-Stop islands being square
+			-Add ruined town/village
+		-Add powas (YAY)
+		-Add monsters in-game (currently only have the class with a basic array)
+		-Add a quest system
+		-Add weapons
+		-Add inventory / hotbar
+		-Add reputation level
+		-Add hidden/shown xp level
+		-Add level up applience points if we are showing xp level
+		-Stop player spawning at the side of the map
+		-Make map bigger
+		-Add different dimensions (this is kinda the same as the biome arrays one, or at least part of it)
+		-Add farming
+			-Add food
+				-Potatos
+				-Chicken
+				-Carrots
+				-Lots more
+			-Add animals
+			-Add fences
+		-Add building
+		-Add potions
+		-Game Saving
+			-Make loading work
+		-World Generation
+			-Rivers
+			-3rd layer biome map (oceans = edges, mountains = middle)
+		-ADD STUFF TO THIS LIST :)
