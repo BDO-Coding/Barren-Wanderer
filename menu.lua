@@ -338,12 +338,11 @@ function menu.update(dt)
 
     clickDelay = clickDelay - dt
 
-    if doLoadScreen == true or loadScreen == true then
-        if love.keyboard.isDown("x")then
-            doLoadScreen = false
-            loadDelay = 0.5
-            volume = 0
-        end
+    if love.keyboard.isDown("x") then --Developer mode
+        doLoadScreen = not doLoadScreen
+        loadDelay = 0.5
+        volume = 0
+        love.timer.sleep(0.5)
     end
 
     if loadScreen == true then
