@@ -1,12 +1,11 @@
 This is our Barren World TODO List:
 
-Who does what:
+Who does what (Lua classes):
 
 Ori : Monster, Player, Hotbar
 Danny : Scroll, Item
 Benjamin : Menu, Save, Sound (does not exist yet)
-
-All : Main, Images
+All : Main, Images, Conf
 
 General:
 
