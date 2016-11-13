@@ -3,4 +3,6 @@ Write here in CHRONOLOGICAL order the storyline or gameflow of Barren World:
 
 START:
 #?- Kill overworld main boss
-#?- Kill 
+#?- Kill underground main boos
+#?- Kill oblivion main boss
+#?- Kill game main boss
