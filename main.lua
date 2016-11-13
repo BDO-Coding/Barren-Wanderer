@@ -2,7 +2,7 @@ require "menu"
 require "scroll"
 require "player"
 require "images"
-require "monster"
+require "creature"
 require "item"
 require "hotbar"
 require "save"
@@ -29,7 +29,7 @@ function love.update(dt)
         save.load()
 		scroll.load()
 		player.load()
-        monster.load()
+        creature.load()
         item.load()
         hotbar.load()
 
@@ -40,7 +40,7 @@ function love.update(dt)
 	if ingame == true then
 	    UPDATE_SCROLL(dt)
 	    UPDATE_PLAYER(dt)
-	    UPDATE_MONSTER(dt)
+	    UPDATE_CREATURE(dt)
 	    UPDATE_ITEM(dt)
 	    UPDATE_HOTBAR(dt)
 	end
@@ -56,7 +56,7 @@ function love.draw()
 
 	if ingame == true then
 	    DRAW_SCROLL()
-	    DRAW_MONSTER()
+	    DRAW_CREATURE()
 	    DRAW_ITEM()
 	    DRAW_PLAYER()
 	    DRAW_HOTBAR()

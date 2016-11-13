@@ -32,6 +32,12 @@ function images.load()
 	--Items
 	images.stone = love.graphics.newImage("images/entities/items/stone.png")
 
+	--Monsters
+
+	--Animals
+	images.chicken = love.graphics.newImage("images/entities/animals/chicken.png")
+	images.parrot = love.graphics.newImage("images/entities/animals/parrot.png")
+
 end
 
 function UPDATE_IMAGES(dt)
