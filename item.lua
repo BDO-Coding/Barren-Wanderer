@@ -7,7 +7,7 @@ function item.load()
 	item.Stackamount = 1
 
 	itemArray = {{}}
-	itemArray[1] = {1--[[ID]],1--[[amount]],1,1--[[x,y coords]]}
+	itemArray[1] = {1--[[ID]],1--[[amount]],1000,1000--[[x,y coords]]}
 
 
 	itemIndex = {{}}
@@ -21,7 +21,7 @@ end
 
 function item.draw()
 	for i = 1, item.Stackamount do
-		love.graphics.draw(itemIndex[itemArray[i][1]][3],(playerX*-64)+500,((playerY)*-64)+500, 0, 1, 1)
+		love.graphics.draw(itemIndex[itemArray[i][1]][3],(playerX*-64)+itemArray[i][3],((playerY)*-64)+itemArray[i][4], 0, 1, 1)
 		i=i+1
 	end
 end
