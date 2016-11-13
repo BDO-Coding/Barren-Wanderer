@@ -343,7 +343,7 @@ function menu.update(dt)
         loadDelay = 0.5
         volume = 0
         love.timer.sleep(0.1)
-    elseif love.keyboard.isDown("x") then
+    elseif love.keyboard.isDown("x") and doLoadScreen == false then
         doLoadScreen = true
         love.timer.sleep(0.1)
     end
@@ -743,6 +743,10 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true and clickDelay < 0 then
                 inmenu = false
                 ingame = true
+
+                if doLoadScreen == true then
+                    loadScreen = true
+                end
 
                 loadFunctions = true
                 newgame = false

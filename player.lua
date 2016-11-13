@@ -28,12 +28,16 @@ function player.load()
     currentBiome = 1
     currentTile = 1
 
+    xScreenMinus = 0
+    yScreenMinus = 0
     weaponXOffset = 43
     weaponYOffset = 10
     weaponRotation = 0
     weaponXSize = 2
     currentWeapon = images.woodenSword
     imageUp = false
+    runWeaponUpdate = true
+    weaponType = "melee"
 
     maxStamina = 100
     stamina = 100
@@ -65,29 +69,50 @@ function player.update(dt)
         mana = mana + manaRegen
     end
 
-    if love.mouse.isDown(1) and inmenu == false then
+    if love.mouse.isDown(1) and inmenu == false and weaponType == "melee" then
         weaponRotation = weaponRotation + 0.09817477
-        weaponYOffset = 24
+        weaponXOffset = 588
+        weaponYOffset = 377
+        weaponXSize = -2
+        xScreenMinus = playerScreenX
+        yScreenMinus = playerScreenY
+        runWeaponUpdate = true
     elseif inmenu == false then
         weaponRotation = 0
-        weaponYOffset = 10
+        if runWeaponUpdate == true then
+            xScreenMinus = 0
+            yScreenMinus = 0
+            weaponXSize = 2
+            weaponXOffset = 42
+            weaponYOffset = 10
+            imageUp = false
+            runWeaponUpdate = false
+        end
     end
 
-    if love.keyboard.isDown("a")then
+    if love.keyboard.isDown("a") then
 	    animeDelayA = animeDelayA - dt
-        weaponXSize = -2
+        if runWeaponUpdate == false then
+            weaponXSize = -2
+        end
         imageUp = false
     elseif love.keyboard.isDown("d")then
         animeDelayD = animeDelayD - dt
-        weaponXSize = 2
+        if runWeaponUpdate == false then
+            weaponXSize = 2
+        end
         imageUp = false
     elseif love.keyboard.isDown("w")then
         animeDelayW = animeDelayW - dt
-        weaponXSize = -2
+        if runWeaponUpdate == false then
+            weaponXSize = -2
+        end
         imageUp = true
     elseif love.keyboard.isDown("s")then
         animeDelayS = animeDelayS - dt
-        weaponXSize = 2
+        if runWeaponUpdate == false then
+            weaponXSize = 2
+        end
         imageUp = false
     end
 
@@ -106,7 +131,9 @@ function player.draw()
             playerImage = images.playerUpAnimeA
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 25
+            if runWeaponUpdate == false then
+                weaponXOffset = 25
+            end
             if animeDelayW <= 0 then
                 alternateW = false
                 animeDelayW = 0.4
@@ -115,7 +142,9 @@ function player.draw()
             playerImage = images.playerUpAnimeD
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 26
+            if runWeaponUpdate == false then
+                weaponXOffset = 27
+            end
             if animeDelayW <= 0 then
                 alternateW = true
                 animeDelayW = 0.4
@@ -126,7 +155,9 @@ function player.draw()
             playerImage = images.playerDownAnimeA
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 42
+            if runWeaponUpdate == false then
+                weaponXOffset = 43
+            end
             if animeDelayS <= 0 then
                 alternateS = false
                 animeDelayS = 0.4
@@ -135,7 +166,9 @@ function player.draw()
             playerImage = images.playerDownAnimeD
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 42
+            if runWeaponUpdate == false then
+                weaponXOffset = 41
+            end
             if animeDelayS <= 0 then
                 alternateS = true
                 animeDelayS = 0.4
@@ -146,7 +179,9 @@ function player.draw()
             playerImage = images.playerDownAnimeD
             playerSizeX = -2
             playerScreenX = 625
-            weaponXOffset = -42
+            if runWeaponUpdate == false then
+                weaponXOffset = -42
+            end
             if animeDelayA <= 0 then
                 alternateA = false
                 animeDelayA = 0.4
@@ -155,7 +190,9 @@ function player.draw()
             playerImage = images.playerSide
             playerSizeX = -2
             playerScreenX = 625
-            weaponXOffset = -38
+            if runWeaponUpdate == false then
+                weaponXOffset = -38
+            end
             if animeDelayA <= 0 then
                 alternateA = true
                 animeDelayA = 0.4
@@ -166,7 +203,9 @@ function player.draw()
             playerImage = images.playerDownAnimeD
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 42
+            if runWeaponUpdate == false then
+                weaponXOffset = 42
+            end
             if animeDelayD <= 0 then
                 alternateD = false
                 animeDelayD = 0.4
@@ -175,7 +214,9 @@ function player.draw()
             playerImage = images.playerSide
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 38
+            if runWeaponUpdate == false then
+                weaponXOffset = 38
+            end
             if animeDelayD <= 0 then
                 alternateD = true
                 animeDelayD = 0.4
@@ -234,12 +275,15 @@ function player.draw()
         end
     end
 
+    weaponXLoc = playerScreenX-xScreenMinus
+    weaponYLoc = playerScreenY-yScreenMinus
+
     if imageUp == true and not love.mouse.isDown(1) then
         love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
         love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
     else
         love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
-        love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
+        love.graphics.draw(currentWeapon, weaponXLoc+weaponXOffset, weaponYLoc+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
     end
 
 end
