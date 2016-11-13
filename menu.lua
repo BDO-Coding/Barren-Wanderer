@@ -95,7 +95,7 @@ function menu.draw()
             love.graphics.rectangle("fill", 170, 180, 220, 60)
         end
 
-        if mouseX > 170 and mouseX < 390 and mouseY > 280 and mouseY < 340 then
+        if mouseX > 170 and mouseX < 390 and mouseY > 280 and mouseY < 340 then  -- Load button
             love.graphics.setColor(30, 125, 49)
             love.graphics.rectangle("fill", 170, 280, 220, 60)
         else
@@ -373,7 +373,7 @@ function menu.newgame()
 
         if doThisOnce == true then
             worldName = "World"
-            worldSeed = "0000"
+            worldSeed = seed
             doThisOnce = false
         end
 
@@ -716,6 +716,11 @@ function love.mousepressed(x, y, button, istouch)
 
             if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == false and newgame == false and clickDelay < 0 then
                 loading = true
+                clickDelay = 0.5
+            end
+
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == false and newgame == false and clickDelay < 0 then
+                loading = false
                 clickDelay = 0.5
             end
 
