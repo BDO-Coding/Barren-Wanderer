@@ -28,6 +28,10 @@ function images.load()
 
 	--Title
 	images.title = love.graphics.newImage("images/title.png")
+
+	--Items
+	images.stone = love.graphics.newImage("images/entities/items/stone.png")
+
 end
 
 function UPDATE_IMAGES(dt)

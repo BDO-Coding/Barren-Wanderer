@@ -1,4 +1,5 @@
 item={}
+require"images"
 
 function item.load()
 
@@ -18,19 +19,15 @@ function item.update(dt)
 end
 
 function item.draw()
-	
+
 end
 
 function UPDATE_ITEM(dt)
-
 	item.update(dt)
-
 end
 
 function DRAW_ITEM()
-
 	item.draw()
-
 end
 
 function addItem(id,amount,x,y)
