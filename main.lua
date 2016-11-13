@@ -56,9 +56,9 @@ function love.draw()
 
 	if ingame == true then
 	    DRAW_SCROLL()
-	    DRAW_PLAYER()
 	    DRAW_MONSTER()
 	    DRAW_ITEM()
+	    DRAW_PLAYER()
 	    DRAW_HOTBAR()
 	end
 	

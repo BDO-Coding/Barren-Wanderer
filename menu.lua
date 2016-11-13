@@ -338,11 +338,14 @@ function menu.update(dt)
 
     clickDelay = clickDelay - dt
 
-    if love.keyboard.isDown("x") then --Developer mode
-        doLoadScreen = not doLoadScreen
+    if love.keyboard.isDown("x") and doLoadScreen == true then --Developer mode
+        doLoadScreen = false
         loadDelay = 0.5
         volume = 0
-        love.timer.sleep(0.5)
+        love.timer.sleep(0.1)
+    elseif love.keyboard.isDown("x") then
+        doLoadScreen = true
+        love.timer.sleep(0.1)
     end
 
     if loadScreen == true then
@@ -687,6 +690,10 @@ function menu.loadScreen()
         end
     end
 
+    if doLoadScreen == true and loadScreen == false then
+        loadDelay = 10
+    end
+
     if inmenu == true then
         love.graphics.setColor(0, 0, 0)
         if credits == true or options == true or newgame == true or loading == true then
@@ -736,10 +743,6 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true and clickDelay < 0 then
                 inmenu = false
                 ingame = true
-
-                if doLoadScreen == true then
-                    loadScreen = true
-                end
 
                 loadFunctions = true
                 newgame = false

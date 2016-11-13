@@ -33,6 +33,7 @@ function player.load()
     weaponRotation = 0
     weaponXSize = 2
     currentWeapon = images.woodenSword
+    imageUp = false
 
     maxStamina = 100
     stamina = 100
@@ -66,22 +67,28 @@ function player.update(dt)
 
     if love.mouse.isDown(1) and inmenu == false then
         weaponRotation = weaponRotation + 0.09817477
+        weaponYOffset = 24
     elseif inmenu == false then
         weaponRotation = 0
+        weaponYOffset = 10
     end
 
     if love.keyboard.isDown("a")then
 	    animeDelayA = animeDelayA - dt
         weaponXSize = -2
+        imageUp = false
     elseif love.keyboard.isDown("d")then
         animeDelayD = animeDelayD - dt
         weaponXSize = 2
+        imageUp = false
     elseif love.keyboard.isDown("w")then
         animeDelayW = animeDelayW - dt
         weaponXSize = -2
+        imageUp = true
     elseif love.keyboard.isDown("s")then
         animeDelayS = animeDelayS - dt
         weaponXSize = 2
+        imageUp = false
     end
 
 end
@@ -99,7 +106,7 @@ function player.draw()
             playerImage = images.playerUpAnimeA
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 24
+            weaponXOffset = 25
             if animeDelayW <= 0 then
                 alternateW = false
                 animeDelayW = 0.4
@@ -108,7 +115,7 @@ function player.draw()
             playerImage = images.playerUpAnimeD
             playerSizeX = 2
             playerScreenX = 560
-            weaponXOffset = 24
+            weaponXOffset = 26
             if animeDelayW <= 0 then
                 alternateW = true
                 animeDelayW = 0.4
@@ -210,10 +217,16 @@ function player.draw()
             playerImage = images.playerDown
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 42
+            weaponXSize = 2
+            imageUp = false
         elseif releaseImage == "w" and inmenu == false then
             playerImage = images.playerUp
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 24
+            weaponXSize = -2
+            imageUp = true
         elseif releaseImage == "escape" then
         	if ingame == true then
         		inmenu = not inmenu
@@ -221,8 +234,13 @@ function player.draw()
         end
     end
 
-	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
-    love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
+    if imageUp == true and not love.mouse.isDown(1) then
+        love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
+        love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
+    else
+        love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
+        love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
+    end
 
 end
 
