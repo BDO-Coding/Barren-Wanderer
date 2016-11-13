@@ -504,6 +504,7 @@ function love.textinput(worldText)
     if worldText == "1" or worldText == "2" or worldText == "3" or worldText == "4" or worldText == "5" or worldText == "6" or worldText == "7" or worldText == "8" or worldText == "9" or worldText == "0" then
         if worldSeedType == true and newgame == true then
             worldSeed = worldSeed .. worldText
+            print(worldSeed)
             worldSeedNum = worldSeedNum + 1
         end
     end
@@ -709,6 +710,24 @@ function menu.loadScreen()
 
 end
 
+
+function menu.loadWorld()
+
+    if loadNewGame == true and loading == false and loadWorldClicked == true then
+        
+
+        save.read()
+        seedToLoad = seed
+
+        worldSeed = seedToLoad
+        loadFunctions = true
+        ingame = true
+
+    end
+
+end
+
+
 function love.mousepressed(x, y, button, istouch)
 
     if inmenu == true then
@@ -720,13 +739,15 @@ function love.mousepressed(x, y, button, istouch)
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == false and newgame == false and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == false and newgame == false and loading == false and clickDelay < 0 then
                 loading = true
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == false and newgame == false and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and options == false and newgame == false and loading == true and clickDelay < 0 then
+                loadNewGame = true
                 loading = false
+                loadWorldClicked = true
                 clickDelay = 0.5
             end
 
@@ -866,5 +887,6 @@ function DRAW_MENU()
     menu.options()
     menu.newgame()
     menu.loadScreen()
+    menu.loadWorld()
 
 end
