@@ -72,35 +72,17 @@ function player.update(dt)
 
     if love.keyboard.isDown("a")then
 	    animeDelayA = animeDelayA - dt
-        a = true
-        d = false
-        s = false
-        w = false
+        weaponXSize = -2
     elseif love.keyboard.isDown("d")then
         animeDelayD = animeDelayD - dt
-        a = false
-        d = true
-        s = false
-        w = false
+        weaponXSize = 2
     elseif love.keyboard.isDown("w")then
         animeDelayW = animeDelayW - dt
-        a = false
-        d = false
-        s = false
-        w = true
+        weaponXSize = -2
     elseif love.keyboard.isDown("s")then
         animeDelayS = animeDelayS - dt
-        a = false
-        d = false
-        s = true
-        w = false
+        weaponXSize = 2
     end
-
-    if a == true then weaponXOffset = -20
-    weaponXSize = 2 end
-    if d == true then weaponXOffset = 43 end
-    if s == true then weaponXOffset = 43 end
-    if w == true then weaponXOffset = 43 end
 
 end
 
@@ -117,6 +99,7 @@ function player.draw()
             playerImage = images.playerUpAnimeA
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 24
             if animeDelayW <= 0 then
                 alternateW = false
                 animeDelayW = 0.4
@@ -125,6 +108,7 @@ function player.draw()
             playerImage = images.playerUpAnimeD
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 24
             if animeDelayW <= 0 then
                 alternateW = true
                 animeDelayW = 0.4
@@ -135,6 +119,7 @@ function player.draw()
             playerImage = images.playerDownAnimeA
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 42
             if animeDelayS <= 0 then
                 alternateS = false
                 animeDelayS = 0.4
@@ -143,6 +128,7 @@ function player.draw()
             playerImage = images.playerDownAnimeD
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 42
             if animeDelayS <= 0 then
                 alternateS = true
                 animeDelayS = 0.4
@@ -153,6 +139,7 @@ function player.draw()
             playerImage = images.playerDownAnimeD
             playerSizeX = -2
             playerScreenX = 625
+            weaponXOffset = -42
             if animeDelayA <= 0 then
                 alternateA = false
                 animeDelayA = 0.4
@@ -161,6 +148,7 @@ function player.draw()
             playerImage = images.playerSide
             playerSizeX = -2
             playerScreenX = 625
+            weaponXOffset = -38
             if animeDelayA <= 0 then
                 alternateA = true
                 animeDelayA = 0.4
@@ -171,6 +159,7 @@ function player.draw()
             playerImage = images.playerDownAnimeD
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 42
             if animeDelayD <= 0 then
                 alternateD = false
                 animeDelayD = 0.4
@@ -179,6 +168,7 @@ function player.draw()
             playerImage = images.playerSide
             playerSizeX = 2
             playerScreenX = 560
+            weaponXOffset = 38
             if animeDelayD <= 0 then
                 alternateD = true
                 animeDelayD = 0.4
@@ -232,7 +222,7 @@ function player.draw()
     end
 
 	love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
-    love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, playerSizeX, playerSizeY)
+    love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
 
 end
 

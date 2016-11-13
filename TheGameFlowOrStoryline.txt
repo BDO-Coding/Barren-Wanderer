@@ -2,7 +2,9 @@ Write here in CHRONOLOGICAL order the storyline or gameflow of Barren World:
 [eg: in mc, break a tree, make a crafting table, get iron  tools, go to nether, get blaze powder, kill endermen, kill enderdragon]
 
 START:
-#?- Kill overworld main boss
-#?- Kill underground main boos
-#?- Kill oblivion main boss
-#?- Kill game main boss
+#1- Discover village that was ruined by the Overlord
+#2- Talk to Mayor and begin gathering resources
+#?- Kill overworld Overlord
+#?- Kill underground Overlord
+#?- Kill oblivion Overlord
+#?- Kill Overlord
