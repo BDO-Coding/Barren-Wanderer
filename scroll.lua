@@ -4,6 +4,7 @@ require "player"
 local map -- stores tiledata
  
 local mapX, mapY -- view x,y in tiles. can be a fractional value like 3.25.
+local oldMapX,oldMapY
 local mapWidth, mapHeight -- Width and Height in pixels
  
 local tilesDisplayWidth, tilesDisplayHeight -- number of tiles to show
