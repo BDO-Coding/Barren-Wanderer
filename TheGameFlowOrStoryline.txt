@@ -4,7 +4,13 @@ Write here in CHRONOLOGICAL order the storyline or gameflow of Barren World:
 START:
 #1- Discover village that was ruined by the Overlord
 #2- Talk to Mayor and begin gathering resources
+#?- A gigantic monster will appear above your village, these have only been heard of in stories
 #?- Kill overworld Overlord
+#?- Follow the Overlord's soul underground
+#?- Destory monumental pillars and explore underground
 #?- Kill underground Overlord
+#?- Follow the Overlord's soul through an oblivion portal
+#?- Break Overlord's divine shield with a magical artefact
 #?- Kill oblivion Overlord
-#?- Kill Overlord
+#?- Watch Overlord transformation
+#?- Kill fully powered (unless body's are destroyed) Overlord
