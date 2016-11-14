@@ -1,4 +1,0 @@
-Seed:
-0
-Name:
-World

@@ -1,5 +1,6 @@
 scroll={}
 require "player"
+require "menu"
 
 local map -- stores tiledata
  
@@ -285,8 +286,10 @@ function scroll.update(dt)
         currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
     end
 
-    worldSeedInt = tonumber(worldSeed)
-
+    worldSeedInt = tonumber(seed)
+    print(seed)
+    print(worldSeed)
+    print(worldSeedInt)
     math.randomseed(worldSeedInt)
 
     if inmenu == false and loadScreen == false and alive == true then

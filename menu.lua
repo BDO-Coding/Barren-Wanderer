@@ -1,6 +1,6 @@
 menu = {}
 require("save")
-require("images")
+--require("images")
 
 local utf8 = require("utf8")
 
@@ -27,6 +27,9 @@ function menu.load()
     credits = false
     newgame = false
     loading = false
+
+    seed = worldSeed
+
 
     clickDelay = 0.5
     doThisOnce = true
@@ -332,6 +335,8 @@ end
 
 function menu.update(dt)
 
+    seed = worldSeed
+
     r = r + love.math.random(-10, 10)
     b = b + love.math.random(-10, 10)
     g = g + love.math.random(-10, 10)
@@ -504,7 +509,7 @@ function love.textinput(worldText)
     if worldText == "1" or worldText == "2" or worldText == "3" or worldText == "4" or worldText == "5" or worldText == "6" or worldText == "7" or worldText == "8" or worldText == "9" or worldText == "0" then
         if worldSeedType == true and newgame == true then
             worldSeed = worldSeed .. worldText
-            print(worldSeed)
+            --print()
             worldSeedNum = worldSeedNum + 1
         end
     end
@@ -719,9 +724,15 @@ function menu.loadWorld()
         save.read()
         seedToLoad = seed
 
-        worldSeed = seedToLoad
-        loadFunctionsWOSave = true
+        inmenu = false
         ingame = true
+
+        if doLoadScreen == true then
+            loadScreen = true
+        end
+
+        loadFunctions = true
+        newgame = false
 
     end
 
@@ -768,7 +779,6 @@ function love.mousepressed(x, y, button, istouch)
                 if doLoadScreen == true then
                     loadScreen = true
                 end
-
                 loadFunctions = true
                 newgame = false
             end
@@ -778,7 +788,7 @@ function love.mousepressed(x, y, button, istouch)
                 ingame = true
 
                 worldName = "World"
-                worldSeed = "0000"
+                --worldSeed = "0000"
                 worldName = worldLoadName
 
                 if doLoadScreen == true then

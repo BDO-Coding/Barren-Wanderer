@@ -1,16 +1,16 @@
 save={}
-require "player"
-require "scroll"
+--require "player"
+--require "scroll"
 
-seed = 0
+
 
 function save.load()
-
-    save.clear()
+    seed = 3
+    --[[save.clear()
     local file = io.open(worldName..".txt", "a")
     file:write("Seed:\n"..worldSeed.."\nName:\n"..worldName)
     file:close()
-    save.read()
+    save.read()]]
 
 end
 

@@ -37,19 +37,6 @@ function love.update(dt)
 
 	end
 
-	if loadFunctionsWOSave == true then
-
-		scroll.load()
-		player.load()
-        creature.load()
-        item.load()
-        hotbar.load()
-
-        loadFunctionsWOSave = false
-
-	end
-
-
 	if ingame == true then
 	    UPDATE_SCROLL(dt)
 	    UPDATE_PLAYER(dt)
@@ -57,6 +44,7 @@ function love.update(dt)
 	    UPDATE_ITEM(dt)
 	    UPDATE_HOTBAR(dt)
 	end
+	
     UPDATE_SAVE(dt)
 	UPDATE_MENU(dt)
 	love.audio.setVolume(volume/100)
