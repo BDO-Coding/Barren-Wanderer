@@ -720,7 +720,7 @@ function menu.loadWorld()
         seedToLoad = seed
 
         worldSeed = seedToLoad
-        loadFunctions = true
+        loadFunctionsWOSave = true
         ingame = true
 
     end

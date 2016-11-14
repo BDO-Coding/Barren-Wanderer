@@ -37,6 +37,19 @@ function love.update(dt)
 
 	end
 
+	if loadFunctionsWOSave == true then
+
+		scroll.load()
+		player.load()
+        creature.load()
+        item.load()
+        hotbar.load()
+
+        loadFunctionsWOSave = false
+
+	end
+
+
 	if ingame == true then
 	    UPDATE_SCROLL(dt)
 	    UPDATE_PLAYER(dt)
