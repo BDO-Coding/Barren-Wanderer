@@ -16,11 +16,26 @@ function hotbar.load()
 	manaX = 0
 	hungerX = 20
 
+	slotAmount = 9
+
+	hotbarArray = {{}}
+	reloadHotbar()
 end
 
 function hotbar.goback()
 
 
+
+end
+
+function reloadHotbar()
+
+	for i = 1,slotAmount do
+
+	hotbarArray[i] = {i}
+	i = i+1
+
+	end
 
 end
 
