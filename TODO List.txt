@@ -2,7 +2,7 @@ This is our Barren World TODO List:
 
 	Who does what (Lua classes):
 
-		Ori : Monster, Player, Hotbar
+		Ori : Creature, Player, Hotbar
 		Danny : Scroll, Item
 		Benjamin : Menu, Save, Sound (does not exist yet)
 		All : Main, Images, Conf
@@ -14,16 +14,15 @@ This is our Barren World TODO List:
 			-Stop islands being square
 			-Add ruined town/village
 		-Add powas (YAY)
-		-Add monsters in-game (currently only have the class with a basic array)
+		-Add creatures in-game
 		-Add a quest system
 		-Add weapons
-		-Add inventory / hotbar
+		-Add hot bar storage functions
 		-Add reputation level
 		-Add hidden/shown xp level
 		-Add level up applience points if we are showing xp level
 		-Stop player spawning at the side of the map
-		-Make map bigger
-		-Add different dimensions (this is kinda the same as the biome arrays one, or at least part of it)
+		-Add different dimensions
 		-Add farming
 			-Add food
 				-Potatos
@@ -34,8 +33,6 @@ This is our Barren World TODO List:
 			-Add fences
 		-Add building
 		-Add potions
-		-Game Saving
-			-Make loading work
 		-World Generation
 			-Rivers
 			-3rd layer biome map (oceans = edges, mountains = middle)
