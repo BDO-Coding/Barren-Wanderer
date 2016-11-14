@@ -5,12 +5,20 @@ START:
 #1- Discover village that was ruined by the Overlord
 #2- Talk to Mayor and begin gathering resources
 #?- A gigantic monster will appear above your village, these have only been heard of in stories
-#?- Kill overworld Overlord
+#?- Kill overworld Overlord with medium tier weapons
 #?- Follow the Overlord's soul underground
-#?- Destory monumental pillars and explore underground
-#?- Kill underground Overlord
+#?- Destory monumental pillars and explore underground (these could be called Atlas Pillars?)
+#?- Kill underground Overlord with high tier weapons
 #?- Follow the Overlord's soul through an oblivion portal
-#?- Break Overlord's divine shield with a magical artefact
-#?- Kill oblivion Overlord
+#?- Break Overlord's divine shield with a magical artefact (this shield surrounds his domain)
+#?- Kill oblivion Overlord with MLG weapons
 #?- Watch Overlord transformation
 #?- Kill fully powered (unless body's are destroyed) Overlord
+
+Minibosses:
+Danny(the hardest boss in the game)
+
+
+Combat ideas:
+We need to use the type of scroller we are (have lots of left-right-front-back dodging, less jumping dodging)
+Different weapon types have different attack animations
