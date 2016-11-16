@@ -1,6 +1,5 @@
 hotbar={}
 require "player"
-require "item"
 
 function hotbar.load()
 
@@ -19,7 +18,7 @@ function hotbar.load()
 
 	selectedSlot = 1
 
-	slotAmount = 3
+	slotAmount = 7
 
 	hotbarArray = {{}}
 	reloadHotbar()
@@ -56,8 +55,11 @@ end
 function hotbar.update(dt)
 
 	if love.keyboard.isDown("e") then
+		if hotbarArray[selectedSlot][4]  > 0 then
+		else
 		grab()
 		item.grab(round(playerX,0),round(playerY,0))
+	end
 	end
 
 	healthLength = (health/maxHealth)*barLength
@@ -105,12 +107,19 @@ function hotbar.draw()
 		hotbarXCoord = 500
 		for i = 1,slotAmount do
 			if hotbarArray[i][2] == true then
+				if hotbarArray[i][4]>0 then
+				love.graphics.print(item.getItemName(hotbarArray[i][3]), hotbarXCoord + 15, 720)
+			end
 				love.graphics.setColor(50, 50, 50)
 			else love.graphics.setColor(255, 255, 255) 
 			end
-			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
-			love.graphics.print(i, hotbarXCoord + 5, 655)
-			hotbarXCoord = hotbarXCoord + 67
+				love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
+				love.graphics.print(i, hotbarXCoord + 5, 655)
+				hotbarXCoord = hotbarXCoord + 67
+			if hotbarArray[i][4]>0 then
+				love.graphics.setColor(255, 255, 255) 
+				love.graphics.draw(item.getItemImage(hotbarArray[i][3]), hotbarXCoord-55, 660, 0, 1.5, 1.5)			
+			end
 		end
 
 		end

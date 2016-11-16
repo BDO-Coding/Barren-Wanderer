@@ -1,6 +1,7 @@
 item={}
 require"images"
 require"scroll"
+require"hotbar"
 
 function item.load()
 
@@ -12,8 +13,8 @@ function item.load()
 
 
 	itemIndex = {{}}
-	itemIndex[1--[[id]]] = {"stone"--[[Name]],2--[[weight]],images.stone--[[image]]}
-	itemIndex[2] = {"stick",1,images.stick}
+	itemIndex[1--[[id]]] = {"Stone"--[[Name]],2--[[weight]],images.stone--[[image]]}
+	itemIndex[2] = {"Stick",1,images.stick}
 
 for i = 1, 1000 do
 	addItem(love.math.random(1,2),2,love.math.random(1,200),love.math.random(1,200))
@@ -35,15 +36,28 @@ function item.draw()
 end
 end
 
+function item.getItemImage(id)
+
+return itemIndex[id][3]
+
+end
+
+function item.getItemName(id)
+
+return itemIndex[id][1]
+
+end
+
 function item.grab(x,y)
 
 for i=1, item.Stackamount-1 do
 	if round(itemArray[i][3],0) == x and round(itemArray[i][4],0) == y then
+	hotbarArray[selectedSlot][3] = itemArray[i][1]
+	hotbarArray[selectedSlot][4] = itemArray[i][2]
 	table.remove(itemArray,i)
 	item.Stackamount = item.Stackamount-1
 	end
 	i = i +1
-
 end
 
 end
