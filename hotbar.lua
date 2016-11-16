@@ -1,5 +1,6 @@
 hotbar={}
 require "player"
+require "item"
 
 function hotbar.load()
 
@@ -46,7 +47,19 @@ function reloadHotbar()
 
 end
 
+function grab()
+
+
+
+end
+
 function hotbar.update(dt)
+
+	if love.keyboard.isDown("e") then
+		grab()
+		item.grab(round(playerX,0),round(playerY,0))
+	end
+
 	healthLength = (health/maxHealth)*barLength
 	staminaLength = (stamina/maxStamina)*barLength
 	manaLength = (mana/maxMana)*barLength
@@ -79,6 +92,10 @@ function hotbar.update(dt)
 
 end
 
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
 
 function hotbar.draw()
 

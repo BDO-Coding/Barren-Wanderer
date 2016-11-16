@@ -35,12 +35,30 @@ function item.draw()
 end
 end
 
+function item.grab(x,y)
+
+for i=1,1 do
+	if round(itemArray[i][3],0) == x and round(itemArray[i][4],0) == y then
+	table.remove(itemArray,i)
+	item.Stackamount = item.Stackamount-1
+	end
+	i = i +1
+
+end
+
+end
+
 function UPDATE_ITEM(dt)
 	item.update(dt)
 end
 
 function DRAW_ITEM()
 	item.draw()
+end
+
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
 end
 
 function addItem(id,amount,x,y)
