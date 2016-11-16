@@ -434,7 +434,7 @@ function menu.newgame()
         if worldSeedType == true then
             love.graphics.print("World Seed-: "..worldSeed, 190, 290, 0, 2, 3)
         else
-            love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
+       --     love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
         end
         
         love.graphics.print("Create World", 200, 370, 0, 2, 3)

@@ -1,10 +1,11 @@
 scroll={}
 require "player"
 require "menu"
+require "save"
 
 local map -- stores tiledata
- 
-local mapX, mapY -- view x,y in tiles. can be a fractional value like 3.25.
+
+mapX, mapY = 0,0-- view x,y in tiles. can be a fractional value like 3.25.
 local oldMapX,oldMapY
 local mapWidth, mapHeight -- Width and Height in pixels
  
@@ -286,7 +287,7 @@ function scroll.update(dt)
         currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
     end
 
-    worldSeedInt = tonumber(seed)
+    worldSeedInt= 3--= tonumber(seed)
     print(seed)
     print(worldSeed)
     print(worldSeedInt)
