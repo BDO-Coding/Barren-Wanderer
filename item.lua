@@ -15,8 +15,8 @@ function item.load()
 	itemIndex[1--[[id]]] = {"stone"--[[Name]],2--[[weight]],images.stone--[[image]]}
 	itemIndex[2] = {"stick",1,images.stick}
 
-for i = 1, 10 do
-	addItem(love.math.random(1,2),2,i,i)
+for i = 1, 1000 do
+	addItem(love.math.random(1,2),2,love.math.random(1,200),love.math.random(1,200))
 	i=i+1
 end
 
