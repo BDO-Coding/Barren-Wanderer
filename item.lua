@@ -15,7 +15,7 @@ function item.load()
 	itemIndex[1--[[id]]] = {"stone"--[[Name]],2--[[weight]],images.stone--[[image]]}
 	itemIndex[2] = {"stick",1,images.stick}
 
-for i = 1, 100 do
+for i = 1, 10 do
 	addItem(love.math.random(1,2),2,i,i)
 	i=i+1
 end
@@ -37,7 +37,7 @@ end
 
 function item.grab(x,y)
 
-for i=1,1 do
+for i=1, item.Stackamount-1 do
 	if round(itemArray[i][3],0) == x and round(itemArray[i][4],0) == y then
 	table.remove(itemArray,i)
 	item.Stackamount = item.Stackamount-1
