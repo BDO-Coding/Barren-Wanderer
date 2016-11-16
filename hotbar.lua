@@ -52,7 +52,22 @@ function grab()
 
 end
 
+function love.wheelmoved(x, y)
+    if y > 0 then
+        selectedSlot = selectedSlot -1
+    elseif y < 0 then
+        selectedSlot = selectedSlot +1
+            end
+end
+
 function hotbar.update(dt)
+	if selectedSlot > slotAmount then
+		selectedSlot = 1
+	end
+
+	if selectedSlot < 1 then
+		selectedSlot = slotAmount
+	end
 
 	if love.keyboard.isDown("e") then
 		if hotbarArray[selectedSlot][4]  > 0 then
