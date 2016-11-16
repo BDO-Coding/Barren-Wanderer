@@ -16,10 +16,13 @@ function hotbar.load()
 	manaX = 0
 	hungerX = 20
 
-	slotAmount = 9
+	selectedSlot = 1
+
+	slotAmount = 3
 
 	hotbarArray = {{}}
 	reloadHotbar()
+	--Example hotbar : hotbarArray[1] = {1--[[HobarNumber]],true--[[If it is selected or not]],1The ID of the item in it,1--[[The number of items in it]]}
 end
 
 function hotbar.goback()
@@ -32,15 +35,18 @@ function reloadHotbar()
 
 	for i = 1,slotAmount do
 
-	hotbarArray[i] = {i}
+	hotbarArray[i] = {i,false,1,0}
 	i = i+1
+
+	if numberKey == i then
+			hotbarArray[i][2] = true
+	end
 
 	end
 
 end
 
 function hotbar.update(dt)
-
 	healthLength = (health/maxHealth)*barLength
 	staminaLength = (stamina/maxStamina)*barLength
 	manaLength = (mana/maxMana)*barLength
@@ -57,51 +63,39 @@ function hotbar.update(dt)
 
 	if hunger <= 0 then hungerLength = 0 end
 
-	function love.keypressed(numberKey)
-		if ingame == true and loadScreen == false then
-			if numberKey == "1" then
-				currentHotbarHand = 1
-			elseif numberKey == "2" then
-				currentHotbarHand = 2
-			elseif numberKey == "3" then
-				currentHotbarHand = 3
-			elseif numberKey == "4" then
-				currentHotbarHand = 4
-			elseif numberKey == "5" then
-				currentHotbarHand = 5
-			elseif numberKey == "6" then
-				currentHotbarHand = 6
-			elseif numberKey == "7" then
-				currentHotbarHand = 7
-			elseif numberKey == "8" then
-				currentHotbarHand = 8
-			elseif numberKey == "9" then
-				currentHotbarHand = 9
-			elseif numberKey == "0" then
-				currentHotbarHand = 10
+
+	if ingame == true and loadScreen == false then
+		for i = 1, slotAmount do
+			if selectedSlot == i then
+				hotbarArray[i][2] = true
+			else hotbarArray[i][2] = false end
+
+			if love.keyboard.isDown(i) then
+				selectedSlot = i
 			end
 		end
 	end
+	
 
 end
+
 
 function hotbar.draw()
 
 	hotbarXCoord = 500
 
 	if alive == true then
-		for i = 1, 10 do
-			if i == currentHotbarHand then
+		hotbarXCoord = 500
+		for i = 1,slotAmount do
+			if hotbarArray[i][2] == true then
 				love.graphics.setColor(50, 50, 50)
-				love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
-				love.graphics.print(i, hotbarXCoord + 5, 655)
-				hotbarXCoord = hotbarXCoord + 67
-			else
-				love.graphics.setColor(255, 255, 255)
-				love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
-				love.graphics.print(i, hotbarXCoord + 5, 655)
-				hotbarXCoord = hotbarXCoord + 67
+			else love.graphics.setColor(255, 255, 255) 
 			end
+			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
+			love.graphics.print(i, hotbarXCoord + 5, 655)
+			hotbarXCoord = hotbarXCoord + 67
+		end
+
 		end
 		love.graphics.setColor(255, 0, 0)
 		love.graphics.draw(images.guiBarInside, 70, 650, 0, healthLength, barHeight)
@@ -126,7 +120,7 @@ function hotbar.draw()
 		love.graphics.print((math.floor(hunger)).."/"..maxHunger, rightX-hungerX, 690)
 	end
 
-end
+--end
 
 function UPDATE_HOTBAR(dt)
 
