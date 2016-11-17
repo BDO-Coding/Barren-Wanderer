@@ -66,7 +66,7 @@ function hotbar.update(dt)
 
 	if love.keyboard.isDown("e") then
 		--if hotbarArray[selectedSlot][4] == 0 then
-			item.grab(hotbar.round(playerX, 0), hotbar.round(playerY, 0))
+			item.grab(hotbar.round(playerX, 0), hotbar.round(playerY-0.5, 0))
 		--end
 	end
 
