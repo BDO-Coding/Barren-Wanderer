@@ -7,7 +7,8 @@ function item.load()
 
 	item.amount = 0
 	item.Stackamount = 0
-
+	contributeToStack = true
+	sameStack = 0
 	itemArray = {{}}
 	--itemArray[1] = {1--[[ID]],1--[[amount]],1,1--[[x,y coords]]}
 
@@ -52,8 +53,20 @@ function item.grab(x,y)
 
 for i=1, item.Stackamount-1 do
 	if round(itemArray[i][3],0) == x and round(itemArray[i][4],0) == y then
-	hotbarArray[selectedSlot][3] = itemArray[i][1]
-	hotbarArray[selectedSlot][4] = itemArray[i][2]
+			contributeToStack = false
+		for j = 1, slotAmount do
+			if hotbarArray[j][3] == itemArray[i][1] then
+				contributeToStack = true
+				sameStack = j
+			end
+			j=j+1
+		end
+		if contributeToStack == false then
+			hotbarArray[selectedSlot][3] = itemArray[i][1]
+			hotbarArray[selectedSlot][4] = itemArray[i][2]
+		else
+			hotbarArray[sameStack][4] = hotbarArray[sameStack][4] + itemArray[i][2]
+		end
 	table.remove(itemArray,i)
 	item.Stackamount = item.Stackamount-1
 	end
