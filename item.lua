@@ -77,6 +77,11 @@ for i=1, item.Stackamount-1 do
 	end
 	i = i +1
 end
+end
+
+function item.throw(x,y,id)
+
+	addItem(id,1,x,y)
 
 end
 

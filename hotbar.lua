@@ -24,6 +24,7 @@ function hotbar.load()
 	hotbar.reload()
 
 	highestUsedSpot=0
+	throw1 = false
 	--[[Example hotbar :
 		1=HotbarNumber,
 		true=If it is selected or not,
@@ -68,6 +69,18 @@ function hotbar.update(dt)
 		--if hotbarArray[selectedSlot][4] == 0 then
 			item.grab(hotbar.round(playerX, 0), hotbar.round(playerY-0.5, 0))
 		--end
+	end
+
+	if love.keyboard.isDown("q") then
+		throw1 = true
+	else
+		if throw1 == true then
+					if hotbarArray[selectedSlot][4] > 0 then
+						item.throw(hotbar.round(playerX, 0), hotbar.round(playerY-0.5, 0),hotbarArray[selectedSlot][3])
+						hotbarArray[selectedSlot][4] = hotbarArray[selectedSlot][4] - 2
+						throw1=false
+					end
+		end
 	end
 
 	healthLength = (health/maxHealth)*barLength
