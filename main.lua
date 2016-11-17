@@ -29,8 +29,8 @@ function love.update(dt)
         save.load()
 		scroll.load()
 		player.load()
+		item.load()
         mob.load()
-        item.load()
         hotbar.load()
 
         loadFunctions = false
@@ -40,8 +40,8 @@ function love.update(dt)
 	if ingame == true then
 	    UPDATE_SCROLL(dt)
 	    UPDATE_PLAYER(dt)
-	    UPDATE_MOB(dt)
 	    UPDATE_ITEM(dt)
+	    UPDATE_MOB(dt)
 	    UPDATE_HOTBAR(dt)
 	end
 	
