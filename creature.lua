@@ -1,4 +1,3 @@
-creature={}
 
 function creature.load()
 

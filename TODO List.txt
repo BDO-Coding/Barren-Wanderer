@@ -2,8 +2,8 @@ This is our Barren World TODO List:
 
 	Who does what (Lua classes):
 
-		Ori : Creature, Player, Hotbar
-		Danny : Scroll, Item
+		Ori : Mob, Player, Hotbar, Spell (does not exist yet)
+		Danny : Scroll, Item, Quest (does not exist yet)
 		Benjamin : Menu, Save, Sound (does not exist yet)
 		All : Main, Images, Conf
 
