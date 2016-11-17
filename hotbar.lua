@@ -21,7 +21,7 @@ function hotbar.load()
 	slotAmount = 7
 
 	hotbarArray = {{}}
-	reloadHotbar()
+	hotbar.reload()
 
 	--[[Example hotbar :
 		1=HotbarNumber,
@@ -32,13 +32,7 @@ function hotbar.load()
 
 end
 
-function hotbar.goback()
-
-
-
-end
-
-function reloadHotbar()
+function hotbar.reload()
 
 	for i = 1,slotAmount do
 		hotbarArray[i] = {i,false,1,0}
@@ -52,9 +46,9 @@ end
 function love.wheelmoved(x, y)
 
     if y > 0 then
-        selectedSlot = selectedSlot -1
+        selectedSlot = selectedSlot - 1
     elseif y < 0 then
-        selectedSlot = selectedSlot +1
+        selectedSlot = selectedSlot + 1
     end
 
 end
@@ -70,9 +64,8 @@ function hotbar.update(dt)
 	end
 
 	if love.keyboard.isDown("e") then
-		if not hotbarArray[selectedSlot][4] > 0 then
-			grab()
-			item.grab(round(playerX,0),round(playerY,0))
+		if hotbarArray[selectedSlot][4] == 0 then
+			item.grab(hotbar.round(playerX, 0), hotbar.round(playerY, 0))
 		end
 	end
 
@@ -106,7 +99,7 @@ function hotbar.update(dt)
 
 end
 
-function round(num, idp)
+function hotbar.round(num, idp)
 
 	local mult = 10^(idp or 0)
 	return math.floor(num * mult + 0.5) / mult
