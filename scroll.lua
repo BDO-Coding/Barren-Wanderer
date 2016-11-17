@@ -122,7 +122,6 @@ function scroll.setupMap()
 
     end
 
-
     --Name Signiture
     map[1][1] = 5
     map[1][2] = 5
@@ -177,6 +176,7 @@ function scroll.setupMap()
     map[6][13] = 5
 
     mapDrawn = true
+    
 end
  
 function scroll.setupMapView()
@@ -288,9 +288,6 @@ function scroll.update(dt)
     end
 
     worldSeedInt= 3--= tonumber(seed)
-    print(seed)
-    print(worldSeed)
-    print(worldSeedInt)
     math.randomseed(worldSeedInt)
 
     if inmenu == false and loadScreen == false and alive == true then
