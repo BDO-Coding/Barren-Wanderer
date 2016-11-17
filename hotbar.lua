@@ -64,9 +64,9 @@ function hotbar.update(dt)
 	end
 
 	if love.keyboard.isDown("e") then
-		if hotbarArray[selectedSlot][4] == 0 then
+		--if hotbarArray[selectedSlot][4] == 0 then
 			item.grab(hotbar.round(playerX, 0), hotbar.round(playerY, 0))
-		end
+		--end
 	end
 
 	healthLength = (health/maxHealth)*barLength
