@@ -14,11 +14,12 @@ function item.load()
 
 
 	itemIndex = {{}}
-	itemIndex[1--[[id]]] = {"Stone"--[[Name]],2--[[weight]],images.stone--[[image]]}
+	itemIndex[1--[[id]]] = {"Test"--[[Name]],2--[[weight]],images.mana--[[image]]}
 	itemIndex[2] = {"Stick",1,images.stick}
+	itemIndex[3] = {"Stone",1,images.stone}
 
 for i = 1, 1000 do
-	addItem(love.math.random(1,2),2,love.math.random(1,200),love.math.random(1,200))
+	addItem(love.math.random(2,3),2,love.math.random(1,200),love.math.random(1,200))
 	i=i+1
 end
 
@@ -62,8 +63,9 @@ for i=1, item.Stackamount-1 do
 			j=j+1
 		end
 		if contributeToStack == false then
-			hotbarArray[selectedSlot][3] = itemArray[i][1]
-			hotbarArray[selectedSlot][4] = itemArray[i][2]
+			hotbarArray[highestUsedSpot+1][3] = itemArray[i][1]
+			hotbarArray[highestUsedSpot+1][4] = itemArray[i][2]
+			highestUsedSpot = highestUsedSpot + 1
 		else
 			hotbarArray[sameStack][4] = hotbarArray[sameStack][4] + itemArray[i][2]
 		end

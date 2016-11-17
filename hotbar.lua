@@ -18,11 +18,12 @@ function hotbar.load()
 
 	selectedSlot = 1
 
-	slotAmount = 7
+	slotAmount = 10
 
 	hotbarArray = {{}}
 	hotbar.reload()
 
+	highestUsedSpot=0
 	--[[Example hotbar :
 		1=HotbarNumber,
 		true=If it is selected or not,
