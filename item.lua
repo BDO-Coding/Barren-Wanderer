@@ -17,7 +17,6 @@ function item.load()
 	itemIndex[2] = {"Stick",1,images.stick}
 	itemIndex[3] = {"Stone",1,images.stone}
 
-
 	item.indexAmount = 3
 
 for i = 1, 1000 do
