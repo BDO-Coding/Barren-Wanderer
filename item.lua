@@ -10,8 +10,7 @@ function item.load()
 	contributeToStack = true
 	sameStack = 0
 	itemArray = {{}}
-	--itemArray[1] = {1--[[ID]],1--[[amount]],1,1--[[x,y coords]]}
-
+	--itemArray[1] = {1--[[ID]],1--[[amount]],1,1--[[x,y coords]]
 
 	itemIndex = {{}}
 	itemIndex[1--[[id]]] = {"Test"--[[Name]],2--[[weight]],images.mana--[[image]]} -- This item isn't actualy used
