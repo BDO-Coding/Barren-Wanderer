@@ -12,14 +12,21 @@ local mapWidth, mapHeight -- Width and Height in pixels
 local tilesDisplayWidth, tilesDisplayHeight -- number of tiles to show
 local zoomX, zoomY
  
+
+local setTerrainExtreemness = 1 -- Use this to edit how steep the terrain is ********************************************
+
+
 local tilesetImage
 local tileSize -- size of tiles in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 local biomeNum = 25600 --has to be a square number 57600
-local setBiomeSize = 40
+local setBiomeSize = 30
 local biomeSize
 local mapDrawn = false
+local terrainExtreemity = setBiomeSize*setTerrainExtreemness
+
+
 
 
 function round(num, idp)
@@ -61,6 +68,36 @@ function scroll.biome()
                 for y=yStart, yMax do
                     biomeArray[x][y] = biomeType
                 end
+            end
+        end
+    end
+
+     for a=2,mapWidth do
+         for b=2,mapHeight do
+            if a > terrainExtreemity + 3 then
+            if a > mapWidth - (terrainExtreemity+3) then
+                    if biomeArray[a][b+love.math.random(-terrainExtreemity,-1)] ~= biomeArray[a][b] then
+                    biomeArray[a][b] = biomeArray[a][b+love.math.random(-terrainExtreemity,-1)]
+                end
+                if biomeArray[a+love.math.random(-terrainExtreemity,-1)][b] ~= biomeArray[a][b] then
+                 biomeArray[a][b] = biomeArray[a+love.math.random(-terrainExtreemity,-1)][b]
+                end
+            else
+                if biomeArray[a][b+love.math.random(-terrainExtreemity,terrainExtreemity)] ~= biomeArray[a][b] then
+                    biomeArray[a][b] = biomeArray[a][b+love.math.random(-terrainExtreemity,terrainExtreemity)]
+                end
+                if biomeArray[a+love.math.random(-terrainExtreemity,terrainExtreemity)][b] ~= biomeArray[a][b] then
+                 biomeArray[a][b] = biomeArray[a+love.math.random(-terrainExtreemity,terrainExtreemity)][b]
+                end
+            end
+            else
+                if biomeArray[a][b+love.math.random(1,terrainExtreemity)] ~= biomeArray[a][b] then
+                    biomeArray[a][b] = biomeArray[a][b+love.math.random(1,terrainExtreemity)]
+                end
+                if biomeArray[a+love.math.random(1,terrainExtreemity)][b] ~= biomeArray[a][b] then
+                 biomeArray[a][b] = biomeArray[a+love.math.random(1,terrainExtreemity)][b]
+                end
+
             end
         end
     end

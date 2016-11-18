@@ -137,6 +137,7 @@ function hotbar.draw()
 			end
 			love.graphics.draw(images.hotbar, hotbarXCoord, 650, 0, 2, 2)
 			if hotbarArray[i][4]/2 > 1 then
+								love.graphics.setColor(255, 255, 255) 
 			love.graphics.print(hotbarArray[i][4]/2, hotbarXCoord + 5, 655)
 		end
 			hotbarXCoord = hotbarXCoord + 67

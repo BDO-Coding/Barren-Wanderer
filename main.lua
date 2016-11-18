@@ -93,7 +93,7 @@ function love.draw()
 	    love.graphics.print("X: "..playerX, 10, 70)
 	    love.graphics.print("Y: "..playerY, 10, 80)
 	    love.graphics.print("Tile: "..currentTile, 10, 90)
-	    love.graphics.print("Biome: "..currentBiome, 10, 100)
+	--    love.graphics.print("Biome: "..currentBiome, 10, 100) ******************* FOr some reason this crashes the game now
 	end
 
 end

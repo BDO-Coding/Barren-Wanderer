@@ -34,7 +34,7 @@ end
 
 function item.draw()
 	if item.Stackamount > 0 then
-	for i = 1, item.Stackamount do
+	for i = 1, item.Stackamount -1  do
 		love.graphics.draw(itemIndex[itemArray[i][1]][3],math.floor((mapX)*-64)+(itemArray[i][3]*64)+594,math.floor((mapY)*-64)+(itemArray[i][4]*64)+396, 0, 1, 1)
 		i=i+1
 	end
