@@ -25,6 +25,7 @@ function images.load()
 	images.hunger = love.graphics.newImage("images/player/hunger.png")
 	images.guiBar = love.graphics.newImage("images/player/bar.png")
 	images.guiBarInside = love.graphics.newImage("images/player/barInside.png")
+	images.handCursor = love.graphics.newImage("images/player/cursor.png")
 
 	--Title
 	images.title = love.graphics.newImage("images/title.png")

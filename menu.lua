@@ -1,6 +1,7 @@
 menu = {}
 require("save")
---require("images")
+require("player")
+require("images")
 
 local utf8 = require("utf8")
 
@@ -20,6 +21,8 @@ local tilesetSprite
 local r = 200
 local b = 200
 local g = 200
+
+cursorSizeX,cursorSizeY=1,1
 
 function menu.load()
 
@@ -76,7 +79,6 @@ function menu.load()
 end
 
 function menu.draw()
-
     mouseX = love.mouse.getX()
     mouseY = love.mouse.getY()
 
@@ -156,6 +158,8 @@ function menu.draw()
         love.graphics.setColor(255, 255, 255)
         love.graphics.draw(menuPlayerImage, playerImageX, 150, 0, playerImageSizeX, 0.85)
 
+
+    
     end
 
     if inmenu == true and options == false and ingame == true then
@@ -335,6 +339,10 @@ end
 
 function menu.update(dt)
 
+    if ingame == true then
+        cursorSizeX,cursorSizeY = 0.5,0.5
+            end
+
     seed = worldSeed
 
     r = r + love.math.random(-10, 10)
@@ -462,7 +470,7 @@ function menu.newgame()
 end
 
 function love.keypressed(backKey)
-
+if player.noEscapeKey ~= true then
     if backKey == "backspace" and worldNameType == true and newgame == true then
         local byteoffset = utf8.offset(worldName, -1)
  
@@ -513,7 +521,7 @@ function love.textinput(worldText)
             worldSeedNum = worldSeedNum + 1
         end
     end
-
+end
 end
 
 function menu.options()
@@ -712,7 +720,12 @@ function menu.loadScreen()
             end
         end
     end
-
+    love.graphics.setColor(255, 255, 255)
+  local x, y = love.mouse.getPosition() -- get the position of the mouse
+   love.graphics.draw(images.handCursor, x, y,0,cursorSizeX,cursorSizeY)
+   if loading == true then
+    cursorSizeX,cursorSizeY = mouseX,mouseY
+   end
 end
 
 

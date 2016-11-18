@@ -52,10 +52,19 @@ function player.load()
     hungerRegen = 0.05
 
     alive = true
+    inventoryMode = false
 
 end
 
 function player.update(dt)
+
+    if love.keyboard.isDown("i") then
+        inventoryMode = true
+        player.noEscapeKey = true
+        end
+    if love.keyboard.isDown("escape") then
+        inventoryMode = false
+        end
 
     if health < maxHealth then
         health = health + healthRegen
@@ -124,6 +133,8 @@ function player.draw()
     if inmenu == false then
 
         if love.keyboard.isDown("w") and alternateW == true then
+        player.noEscapeKey = false
+        inventoryMode = false
             playerImage = images.playerUpAnimeA
             playerSizeX = 2
             playerScreenX = 560
@@ -265,9 +276,11 @@ function player.draw()
             weaponXSize = -2
             imageUp = true
         elseif releaseImage == "escape" then
+            if noEscapeKey ~= true then
         	if ingame == true then
         		inmenu = not inmenu
         	end
+        end
         end
     end
 

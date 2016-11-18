@@ -1,5 +1,6 @@
 hotbar={}
 require "player"
+require "images"
 
 function hotbar.load()
 
@@ -121,6 +122,9 @@ function hotbar.round(num, idp)
 end
 
 function hotbar.draw()
+	if inventoryMode == true then
+		love.graphics.draw(images.handCursor,hotbarXCoord-55, 660, 0, 1.5, 1.5)		
+	end
 
 	hotbarXCoord = 500
 

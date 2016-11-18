@@ -10,7 +10,7 @@ require "utensil"
 require "quest"
 
 function love.load()
-
+love.mouse.setVisible(false)
 	ingame = false
 	inmenu = true
 	loadFunctions = false
