@@ -1,5 +1,6 @@
 player={}
-require"images"
+require "images"
+require "utensil"
 
 function player.load()
 
@@ -33,7 +34,6 @@ function player.load()
     currentWeapon = images.woodenSword
     imageUp = false
     runWeaponUpdate = true
-    weaponType = "melee"
 
     maxStamina = 100
     stamina = 100

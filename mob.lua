@@ -7,10 +7,10 @@ function mob.load()
 	changeBehavior = true
 
 	mobArray = {{}}
-	mobArray[1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], 1--[[Type 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], 3--[[Size 10]], 1--[[One Creation 11]], destinationArray = {{}}}
+	mobArray[1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], 1--[[Type 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], 3--[[Size 10]], 1--[[One Creation 11]], {1, 1}--[[Destination Array 12]]}
 
 	for i = 1, mob.amount do
-		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], 1--[[Type 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], 3--[[Size 10]], 1--[[One Creation 11]], destinationArray = {{}}}
+		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], 1--[[Type 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], 3--[[Size 10]], 1--[[One Creation 11]], {1, 1}--[[Destination Array 12]]}
 	end
 
 	--[[Temperament (4) 1 is passive
@@ -62,8 +62,10 @@ function mob.behavior(dt)
 			mobArray[i][11] = 3
 		end
 		if mobArray[i][3] == 1 and mobArray[i][4] == 3 then --inPlayerView, follow player
+			mobArray[i][12][1] = playerX
+			mobArray[i][12][2] = playerY
 		elseif mobArray[i][3] == 2 then --inPlayerView, move around a wall
-		elseif mobArray[i][3] == 3 then --both, stay still, blend slightly
+		elseif mobArray[i][3] == 3 then --both, stay still
 		elseif mobArray[i][3] == 4 then --both, move to a random destination
 		elseif mobArray[i][3] == 5 then --notInPlayerView, move towards player view
 
@@ -82,11 +84,7 @@ end
 function mob.draw()
 
 	for i = 1, mob.amount do
-		if mobArray[i][3] == 3 then
-			love.graphics.setColor(50, 255, 50)
-		end
 		love.graphics.draw(mobArray[i][7], math.floor((mapX)*-64) + mobArray[i][1], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10], mobArray[i][10])
-		love.graphics.setColor(255, 255, 255, 255)
 	end
 
 end

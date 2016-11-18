@@ -6,7 +6,7 @@ require "mob"
 require "item"
 require "hotbar"
 require "save"
-require "tool"
+require "utensil"
 require "quest"
 
 function love.load()
@@ -35,7 +35,7 @@ function love.update(dt)
 		item.load()
         mob.load()
         hotbar.load()
-        tool.load()
+        utensil.load()
 
         loadFunctions = false
 
@@ -43,7 +43,7 @@ function love.update(dt)
 
 	if ingame == true then
 	    UPDATE_SCROLL(dt)
-	    tool.update(dt)
+	    UPDATE_UTENSIL(dt)
 	    quest.update(dt)
 	    UPDATE_PLAYER(dt)
 	    UPDATE_ITEM(dt)
@@ -64,7 +64,7 @@ function love.draw()
 	if ingame == true then
 	    DRAW_SCROLL()
 	    DRAW_MOB()
-	    tool.draw()
+	    DRAW_UTENSIL()
 	    quest.draw()
 	    DRAW_ITEM()
 	    DRAW_PLAYER()
