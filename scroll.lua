@@ -313,8 +313,28 @@ function scroll.moveMap(dx, dy) -- Central function for moving the map
     end
 
 end
+function scroll.round(num, idp)
+
+    local mult = 10^(idp or 0)
+    return math.floor(1* mult + 0.5) / mult
+    
+end
+function mine(x,y)
+
+  --  if map[x][y] == 11 then
+        map[x][y] = 10
+    --else
+    --end
+
+end
 
 function scroll.update(dt)
+    --mine(playerX,playerY)
+         mine(scroll.round(playerX,0), scroll.round(playerY,0))
+down = love.mouse.isDown(1) 
+ if down == true then
+     mine(scroll.round(playerX), scroll.round(playerY))
+ end
 
     playerX = mapX
     playerY = mapY
