@@ -23,7 +23,7 @@ function item.load()
 
 for i = 1, 1000 do
 	addItem(love.math.random(2,item.indexAmount),2,love.math.random(1,200),love.math.random(1,200))
-	i=i+1
+	--i=i+1
 end
 
 end
@@ -36,7 +36,7 @@ function item.draw()
 	if item.Stackamount > 0 then
 	for i = 1, item.Stackamount -1  do
 		love.graphics.draw(itemIndex[itemArray[i][1]][3],math.floor((mapX)*-64)+(itemArray[i][3]*64)+594,math.floor((mapY)*-64)+(itemArray[i][4]*64)+396, 0, 1, 1)
-		i=i+1
+		--i=i+1
 	end
 end
 end
