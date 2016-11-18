@@ -34,6 +34,7 @@ function player.load()
     currentWeapon = images.woodenSword
     imageUp = false
     runWeaponUpdate = true
+    weaponType = "melee"
 
     maxStamina = 100
     stamina = 100

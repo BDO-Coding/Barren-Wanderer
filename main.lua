@@ -63,10 +63,10 @@ function love.draw()
 
 	if ingame == true then
 	    DRAW_SCROLL()
-	    DRAW_MOB()
 	    DRAW_UTENSIL()
 	    quest.draw()
 	    DRAW_ITEM()
+	    DRAW_MOB()
 	    DRAW_PLAYER()
 	    DRAW_HOTBAR()
 	end
