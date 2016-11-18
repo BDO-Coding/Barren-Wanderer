@@ -23,10 +23,6 @@ function player.load()
     alternateA = true
     alternateS = true
     alternateD = true
-    playerX = 1
-    playerY = 1
-    currentBiome = 1
-    currentTile = 1
 
     xScreenMinus = 0
     yScreenMinus = 0
