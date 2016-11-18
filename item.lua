@@ -15,9 +15,11 @@ function item.load()
 	itemIndex = {{}}
 	itemIndex[1--[[id]]] = {"Test"--[[Name]],2--[[weight]],images.mana--[[image]]} -- This item isn't actualy used
 	itemIndex[2] = {"Stick",1,images.stick}
-	itemIndex[3] = {"Stone",1,images.stone}
+	itemIndex[3] = {"Stone",2,images.stone}
+	itemIndex[4] = {"Log",2,images.log}
 
-	item.indexAmount = 3
+
+	item.indexAmount =4
 
 for i = 1, 1000 do
 	addItem(love.math.random(2,item.indexAmount),2,love.math.random(1,200),love.math.random(1,200))

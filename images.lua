@@ -32,6 +32,7 @@ function images.load()
 	--Items
 	images.stone = love.graphics.newImage("images/entities/items/stone.png")
 	images.stick = love.graphics.newImage("images/entities/items/stick.png")
+	images.log = love.graphics.newImage("images/entities/items/log.png")
 
 	--Monsters
 
