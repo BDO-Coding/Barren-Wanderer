@@ -70,10 +70,10 @@ function love.draw()
 	    DRAW_UTENSIL()
 	    DRAW_QUEST()
 	    DRAW_ITEM()
-	    DRAW_MOB()
-	    DRAW_PLAYER()
 	    DRAW_HOTBAR()
 	    DRAW_CONVERSATION()
+	    DRAW_MOB()
+	    DRAW_PLAYER()
 	end
 	
 	DRAW_MENU()

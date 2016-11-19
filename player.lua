@@ -9,6 +9,7 @@ function player.load()
     playerSprint = 2
     playerDefaultSpeed = 0.002
     playerDefaultSpeedDiagonal = 0.001
+    playerDamage = false
 	doOnce = true
 	playerSizeX = 2
 	playerSizeY = 2
@@ -68,7 +69,7 @@ function player.update(dt)
         inventoryMode = false
     end
 
-    if health < maxHealth then
+    if health < maxHealth and playerDamage == false then
         health = health + healthRegen
     end
 
@@ -126,6 +127,12 @@ function player.update(dt)
 end
 
 function player.draw()
+
+    if health <= 0 then
+        love.graphics.setColor(255, 0, 0)
+        love.graphics.print("Your dead", 400, 400, 0, 6, 6)
+        inmenu = true
+    end
 
 	if doOnce == true then
 		playerImage = images.playerDown
@@ -289,12 +296,10 @@ function player.draw()
     weaponXLoc = playerScreenX-xScreenMinus
     weaponYLoc = playerScreenY-yScreenMinus
 
-    for i = 1, mob.amount do
-        if mobArray[i][1] > (playerX*64)+510 and mobArray[i][1] < (playerX*64)+570 and mobArray[i][2] > (playerY*64)+280 and mobArray[i][2] < (playerY*64)+330 then
-            love.graphics.setColor(255, 0, 0)
-        else
-            love.graphics.setColor(255, 255, 255)
-        end
+    if playerDamage == true then
+        love.graphics.setColor(255, 0, 0)
+    else
+        love.graphics.setColor(255, 255, 255)
     end
 
     if imageUp == true and not love.mouse.isDown(1) then
