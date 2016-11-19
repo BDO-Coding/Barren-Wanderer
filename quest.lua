@@ -7,6 +7,7 @@ questIndex={{}}
 questIndex[1] = {"Name","collect"--[[objective type]],4--[[objective info]],1--[[objective info no.2]],10--[[coin reqard]],2--[[item reward ID]],1000--[[item amount]],false--[[if it has been earned]]}
 questIndex[2] = {"It Begins...","event",1,0,10,2,3,false}
 questIndex[3] = {"Gatherer","collect",3,1,3,4,2,false}
+questIndex[4] = {"Lumberjack","collect",4,10,20,4,100,false}
 
 eventIndex={{}}
 eventIndex[1] = {1--[[ID]],true--[[is this event happening?]],"player starts the game"}
