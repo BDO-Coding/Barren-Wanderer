@@ -23,6 +23,10 @@ function mob.update(dt)
 
 	behaviorTimer = behaviorTimer + dt
 
+end
+
+function mob.createMob()
+
 	for i = 1, mob.amount do
 		if mobArray[i][11] == 1 and mobArray[i][6][2] == "mob" then
 			if mobArray[i][4] == 1 then
@@ -113,7 +117,7 @@ function mob.draw()
 		end
 
 		if mobArray[i][6][2] == "npc" then
-			love.graphics.print(--TODO)
+			love.graphics.print()
 		end
 
 		love.graphics.draw(mobArray[i][7], (math.floor((mapX)*-64) + mobArray[i][1]) + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])
@@ -123,6 +127,7 @@ end
 
 function UPDATE_MOB(dt)
 
+	mob.createMob()
 	mob.update(dt)
 	mob.behavior(dt)
 
