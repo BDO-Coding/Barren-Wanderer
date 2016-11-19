@@ -8,6 +8,7 @@ require "hotbar"
 require "save"
 require "utensil"
 require "quest"
+require "conversation"
 
 function love.load()
 	
@@ -37,6 +38,7 @@ function love.update(dt)
         mob.load()
         hotbar.load()
         utensil.load()
+        conversation.load()
 
         loadFunctions = false
 
@@ -50,6 +52,7 @@ function love.update(dt)
 	    UPDATE_ITEM(dt)
 	    UPDATE_MOB(dt)
 	    UPDATE_HOTBAR(dt)
+	    UPDATE_CONVERSATION(dt)
 	end
 	
     UPDATE_SAVE(dt)
@@ -70,6 +73,7 @@ function love.draw()
 	    DRAW_MOB()
 	    DRAW_PLAYER()
 	    DRAW_HOTBAR()
+	    DRAW_CONVERSATION()
 	end
 	
 	DRAW_MENU()

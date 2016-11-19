@@ -62,10 +62,11 @@ function player.update(dt)
     if love.keyboard.isDown("i") then
         inventoryMode = true
         player.noEscapeKey = true
-        end
+    end
+
     if love.keyboard.isDown("escape") then
         inventoryMode = false
-        end
+    end
 
     if health < maxHealth then
         health = health + healthRegen
@@ -287,6 +288,14 @@ function player.draw()
 
     weaponXLoc = playerScreenX-xScreenMinus
     weaponYLoc = playerScreenY-yScreenMinus
+
+    for i = 1, mob.amount do
+        if mobArray[i][1] > (playerX*64)+510 and mobArray[i][1] < (playerX*64)+570 and mobArray[i][2] > (playerY*64)+280 and mobArray[i][2] < (playerY*64)+330 then
+            love.graphics.setColor(255, 0, 0)
+        else
+            love.graphics.setColor(255, 255, 255)
+        end
+    end
 
     if imageUp == true and not love.mouse.isDown(1) then
         love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
