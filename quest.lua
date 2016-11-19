@@ -15,6 +15,8 @@ function quest.load ()
 
 	printWait = 0
 
+
+	quest.getQuest(4)
 end
 
 function quest.draw()
@@ -39,7 +41,6 @@ function quest.getQuest(questID)
 end
 
 function quest.reward(questID)
-
 	if questIndex[questID][8][1]==false and questIndex[questID][8][2]==true then
 		item.grab(0,0,"specificGive",questIndex[questID][6],questIndex[questID][7])
 		printWait = 200

@@ -17,7 +17,7 @@ function images.load()
 	--Weapons
 	images.woodenSword = love.graphics.newImage("images/weapons/swords/woodenSword.png")
 
-	--Hotbar & Other GUI
+	--Hotbar
 	images.hotbar = love.graphics.newImage("images/player/hotbar.png")
 	images.health = love.graphics.newImage("images/player/health.png")
 	images.stamina = love.graphics.newImage("images/player/stamina.png")
@@ -41,6 +41,8 @@ function images.load()
 	images.chicken = love.graphics.newImage("images/entities/animals/chicken.png")
 	images.parrot = love.graphics.newImage("images/entities/animals/parrot.png")
 
+	--GUI
+	images.crafting = love.graphics.newImage("images/GUI/craftingGUI.png")
 end
 
 function UPDATE_IMAGES(dt)
