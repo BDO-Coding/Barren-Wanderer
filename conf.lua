@@ -1,6 +1,6 @@
 function love.conf(t)
 
-	t.title = "Donald Trump is better than us all!"
+	t.title = "I disagree!"
 	t.window.width = 1200
 	t.window.height = 750
 	t.window.icon = "images/player/playerDown.png"

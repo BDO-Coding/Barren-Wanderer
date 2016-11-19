@@ -5,6 +5,8 @@ require"hotbar"
 
 function item.load()
 
+		draw = false
+
 	item.amount = 0
 	item.Stackamount = 0
 	contributeToStack = true
@@ -33,6 +35,9 @@ function item.update(dt)
 end
 
 function item.draw()
+	if draw1 == true then
+love.graphics.draw(images.mana,100,600)
+end
 	if item.Stackamount > 0 then
 	for i = 1, item.Stackamount -1  do
 		love.graphics.draw(itemIndex[itemArray[i][1]][3],math.floor((mapX)*-64)+(itemArray[i][3]*64)+594,math.floor((mapY)*-64)+(itemArray[i][4]*64)+396, 0, 1, 1)
@@ -53,7 +58,26 @@ return itemIndex[id][1]
 
 end
 
-function item.grab(x,y)
+function item.grab(x,y,mode,specificItem,specificAmount)
+if mode == "specificGive" then
+	contributeToStack = false
+		for j = 1, slotAmount do
+			if hotbarArray[j][3] == specificItem then
+				contributeToStack = true
+				sameStack = j
+			end
+			j=j+1
+		end
+		if contributeToStack == false then
+			hotbarArray[highestUsedSpot+1][3] = specificItem
+			hotbarArray[highestUsedSpot+1][4] = specificAmount*2
+			highestUsedSpot = highestUsedSpot + 1
+
+		else
+
+			hotbarArray[sameStack][4] = hotbarArray[sameStack][4] + specificAmount*2
+		end
+else
 
 for i=1, item.Stackamount-1 do
 	if round(itemArray[i][3],0) == x and round(itemArray[i][4],0) == y then
@@ -72,10 +96,11 @@ for i=1, item.Stackamount-1 do
 		else
 			hotbarArray[sameStack][4] = hotbarArray[sameStack][4] + itemArray[i][2]
 		end
-	table.remove(itemArray,i)
-	item.Stackamount = item.Stackamount-1
+		table.remove(itemArray,i)
+		item.Stackamount = item.Stackamount-1
 	end
 	i = i +1
+end
 end
 end
 

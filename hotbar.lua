@@ -26,6 +26,8 @@ function hotbar.load()
 
 	highestUsedSpot=0
 	throw1 = false
+
+	works = false
 	--[[Example hotbar :
 		1=HotbarNumber,
 		true=If it is selected or not,
@@ -121,7 +123,21 @@ function hotbar.round(num, idp)
 	
 end
 
+function hotbar.search(id,amount)
+	for i=1,slotAmount do
+		if hotbarArray[i][3] == id then
+			if hotbarArray[i][4] > (amount*2)-1 then
+				return true			
+			end		
+		end
+	end
+end
+
 function hotbar.draw()
+	if works == true then
+--love.graphics.draw(images.mana,100,100)
+	end
+
 	if inventoryMode == true then
 		love.graphics.draw(images.handCursor,hotbarXCoord-55, 660, 0, 1.5, 1.5)		
 	end
