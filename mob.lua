@@ -7,10 +7,10 @@ function mob.load()
 	changeBehavior = true
 
 	mobArray = {{}}
-	mobArray[1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], 1--[[Type 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], 1--[[One Creation 11]], {1, 1, "left", true}--[[Destination Array 12]]}
+	mobArray[1] = {200--[[X position 1]], 200--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"npc"}--[[Type Array 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], 1--[[One Creation 11]], {1, 1, "left", true}--[[Destination Array 12]]}
 
 	for i = 1, mob.amount do
-		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], 1--[[Type 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], 1--[[One Creation 11]], {1, 1, "left", true}--[[Destination Array 12]]}
+		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], 1--[[Health 8]], 1--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], 1--[[One Creation 11]], {1, 1, "left", true}--[[Destination Array 12]]}
 	end
 
 	--[[Temperament (4) 1 is passive
@@ -24,27 +24,27 @@ function mob.update(dt)
 	behaviorTimer = behaviorTimer + dt
 
 	for i = 1, mob.amount do
-		if mobArray[i][11] == 1 then
+		if mobArray[i][11] == 1 and mobArray[i][6][2] == "mob" then
 			if mobArray[i][4] == 1 then
-				mobArray[i][6] = 1--love.math.random(1, 2)
+				mobArray[i][6][1] = 1--love.math.random(1, 2)
 				mobArray[i][1] = love.math.random(600, 1000)
 				mobArray[i][2] = love.math.random(400, 800)
 			elseif mobArray[i][4] == 2 then
-				mobArray[i][6] = love.math.random(1, 2)
+				mobArray[i][6][1] = love.math.random(1, 2)
 				mobArray[i][1] = love.math.random(1010, 1500)
 				mobArray[i][2] = love.math.random(810, 1300)
 			elseif mobArray[i][4] == 3 then
-				mobArray[i][6] = 2--love.math.random(1, 2)
+				mobArray[i][6][1] = 2--love.math.random(1, 2)
 				mobArray[i][1] = love.math.random(1510, 2000)
 				mobArray[i][2] = love.math.random(1310, 1800)
-			end
+			end																	
 			changeBehavior = false
 			mobArray[i][11] = 0
 		end
 
-		if mobArray[i][6] == 1 then
+		if mobArray[i][6][1] == 1 then
 			mobArray[i][7] = images.chicken
-		elseif mobArray[i][6] == 2 then
+		elseif mobArray[i][6][1] == 2 then
 			mobArray[i][7] = images.parrot
 		end
 	end
@@ -54,39 +54,41 @@ end
 function mob.behavior(dt)
 
 	for i = 1, mob.amount do
-		if (math.floor((mapX)*-64) + mobArray[i][1]) < 1200 and math.floor((mapY)*-64) + mobArray[i][2] > 0 and changeBehavior == true then
-			mobArray[i][3] = love.math.random(1, 4)
-		elseif mobArray[i][11] == 2 and changeBehavior == true then
-			mobArray[i][3] = love.math.random(3, 5)
-		end
-		if changeBehavior == true then
-			mobArray[i][11] = 3
-			mobArray[i][12][4] = true
-		end
-		if mobArray[i][3] == 1 and mobArray[i][4] == 3 then --inPlayerView, follow player
-			mobArray[i][12][1] = (playerX*64)+540
-			mobArray[i][12][2] = (playerY*64)+310
-			if mobArray[i][12][1] > mobArray[i][1] then mobArray[i][1] = mobArray[i][1] + 1
-				mobArray[i][12][3] = "right" end
-			if mobArray[i][12][1] < mobArray[i][1] then mobArray[i][1] = mobArray[i][1] - 1
-				mobArray[i][12][3] = "left" end
-			if mobArray[i][12][2] > mobArray[i][2] then mobArray[i][2] = mobArray[i][2] + 1 end
-			if mobArray[i][12][2] < mobArray[i][2] then mobArray[i][2] = mobArray[i][2] - 1 end
-		elseif mobArray[i][3] == 2 then --inPlayerView, move around a wall
-		elseif mobArray[i][3] == 3 then --both, stay still
-		elseif mobArray[i][3] == 4 then --both, move to a random destination
-			if mobArray[i][12][4] == true then
-				mobArray[i][12][1] = (mobArray[i][1])+love.math.random(-500, 500)
-				mobArray[i][12][2] = (mobArray[i][2])+love.math.random(-500, 500)
-				mobArray[i][12][4] = false
+		if mobArray[i][6][2] == "mob" then
+			if (math.floor((mapX)*-64) + mobArray[i][1]) < 1200 and math.floor((mapY)*-64) + mobArray[i][2] > 0 and changeBehavior == true then
+				mobArray[i][3] = love.math.random(1, 4)
+			elseif mobArray[i][11] == 2 and changeBehavior == true then
+				mobArray[i][3] = love.math.random(3, 5)
 			end
-			if mobArray[i][12][1] > mobArray[i][1] then mobArray[i][1] = mobArray[i][1] + 1
-				mobArray[i][12][3] = "right" end
-			if mobArray[i][12][1] < mobArray[i][1] then mobArray[i][1] = mobArray[i][1] - 1
-				mobArray[i][12][3] = "left" end
-			if mobArray[i][12][2] > mobArray[i][2] then mobArray[i][2] = mobArray[i][2] + 1 end
-			if mobArray[i][12][2] < mobArray[i][2] then mobArray[i][2] = mobArray[i][2] - 1 end
-		elseif mobArray[i][3] == 5 then --notInPlayerView, move towards player view
+			if changeBehavior == true then
+				mobArray[i][11] = 3
+				mobArray[i][12][4] = true
+			end
+			if mobArray[i][3] == 1 and mobArray[i][4] == 3 then --inPlayerView, follow player
+				mobArray[i][12][1] = (playerX*64)+540
+				mobArray[i][12][2] = (playerY*64)+310
+				if mobArray[i][12][1] > mobArray[i][1] then mobArray[i][1] = mobArray[i][1] + 1
+					mobArray[i][12][3] = "right" end
+				if mobArray[i][12][1] < mobArray[i][1] then mobArray[i][1] = mobArray[i][1] - 1
+					mobArray[i][12][3] = "left" end
+				if mobArray[i][12][2] > mobArray[i][2] then mobArray[i][2] = mobArray[i][2] + 1 end
+				if mobArray[i][12][2] < mobArray[i][2] then mobArray[i][2] = mobArray[i][2] - 1 end
+			elseif mobArray[i][3] == 2 then --inPlayerView, move around a wall
+			elseif mobArray[i][3] == 3 then --both, stay still
+			elseif mobArray[i][3] == 4 then --both, move to a random destination
+				if mobArray[i][12][4] == true then
+					mobArray[i][12][1] = (mobArray[i][1])+love.math.random(-500, 500)
+					mobArray[i][12][2] = (mobArray[i][2])+love.math.random(-500, 500)
+					mobArray[i][12][4] = false
+				end
+				if mobArray[i][12][1] > mobArray[i][1] then mobArray[i][1] = mobArray[i][1] + 1
+					mobArray[i][12][3] = "right" end
+				if mobArray[i][12][1] < mobArray[i][1] then mobArray[i][1] = mobArray[i][1] - 1
+					mobArray[i][12][3] = "left" end
+				if mobArray[i][12][2] > mobArray[i][2] then mobArray[i][2] = mobArray[i][2] + 1 end
+				if mobArray[i][12][2] < mobArray[i][2] then mobArray[i][2] = mobArray[i][2] - 1 end
+			elseif mobArray[i][3] == 5 then --notInPlayerView, move towards player view
+			end
 		end
 	end
 
@@ -108,6 +110,10 @@ function mob.draw()
 		elseif mobArray[i][12][3] == "right" then
 			mobArray[i][10][1] = -3
 			mobArray[i][10][3] = 100
+		end
+
+		if mobArray[i][6][2] == "npc" then
+			love.graphics.print(--TODO)
 		end
 
 		love.graphics.draw(mobArray[i][7], (math.floor((mapX)*-64) + mobArray[i][1]) + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])
