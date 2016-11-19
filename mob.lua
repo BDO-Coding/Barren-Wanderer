@@ -31,9 +31,13 @@ function mob.update(dt)
 			mobArray[i][12][5] = true
 		else
 			mobArray[i][12][5] = false
+			mobArray[i][8] = mobArray[i][8] + 0.01
 		end
 		if mobArray[i][8] <= 0 then
 			mob.createMob(i)
+		end
+		if mobArray[i][8] <= 10 then
+			mobArray[i][3] = 5
 		end
 	end
 
@@ -135,17 +139,19 @@ function mob.behavior(dt)
 				if mobArray[i][12][2] > mobArray[i][2] then mobArray[i][2] = mobArray[i][2] + 1 end
 				if mobArray[i][12][2] < mobArray[i][2] then mobArray[i][2] = mobArray[i][2] - 1 end
 			elseif mobArray[i][3] == 5 then --run away from player
-				if mobArray[i][12][4] == true then
-					mobArray[i][12][1] = (playerX*64)+love.math.random(-1000, 1000)
-					mobArray[i][12][2] = (playerY*64)+love.math.random(-1000, 1000)
-					mobArray[i][12][4] = false
+				if mobArray[i][4] == 1 or mobArray[i][8] <= 10 then
+					if mobArray[i][12][4] == true then
+						mobArray[i][12][1] = (playerX*64)+love.math.random(-1000, 1000)
+						mobArray[i][12][2] = (playerY*64)+love.math.random(-1000, 1000)
+						mobArray[i][12][4] = false
+					end
+					if mobArray[i][12][1] > mobArray[i][1] then mobArray[i][1] = mobArray[i][1] + 1
+						mobArray[i][12][3] = "right" end
+					if mobArray[i][12][1] < mobArray[i][1] then mobArray[i][1] = mobArray[i][1] - 1
+						mobArray[i][12][3] = "left" end
+					if mobArray[i][12][2] > mobArray[i][2] then mobArray[i][2] = mobArray[i][2] + 1 end
+					if mobArray[i][12][2] < mobArray[i][2] then mobArray[i][2] = mobArray[i][2] - 1 end
 				end
-				if mobArray[i][12][1] > mobArray[i][1] then mobArray[i][1] = mobArray[i][1] + 1
-					mobArray[i][12][3] = "right" end
-				if mobArray[i][12][1] < mobArray[i][1] then mobArray[i][1] = mobArray[i][1] - 1
-					mobArray[i][12][3] = "left" end
-				if mobArray[i][12][2] > mobArray[i][2] then mobArray[i][2] = mobArray[i][2] + 1 end
-				if mobArray[i][12][2] < mobArray[i][2] then mobArray[i][2] = mobArray[i][2] - 1 end
 			end
 		end
 	end
@@ -185,7 +191,7 @@ function mob.draw()
             mobArray[i][8] = mobArray[i][8] - 0.1
             if mobArray[i][4] == 1 then
             	mobArray[i][3] = 5
-            elseif mobArray[i][4] == 3 then
+            elseif mobArray[i][4] == 3 and mobArray[i][8] > 10 then
             	mobArray[i][1] = mobArray[i][1] + love.math.random(-5, 5)
             	mobArray[i][2] = mobArray[i][2] + love.math.random(-3, 3)
             	mobArray[i][3] = 1
