@@ -9,7 +9,6 @@ function player.load()
     playerSprint = 2
     playerDefaultSpeed = 0.002
     playerDefaultSpeedDiagonal = 0.001
-    playerDamage = false
 	doOnce = true
 	playerSizeX = 2
 	playerSizeY = 2
@@ -41,6 +40,7 @@ function player.load()
 
     maxHealth = 100
     health = 100
+    oldHealth = 100
     healthRegen = 0.01
 
     maxMana = 0
@@ -57,6 +57,8 @@ function player.load()
 end
 
 function player.update(dt)
+
+    oldHealth = health
 
     if love.keyboard.isDown("i") then
         inventoryMode = true
@@ -125,6 +127,12 @@ function player.update(dt)
 end
 
 function player.draw()
+
+    if oldHealth > health then
+        playerDamage = true
+    else
+        playerDamage = false
+    end
 
     if health <= 0 then
         love.graphics.setColor(255, 0, 0)

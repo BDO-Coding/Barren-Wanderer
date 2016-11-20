@@ -3,6 +3,7 @@ require "images"
 require "conversation"
 require "player"
 require "item"
+require "crafting"
 
 function mob.load()
 
@@ -10,6 +11,8 @@ function mob.load()
 	behaviorTimer = 0
 	changeBehavior = true
 	createMobs = true
+	EPressed = false
+	waitBag = 0
 
 	mobArray = {{}}
 	mobArray[1] = {200--[[X position 1]], 200--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"npc"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Gary", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]]}
@@ -18,7 +21,7 @@ function mob.load()
 		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {itemIndex[2]}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]]}
 	end
 
-	dropArray = {{}}--[[1 = Drops, 2 = Timer, 4 = X & Y]]
+	dropArray = {{}}--[[1 = Drops, 2 = Timer, 4 = X & Y, 5 = inBag]]
 	dropsActive = {}
 
 	--[[Temperament (4) 1 is passive
@@ -45,12 +48,10 @@ function mob.update(dt)
 			mobArray[i][12][5] = true
 			if mobArray[i][4] == 3 then
 				health = health - mobArray[i][8][2]
-				playerDamage = true
 			end
 		else
 			mobArray[i][12][5] = false
 			mobArray[i][8][1] = mobArray[i][8][1] + 0.01
-			playerDamage = false
 		end
 		if contains(dropsActive, i) == true then
 			dropArray[i][2] = dropArray[i][2] - dt
@@ -59,7 +60,7 @@ function mob.update(dt)
 			end
 		end
 		if mobArray[i][8][1] <= 0 then
-			dropArray[i] = {mobArray[i][9], 20, {mobArray[i][1] + 35, mobArray[i][2] + 50}}
+			dropArray[i] = {mobArray[i][9], 20, {mobArray[i][1] + 35, mobArray[i][2] + 50}, false}
 			dropsActive[i] = i
 			mob.createMob(i)
 		end
@@ -138,15 +139,28 @@ function mob.drops()
 	for i = 1, mob.amount do
 		if contains(dropsActive, i) == true then
 			love.graphics.setColor(255, 255, 255)
-			print((playerY*64)+240 .. " " .. math.floor((mapX)*-64) + dropArray[i][3][1])
 			love.graphics.draw(images.bag, math.floor((mapX)*-64) + dropArray[i][3][1], math.floor((mapY)*-64) + dropArray[i][3][2])
-			if (playerX*64)+380 > math.floor((mapX)*-64) + dropArray[i][3][1] and (playerX*64)+240 < math.floor((mapX)*-64) + dropArray[i][3][1] and (playerY*64)+320 > math.floor((mapY)*-64) + dropArray[i][3][2] and (playerY*64)+280 < math.floor((mapY)*-64) + dropArray[i][3][2] then 
+			if playerScreenX > math.floor((mapX)*-64) + dropArray[i][3][1] - 30 and playerScreenX < math.floor((mapX)*-64) + dropArray[i][3][1] + 30 and playerScreenY > math.floor((mapY)*-64) + dropArray[i][3][2] - 30 and playerScreenY < math.floor((mapY)*-64) + dropArray[i][3][2] + 30 then 
 				love.graphics.setColor(30, 30, 30)
-				if love.mouse.isDown(1) then
-					love.graphics.print("You have the items!", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
-				else
-					love.graphics.print("Click to open", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
+				if EPressed == true then
+					dropArray[i][5] = not dropArray[i][5]
+					EPressed = false
 				end
+				if waitBag > 0 then
+					waitBag = waitBag - 1
+				end
+				if love.keyboard.isDown("e") and waitBag == 0 then
+					EPressed = true
+					waitBag = 20
+				else
+					love.graphics.print("Press 'e' to open", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
+				end
+				if dropArray[i][5] == true then
+					love.graphics.draw(images.crafting,350,50,0,1,1)
+					inCrafting = false
+				end
+			elseif dropArray[i][5] == true then
+				dropArray[i][5] = false
 			end
 		end
 	end
