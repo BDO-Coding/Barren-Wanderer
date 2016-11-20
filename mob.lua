@@ -137,8 +137,10 @@ function mob.drops()
 
 	for i = 1, mob.amount do
 		if contains(dropsActive, i) == true then
+			love.graphics.setColor(255, 255, 255)
+			print((playerY*64)+240 .. " " .. math.floor((mapX)*-64) + dropArray[i][3][1])
 			love.graphics.draw(images.bag, math.floor((mapX)*-64) + dropArray[i][3][1], math.floor((mapY)*-64) + dropArray[i][3][2])
-			if love.mouse.getX() > math.floor((mapX)*-64) + dropArray[i][3][1] - 30 and love.mouse.getX() < math.floor((mapX)*-64) + dropArray[i][3][1] + 30 and love.mouse.getY() > math.floor((mapY)*-64) + dropArray[i][3][2] - 30 and love.mouse.getY() < math.floor((mapY)*-64) + dropArray[i][3][2] + 30 then
+			if (playerX*64)+380 > math.floor((mapX)*-64) + dropArray[i][3][1] and (playerX*64)+240 < math.floor((mapX)*-64) + dropArray[i][3][1] and (playerY*64)+320 > math.floor((mapY)*-64) + dropArray[i][3][2] and (playerY*64)+280 < math.floor((mapY)*-64) + dropArray[i][3][2] then 
 				love.graphics.setColor(30, 30, 30)
 				if love.mouse.isDown(1) then
 					love.graphics.print("You have the items!", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
