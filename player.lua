@@ -316,6 +316,8 @@ function player.draw()
         love.graphics.draw(currentWeapon[4], weaponXLoc+weaponXOffset, weaponYLoc+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
     end
 
+    love.graphics.setColor(255, 255, 255)
+
 end
 
 function UPDATE_PLAYER(dt)
