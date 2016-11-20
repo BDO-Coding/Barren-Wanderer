@@ -70,13 +70,14 @@ function love.draw()
 
 	if ingame == true then
 	    DRAW_SCROLL()
-	    DRAW_QUEST()
-	    DRAW_CRAFTING()
 	    DRAW_ITEM()
 	    DRAW_HOTBAR()
 	    DRAW_CONVERSATION()
 	    DRAW_MOB()
 	    DRAW_PLAYER()
+	    DRAW_CRAFTING()
+	    DRAW_QUEST()
+
 	end
 	
 	DRAW_MENU()

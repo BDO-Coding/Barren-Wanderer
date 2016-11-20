@@ -30,7 +30,7 @@ function quest.draw()
 	    love.graphics.setColor(255, 0, 0)
 		love.graphics.print("You have achieved:  '"..questIndex[printID][1].."'", 400, 0,0,2,2)
 	    love.graphics.setColor(255, 255, 255)
-		love.graphics.print("You have recieved: "..questIndex[printID][5].." coins and "..questIndex[printID][7].." "..item.getItemName(questIndex[printID][6]).."s!",400, 100,0,1.5,1.5)
+		love.graphics.print("You have recieved: "..questIndex[printID][5].." coins and "..questIndex[printID][7].." "..item.getItemName(questIndex[printID][6]).."s!",400, 50,0,1.5,1.5)
 		printWait = printWait - 0.5
 	end
 
