@@ -86,7 +86,7 @@ function mob.createMobs()
 				mobArray[i][6][1] = 2--love.math.random(1, 2)
 				mobArray[i][1] = love.math.random(1510, 2000)
 				mobArray[i][2] = love.math.random(1310, 1800)
-			end											
+			end
 			changeBehavior = false
 			if mobArray[i][6][1] == 1 then
 				mobArray[i][7] = images.chicken
@@ -121,14 +121,32 @@ function mob.createMob(i)
 	end
 	if mobArray[i][6][1] == 1 then
 		mobArray[i][7] = images.chicken
-		mobArray[i][8][1] = 30
-		mobArray[i][8][2] = 0.02
+		mobArray[i][8][1] = 5
+		mobArray[i][8][2] = 0.01
 		mobArray[i][11][1] = "Chicken"
 	elseif mobArray[i][6][1] == 2 then
 		mobArray[i][7] = images.parrot
-		mobArray[i][8][1] = 30
-		mobArray[i][8][2] = 0.1
+		mobArray[i][8][1] = 10
+		mobArray[i][8][2] = 0.02
 		mobArray[i][11][1] = "Parrot"
+	end
+
+end
+
+function mob.drops()
+
+	for i = 1, mob.amount do
+		if contains(dropsActive, i) == true then
+			love.graphics.draw(images.bag, math.floor((mapX)*-64) + dropArray[i][3][1], math.floor((mapY)*-64) + dropArray[i][3][2])
+			if love.mouse.getX() > math.floor((mapX)*-64) + dropArray[i][3][1] - 30 and love.mouse.getX() < math.floor((mapX)*-64) + dropArray[i][3][1] + 30 and love.mouse.getY() > math.floor((mapY)*-64) + dropArray[i][3][2] - 30 and love.mouse.getY() < math.floor((mapY)*-64) + dropArray[i][3][2] + 30 then
+				love.graphics.setColor(30, 30, 30)
+				if love.mouse.isDown(1) then
+					love.graphics.print("You have the items!", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
+				else
+					love.graphics.print("Click to open", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
+				end
+			end
+		end
 	end
 
 end
@@ -200,7 +218,7 @@ function mob.NPC()
 
 	for i = 1, mob.amount do
 		if mobArray[i][12][5] == true then
-
+			
 		end
 	end
 
@@ -244,10 +262,6 @@ function mob.draw()
 		end
 
 		love.graphics.setColor(255, 255, 255)
-
-		if contains(dropsActive, i) == true then
-	        love.graphics.draw(images.bag, math.floor((mapX)*-64) + dropArray[i][3][1], math.floor((mapY)*-64) + dropArray[i][3][2])
-	    end
 	end
 
 end
@@ -269,5 +283,8 @@ end
 function DRAW_MOB()
 
 	mob.draw()
+	if inmenu == false then
+		mob.drops()
+	end
 
 end
