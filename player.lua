@@ -32,10 +32,8 @@ function player.load()
     weaponYOffset = 10
     weaponRotation = 0
     weaponXSize = 2
-    currentWeapon = images.woodenSword
     imageUp = false
     runWeaponUpdate = true
-    weaponType = "melee"
 
     maxStamina = 100
     stamina = 100
@@ -77,7 +75,7 @@ function player.update(dt)
         mana = mana + manaRegen
     end
 
-    if love.mouse.isDown(1) and inmenu == false and weaponType == "melee" then
+    if love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" then
         weaponRotation = weaponRotation + 0.09817477
         weaponXOffset = 588
         weaponYOffset = 377
@@ -303,11 +301,11 @@ function player.draw()
     end
 
     if imageUp == true and not love.mouse.isDown(1) then
-        love.graphics.draw(currentWeapon, playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
+        love.graphics.draw(currentWeapon[4], playerScreenX+weaponXOffset, playerScreenY+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
         love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
     else
         love.graphics.draw(playerImage, playerScreenX, playerScreenY, 0, playerSizeX, playerSizeY)
-        love.graphics.draw(currentWeapon, weaponXLoc+weaponXOffset, weaponYLoc+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
+        love.graphics.draw(currentWeapon[4], weaponXLoc+weaponXOffset, weaponYLoc+weaponYOffset, weaponRotation, weaponXSize, playerSizeY)
     end
 
 end

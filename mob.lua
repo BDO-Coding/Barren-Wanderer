@@ -1,6 +1,8 @@
 mob={}
+require "images"
 require "conversation"
 require "player"
+require "item"
 
 function mob.load()
 
@@ -13,12 +15,24 @@ function mob.load()
 	mobArray[1] = {200--[[X position 1]], 200--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"npc"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Gary", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]]}
 
 	for i = 1, mob.amount do
-		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]]}
+		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {itemIndex[2]}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]]}
 	end
+
+	dropArray = {{}}--[[1 = Drops, 2 = Timer, 4 = X & Y]]
+	dropsActive = {}
 
 	--[[Temperament (4) 1 is passive
 		Temperament (4) 2 is neutral
 		Temperament (4) 3 is aggressive]]
+
+end
+
+local function contains(array, value)
+
+	if array[value] == value then 
+		return true
+	end
+    return false
 
 end
 
@@ -38,10 +52,18 @@ function mob.update(dt)
 			mobArray[i][8][1] = mobArray[i][8][1] + 0.01
 			playerDamage = false
 		end
+		if contains(dropsActive, i) == true then
+			dropArray[i][2] = dropArray[i][2] - dt
+			if dropArray[i][2] <= 0 then
+				dropsActive[i] = 0
+			end
+		end
 		if mobArray[i][8][1] <= 0 then
+			dropArray[i] = {mobArray[i][9], 20, {mobArray[i][1] + 35, mobArray[i][2] + 50}}
+			dropsActive[i] = i
 			mob.createMob(i)
 		end
-		if mobArray[i][8][1] <= 10 then
+		if mobArray[i][8][1] <= mobArray[i][8][1]/5 then
 			mobArray[i][3] = 5
 		end
 	end
@@ -68,12 +90,12 @@ function mob.createMobs()
 			changeBehavior = false
 			if mobArray[i][6][1] == 1 then
 				mobArray[i][7] = images.chicken
-				mobArray[i][8][1] = 30
+				mobArray[i][8][1] = 5
 				mobArray[i][8][2] = 0.01
 				mobArray[i][11][1] = "Chicken"
 			elseif mobArray[i][6][1] == 2 then
 				mobArray[i][7] = images.parrot
-				mobArray[i][8][1] = 30
+				mobArray[i][8][1] = 10
 				mobArray[i][8][2] = 0.02
 				mobArray[i][11][1] = "Parrot"
 			end
@@ -82,31 +104,31 @@ function mob.createMobs()
 
 end
 
-function mob.createMob(mobID)
+function mob.createMob(i)
 
-	if mobArray[mobID][4] == 1 then
-		mobArray[mobID][6][1] = 1--love.math.random(1, 2)
-		mobArray[mobID][1] = love.math.random(600, 1000)
-		mobArray[mobID][2] = love.math.random(400, 800)
-	elseif mobArray[mobID][4] == 2 then
-		mobArray[mobID][6][1] = love.math.random(1, 2)
-		mobArray[mobID][1] = love.math.random(1010, 1500)
-		mobArray[mobID][2] = love.math.random(810, 1300)
-	elseif mobArray[mobID][4] == 3 then
-		mobArray[mobID][6][1] = 2--love.math.random(1, 2)
-		mobArray[mobID][1] = love.math.random(1510, 2000)
-		mobArray[mobID][2] = love.math.random(1310, 1800)
+	if mobArray[i][4] == 1 then
+		mobArray[i][6][1] = 1--love.math.random(1, 2)
+		mobArray[i][1] = love.math.random(600, 1000)
+		mobArray[i][2] = love.math.random(400, 800)
+	elseif mobArray[i][4] == 2 then
+		mobArray[i][6][1] = love.math.random(1, 2)
+		mobArray[i][1] = love.math.random(1010, 1500)
+		mobArray[i][2] = love.math.random(810, 1300)
+	elseif mobArray[i][4] == 3 then
+		mobArray[i][6][1] = 2--love.math.random(1, 2)
+		mobArray[i][1] = love.math.random(1510, 2000)
+		mobArray[i][2] = love.math.random(1310, 1800)
 	end
-	if mobArray[mobID][6][1] == 1 then
-		mobArray[mobID][7] = images.chicken
-		mobArray[mobID][8][1] = 30
-		mobArray[mobID][8][2] = 0.02
-		mobArray[mobID][11][1] = "Chicken"
-	elseif mobArray[mobID][6][1] == 2 then
-		mobArray[mobID][7] = images.parrot
-		mobArray[mobID][8][1] = 30
-		mobArray[mobID][8][2] = 0.1
-		mobArray[mobID][11][1] = "Parrot"
+	if mobArray[i][6][1] == 1 then
+		mobArray[i][7] = images.chicken
+		mobArray[i][8][1] = 30
+		mobArray[i][8][2] = 0.02
+		mobArray[i][11][1] = "Chicken"
+	elseif mobArray[i][6][1] == 2 then
+		mobArray[i][7] = images.parrot
+		mobArray[i][8][1] = 30
+		mobArray[i][8][2] = 0.1
+		mobArray[i][11][1] = "Parrot"
 	end
 
 end
@@ -115,7 +137,7 @@ function mob.behavior(dt)
 
 	for i = 1, mob.amount do
 		if mobArray[i][6][2] == "mob" then
-			if (math.floor((mapX)*-64) + mobArray[i][1]) < 1200 and math.floor((mapY)*-64) + mobArray[i][2] > 0 and changeBehavior == true then
+			if (math.floor((mapX)*-64) + mobArray[i][1]) < 1200 and math.floor((mapY)*-64) + mobArray[i][2] > 0 and (math.floor((mapX)*-64) + mobArray[i][1]) > 0 and math.floor((mapY)*-64) + mobArray[i][2] < 750 and changeBehavior == true then
 				mobArray[i][3] = love.math.random(1, 4)
 			elseif mobArray[i][11][2] == 2 and changeBehavior == true then
 				mobArray[i][3] = love.math.random(3, 4)
@@ -195,9 +217,9 @@ function mob.draw()
 			mobArray[i][10][3] = 100
 		end
 
-        if mobArray[i][12][5] == true and love.mouse.isDown(1) and inmenu == false and weaponType == "melee" then
+        if mobArray[i][12][5] == true and love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" then
             love.graphics.setColor(255, 0, 0)
-            mobArray[i][8][1] = mobArray[i][8][1] - 0.1
+            mobArray[i][8][1] = mobArray[i][8][1] - currentWeapon[5]
             if mobArray[i][4] == 1 then
             	mobArray[i][3] = 5
             elseif mobArray[i][4] == 3 and mobArray[i][8][1] > 10 then
@@ -222,6 +244,10 @@ function mob.draw()
 		end
 
 		love.graphics.setColor(255, 255, 255)
+
+		if contains(dropsActive, i) == true then
+	        love.graphics.draw(images.bag, math.floor((mapX)*-64) + dropArray[i][3][1], math.floor((mapY)*-64) + dropArray[i][3][2])
+	    end
 	end
 
 end
@@ -232,9 +258,11 @@ function UPDATE_MOB(dt)
 		mob.createMobs()
 		createMobs = false
 	end
-	mob.NPC()
-	mob.update(dt)
-	mob.behavior(dt)
+	if inmenu == false then
+		mob.NPC()
+		mob.update(dt)
+		mob.behavior(dt)
+	end
 
 end
 
