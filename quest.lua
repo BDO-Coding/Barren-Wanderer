@@ -17,6 +17,8 @@ function quest.load ()
 
 
 	quest.getQuest(4)
+	quest.getQuest(3)
+
 end
 
 function quest.draw()

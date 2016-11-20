@@ -124,6 +124,12 @@ function round(num, idp)
 end
 
 function addItem(id,amount,x,y)
+	for i = 1, item.Stackamount do
+		if itemArray[i][3] == x and itemArray[i][4] == y then
+			x = x+1
+			 y = y+1
+		end
+	end
 	item.amount = item.amount+amount
 	item.Stackamount = item.Stackamount + 1
 	itemArray[item.Stackamount] = {id,amount,x,y}
