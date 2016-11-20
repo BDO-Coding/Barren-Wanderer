@@ -9,6 +9,7 @@ require "save"
 require "utensil"
 require "quest"
 require "conversation"
+require "crafting"
 
 function love.load()
 	
@@ -33,6 +34,7 @@ function love.update(dt)
         save.load()
 		scroll.load()
 		quest.load()
+		crafting.load()
 		player.load()
 		item.load()
         mob.load()
@@ -48,6 +50,7 @@ function love.update(dt)
 	    UPDATE_SCROLL(dt)
 	    UPDATE_UTENSIL(dt)
 	    UPDATE_QUEST(dt)
+	    UPDATE_CRAFTING(dt)
 	    UPDATE_PLAYER(dt)
 	    UPDATE_ITEM(dt)
 	    UPDATE_MOB(dt)
@@ -68,6 +71,7 @@ function love.draw()
 	if ingame == true then
 	    DRAW_SCROLL()
 	    DRAW_QUEST()
+	    DRAW_CRAFITNG()
 	    DRAW_ITEM()
 	    DRAW_HOTBAR()
 	    DRAW_CONVERSATION()

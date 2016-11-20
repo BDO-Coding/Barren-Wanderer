@@ -1,29 +1,26 @@
-utensil={}
+crafting={}
 require "images"
 
-function utensil.load ()
-
-	utensilIndex = {{}}
-	utensilIndex[1] = {"Name","Type",false--[[uses right hand]],true--[[uses left hand]]}
+function crafting.load ()
 
 end
 
-function utensil.draw()
+function crafting.draw()
 
 end
 
-function utensil.update(dt)
+function crafting.update(dt)
 
 end
 
-function DRAW_UTENSIL()
+function DRAW_CRAFTING()
 
-	utensil.draw()
+	crafting.draw()
 
 end
 
-function UPDATE_UTENSIL(dt)
+function UPDATE_CRAFTING(dt)
 
-	utensil.update(dt)
+	crafting.update(dt)
 
 end
