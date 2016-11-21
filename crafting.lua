@@ -15,6 +15,9 @@ function crafting.load ()
 	recipeIndex[4] = {true,false,4,1,2}
 	recipeIndex[4][6] = {4,10}
 
+	recipeIndex[5] = {true,false,5,1,4}
+	recipeIndex[5][6] = {2,2,4,1}
+
 
 
 	inCrafting = false
