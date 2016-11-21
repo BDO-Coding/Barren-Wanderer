@@ -27,7 +27,7 @@ function crafting.load ()
 
 	keyPressed = false
 
-	draw2 = false
+		draw2 = false
 
 	mouseX = 0
 	mouseY = 0
