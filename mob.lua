@@ -156,7 +156,10 @@ function mob.drops()
 					love.graphics.print("Press 'e' to open", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
 				end
 				if dropArray[i][5] == true then
+					love.graphics.setColor(255,255,255)
 					love.graphics.draw(images.crafting,350,50,0,1,1)
+					love.graphics.print("Drops:",437,110)
+					love.graphics.print("Stats:",648,110)
 					inCrafting = false
 				end
 			elseif dropArray[i][5] == true then
