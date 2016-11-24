@@ -23,7 +23,7 @@ function crafting.load ()
 	inCrafting = false
 	wait = 0
 
-	lineSpacing = 15
+	lineSpacing = 30
 
 	keyPressed = false
 
@@ -61,7 +61,9 @@ function crafting.draw()
 				else
 					love.graphics.setColor(255,255,255)
 				end
-				love.graphics.print(item.getItemName(recipeIndex[i][3]),360, 128+((lineNum-1)*lineSpacing))
+				love.graphics.print(item.getItemName(recipeIndex[i][3]),380, 128+((lineNum-1)*lineSpacing))
+					love.graphics.setColor(255,255,255)
+				love.graphics.draw(item.getItemImage(recipeIndex[i][3]),350,128+((lineNum-1)*lineSpacing),0,0.75,0.75)
 				lineNum = lineNum+1
 			end
 		end
@@ -73,6 +75,7 @@ function crafting.draw()
 		for i = 1, (recipeIndex[selectedRecipe][5])/2 do
 			ingredientNum = (i*2)-1
 			love.graphics.print(item.getItemName(recipeIndex[selectedRecipe][6][ingredientNum]).." x "..recipeIndex[selectedRecipe][6][ingredientNum+1],650,128+((lineNum-1)*lineSpacing))
+			love.graphics.draw(item.getItemImage(recipeIndex[selectedRecipe][6][ingredientNum]),600,128+((lineNum-1)*lineSpacing),0,0.75,0.75)
 			lineNum = lineNum+1
 		end
 		end
