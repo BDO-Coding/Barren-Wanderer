@@ -58,8 +58,44 @@ function love.wheelmoved(x, y)
 
 end
 
-function hotbar.update(dt)
+function hotbar.throw()
 
+	if love.keyboard.isDown("q") then
+		throw1 = true
+	else
+		if throw1 == true then
+					if hotbarArray[selectedSlot][4] > 0 then
+						item.throw(hotbar.round(playerX, 0), hotbar.round(playerY-0.5, 0),hotbarArray[selectedSlot][3])
+						hotbarArray[selectedSlot][4] = hotbarArray[selectedSlot][4] - 2
+						throw1=false
+					end
+		end
+	end
+end
+
+function hotbar.take(id,amount)
+	amount = amount / 2
+	for i = 1, slotAmount do
+		if hotbarArray[i][3] == id then
+			if hotbarArray[i][4] > amount then
+				hotbarArray[i][4] = hotbarArray[i][3] - amount
+					return true
+			else
+				if hotbarArray[i][4] == amount then
+					hotbarArray[i][4] = 0
+					hotbarArray[i][3] = 0
+					return true
+				else
+					return false
+				end
+			end
+		end
+	end
+					return false
+end
+
+function hotbar.update(dt)
+	hotbar.throw()
 	if selectedSlot > slotAmount then
 		selectedSlot = 1
 	end
@@ -74,17 +110,7 @@ function hotbar.update(dt)
 		--end
 	end
 
-	if love.keyboard.isDown("q") then
-		throw1 = true
-	else
-		if throw1 == true then
-					if hotbarArray[selectedSlot][4] > 0 then
-						item.throw(hotbar.round(playerX, 0), hotbar.round(playerY-0.5, 0),hotbarArray[selectedSlot][3])
-						hotbarArray[selectedSlot][4] = hotbarArray[selectedSlot][4] - 2
-						throw1=false
-					end
-		end
-	end
+
 
 	healthLength = (health/maxHealth)*barLength
 	staminaLength = (stamina/maxStamina)*barLength
@@ -135,7 +161,7 @@ end
 
 function hotbar.draw()
 	if works == true then
---love.graphics.draw(images.mana,100,100)
+love.graphics.draw(images.mana,100,100)
 	end
 
 	if inventoryMode == true then

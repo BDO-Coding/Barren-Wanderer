@@ -72,6 +72,8 @@ function crafting.draw()
 		ingredientNum = 1
 		lineNum = 1
 					love.graphics.setColor(255,255,255)
+					love.graphics.print("Craft",670,580)
+
 		for i = 1, (recipeIndex[selectedRecipe][5])/2 do
 			ingredientNum = (i*2)-1
 			love.graphics.print(item.getItemName(recipeIndex[selectedRecipe][6][ingredientNum]).." x "..recipeIndex[selectedRecipe][6][ingredientNum+1],650,128+((lineNum-1)*lineSpacing))
@@ -99,6 +101,16 @@ function crafting.update(dt)
 	mouseX, mouseY = love.mouse.getX(),love.mouse.getY()
 
 	if love.mouse.isDown(1) == true then
+		if inCrafting == true then
+		if unselected == false then
+			if love.mouse.getX() > 590 and love.mouse.getX() < 740  and love.mouse.getY() > 550 and love.mouse.getY() < 580 then
+			inCrafting = false
+			item.grab(0,0,"specificGive",recipeIndex[selectedRecipe][3],1)
+			hotbar.take(2,1)
+	end
+		end
+	end
+
 		lineNum = 0
 		for i = 2, #recipeIndex do
 			if recipeIndex[i][1] == true then

@@ -30,7 +30,7 @@ function images.load()
 	images.stone = love.graphics.newImage("images/items/stone.png")
 	images.stick = love.graphics.newImage("images/items/stick.png")
 	images.log = love.graphics.newImage("images/items/log.png")
-	images.log = love.graphics.newImage("images/items/copperBar.png")
+	--images.log = love.graphics.newImage("images/items/copperBar.png")
 
 	--Mobs
 	images.chicken = love.graphics.newImage("images/entities/mobs/chicken.png")
