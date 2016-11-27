@@ -36,6 +36,10 @@ function images.load()
 	--Mobs
 	images.chicken = love.graphics.newImage("images/entities/mobs/chicken.png")
 	images.parrot = love.graphics.newImage("images/entities/mobs/parrot.png")
+	images.worm1 = love.graphics.newImage("images/entities/mobs/worm1.png")
+	images.worm2 = love.graphics.newImage("images/entities/mobs/worm2.png")
+	images.evilworm1 = love.graphics.newImage("images/entities/mobs/evilWorm1.png")
+	images.evilworm2 = love.graphics.newImage("images/entities/mobs/evilWorm2.png")
 
 	--GUI
 	images.crafting = love.graphics.newImage("images/GUI/craftingGUI.png")

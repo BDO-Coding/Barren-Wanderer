@@ -69,7 +69,7 @@ function player.update(dt)
         inventoryMode = false
     end
 
-    if health < maxHealth and playerDamage == false then
+    if health < maxHealth and playerDamage == false and inmenu == false then
         health = health + healthRegen
     end
 

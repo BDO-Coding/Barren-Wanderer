@@ -13,12 +13,13 @@ function mob.load()
 	createMobs = true
 	EPressed = false
 	waitBag = 0
+	animationTimer = 5
 
 	mobArray = {{}}
-	mobArray[1] = {200--[[X position 1]], 200--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"npc"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Gary", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]]}
+	mobArray[1] = {200--[[X position 1]], 200--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"npc"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Gary", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]], {false, images.chicken, true, images.chicken}--[[Animation Array 13]], {{1,true}}--[[Timers 14]]}
 
 	for i = 1, mob.amount do
-		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {itemIndex[2]}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]]}
+		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {itemIndex[2]}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]], {false, images.chicken, true, images.chicken}--[[Animation Array 13]], {{1,true}}--[[Timers 14]]}
 	end
 
 	dropArray = {{}}--[[1 = Drops, 2 = Timer, 4 = X & Y, 5 = inBag]]
@@ -44,6 +45,7 @@ function mob.update(dt)
 	behaviorTimer = behaviorTimer + dt
 
 	for i = 1, mob.amount do
+		mobArray[i][14][1] = mobArray[i][14][1] - dt
 		if mobArray[i][1] > (playerX*64)+510 and mobArray[i][1] < (playerX*64)+570 and mobArray[i][2] > (playerY*64)+280 and mobArray[i][2] < (playerY*64)+330 then
 			mobArray[i][12][5] = true
 			if mobArray[i][4] == 3 then
@@ -76,29 +78,44 @@ function mob.createMobs()
 	for i = 1, mob.amount do
 		if mobArray[i][6][2] == "mob" then
 			if mobArray[i][4] == 1 then
-				mobArray[i][6][1] = 1--love.math.random(1, 2)
+				mobArray[i][6][1] = love.math.random(1, 2)
 				mobArray[i][1] = love.math.random(600, 1000)
 				mobArray[i][2] = love.math.random(400, 800)
 			elseif mobArray[i][4] == 2 then
-				mobArray[i][6][1] = love.math.random(1, 2)
+				mobArray[i][6][1] = love.math.random(3, 3)
 				mobArray[i][1] = love.math.random(1010, 1500)
 				mobArray[i][2] = love.math.random(810, 1300)
 			elseif mobArray[i][4] == 3 then
-				mobArray[i][6][1] = 2--love.math.random(1, 2)
+				mobArray[i][6][1] = love.math.random(4, 4)
 				mobArray[i][1] = love.math.random(1510, 2000)
 				mobArray[i][2] = love.math.random(1310, 1800)
 			end
-			changeBehavior = false
 			if mobArray[i][6][1] == 1 then
-				mobArray[i][7] = images.chicken
+				mobArray[i][13][4] = images.chicken
 				mobArray[i][8][1] = 5
 				mobArray[i][8][2] = 0.01
 				mobArray[i][11][1] = "Chicken"
+				mobArray[i][13][1] = false
 			elseif mobArray[i][6][1] == 2 then
-				mobArray[i][7] = images.parrot
+				mobArray[i][13][4] = images.worm1
+				mobArray[i][8][1] = 2
+				mobArray[i][8][2] = 0
+				mobArray[i][11][1] = "Worm"
+				mobArray[i][13][1] = true
+				mobArray[i][13][2] = images.worm2
+			elseif mobArray[i][6][1] == 3 then
+				mobArray[i][13][4] = images.parrot
 				mobArray[i][8][1] = 10
 				mobArray[i][8][2] = 0.02
 				mobArray[i][11][1] = "Parrot"
+				mobArray[i][13][1] = false
+			elseif mobArray[i][6][1] == 4 then
+				mobArray[i][13][4] = images.evilworm1
+				mobArray[i][8][1] = 3
+				mobArray[i][8][2] = 0.05
+				mobArray[i][11][1] = "Evil Worm"
+				mobArray[i][13][1] = true
+				mobArray[i][13][2] = images.evilworm2
 			end
 		end
 	end
@@ -108,15 +125,15 @@ end
 function mob.createMob(i)
 
 	if mobArray[i][4] == 1 then
-		mobArray[i][6][1] = 1--love.math.random(1, 2)
+		mobArray[i][6][1] = love.math.random(1, 2)
 		mobArray[i][1] = love.math.random(600, 1000)
 		mobArray[i][2] = love.math.random(400, 800)
 	elseif mobArray[i][4] == 2 then
-		mobArray[i][6][1] = love.math.random(1, 2)
+		mobArray[i][6][1] = love.math.random(3, 3)
 		mobArray[i][1] = love.math.random(1010, 1500)
 		mobArray[i][2] = love.math.random(810, 1300)
 	elseif mobArray[i][4] == 3 then
-		mobArray[i][6][1] = 2--love.math.random(1, 2)
+		mobArray[i][6][1] = love.math.random(4, 4)
 		mobArray[i][1] = love.math.random(1510, 2000)
 		mobArray[i][2] = love.math.random(1310, 1800)
 	end
@@ -125,11 +142,27 @@ function mob.createMob(i)
 		mobArray[i][8][1] = 5
 		mobArray[i][8][2] = 0.01
 		mobArray[i][11][1] = "Chicken"
+		mobArray[i][13][1] = false
 	elseif mobArray[i][6][1] == 2 then
+		mobArray[i][7] = images.worm1
+		mobArray[i][8][1] = 2
+		mobArray[i][8][2] = 0
+		mobArray[i][11][1] = "Worm"
+		mobArray[i][13][1] = true
+		mobArray[i][13][2] = images.worm2
+	elseif mobArray[i][6][1] == 3 then
 		mobArray[i][7] = images.parrot
 		mobArray[i][8][1] = 10
 		mobArray[i][8][2] = 0.02
 		mobArray[i][11][1] = "Parrot"
+		mobArray[i][13][1] = false
+	elseif mobArray[i][6][1] == 4 then
+		mobArray[i][7] = images.evilworm1
+		mobArray[i][8][1] = 3
+		mobArray[i][8][2] = 0.05
+		mobArray[i][11][1] = "Evil Worm"
+		mobArray[i][13][1] = true
+		mobArray[i][13][2] = images.evilworm2
 	end
 
 end
@@ -273,7 +306,26 @@ function mob.draw()
             love.graphics.setColor(255, 255, 255)
         end
 
-		love.graphics.draw(mobArray[i][7], math.floor((mapX)*-64) + mobArray[i][1] + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])
+        if mobArray[i][14][1] <= 0 then
+        	mobArray[i][14][1] = 1
+        end
+
+        if mobArray[i][13][1] == true and mobArray[i][14][1] <= 0.1 then
+        	if mobArray[i][3] ~= 3 then
+	        	mobArray[i][13][3] = not mobArray[i][13][3]
+		        if mobArray[i][13][3] == true then
+		        	mobArray[i][7] = mobArray[i][13][4]
+		        else
+		        	mobArray[i][7] = mobArray[i][13][2]
+		        end
+		    end
+	    end
+
+        if mobArray[i][13][1] == false then
+			love.graphics.draw(mobArray[i][7], math.floor((mapX)*-64) + mobArray[i][1] + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])
+		elseif mobArray[i][3] ~= 3 then
+			love.graphics.draw(mobArray[i][7], math.floor((mapX)*-64) + mobArray[i][1] + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])
+		end
 
 		if mobArray[i][6][2] == "npc" then
 			love.graphics.setColor(30, 30, 30)
