@@ -44,7 +44,11 @@ function item.draw()
 	end
 	if item.Stackamount > 0 then
 		for i = 1, item.Stackamount -1  do
-			love.graphics.draw(itemIndex[itemArray[i][1]][3],math.floor((mapX)*-64)+(itemArray[i][3]*64)+594,math.floor((mapY)*-64)+(itemArray[i][4]*64)+396, 0, 1, 1)
+			if math.floor((mapX)*-64)+(itemArray[i][3]*64)+594 > -50 and math.floor((mapX)*-64)+(itemArray[i][3]*64)+594 < 1200 then
+				if math.floor((mapY)*-64)+(itemArray[i][4]*64)+396 > -50 and math.floor((mapY)*-64)+(itemArray[i][4]*64)+396 < 750 then
+					love.graphics.draw(itemIndex[itemArray[i][1]][3],math.floor((mapX)*-64)+(itemArray[i][3]*64)+594,math.floor((mapY)*-64)+(itemArray[i][4]*64)+396, 0, 1, 1)
+				end
+			end
 		end
 	end
 

@@ -13,7 +13,7 @@ end
 
 function utensil.update(dt)
 
-	currentWeapon = utensilIndex[2]
+	currentWeapon = utensilIndex[3]
 
 end
 
