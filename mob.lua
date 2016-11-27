@@ -7,7 +7,7 @@ require "crafting"
 
 function mob.load()
 
-	mob.amount = 10000
+	mob.amount = 100
 	behaviorTimer = 0
 	changeBehavior = true
 	createMobs = true
