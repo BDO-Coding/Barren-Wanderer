@@ -10,6 +10,7 @@ require "utensil"
 require "quest"
 require "conversation"
 require "crafting"
+require "effect"
 
 function love.load()
 	
@@ -41,6 +42,7 @@ function love.update(dt)
         hotbar.load()
         utensil.load()
         conversation.load()
+   		effect.load()
 
         loadFunctions = false
 
@@ -56,6 +58,7 @@ function love.update(dt)
 	    UPDATE_MOB(dt)
 	    UPDATE_HOTBAR(dt)
 	    UPDATE_CONVERSATION(dt)
+	    UPDATE_EFFECT(dt)
 	end
 	
     UPDATE_SAVE(dt)
@@ -71,12 +74,13 @@ function love.draw()
 	if ingame == true then
 	    DRAW_SCROLL()
 	    DRAW_ITEM()
-	    DRAW_HOTBAR()
 	    DRAW_CONVERSATION()
 	    DRAW_MOB()
+	    DRAW_HOTBAR()
 	    DRAW_PLAYER()
 	    DRAW_CRAFTING()
 	    DRAW_QUEST()
+	    effect.draw()
 
 	end
 	
