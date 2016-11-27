@@ -148,6 +148,7 @@ function player.draw()
     if inmenu == false then
 
         if love.keyboard.isDown("w") and alternateW == true then
+        scroll.gotoDimension(2)
         player.noEscapeKey = false
         inventoryMode = false
             playerImage = images.playerUpAnimeA

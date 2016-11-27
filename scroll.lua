@@ -25,9 +25,16 @@ local setBiomeSize = 30
 local biomeSize
 local mapDrawn = false
 local terrainExtreemity = setBiomeSize*setTerrainExtreemness
+dimensionNum = 2
+
+currentDimension = 1
 
 
-
+function scroll.gotoDimension(num)
+    if num < dimensionNum + 1 then
+        currentDimension = num
+    end
+end
 
 function round(num, idp)
 
@@ -38,25 +45,71 @@ end
 
 function scroll.load()
 
-    scroll.setupMap()
+    worldSeedInt= 300--= tonumber(seed)
+    math.randomseed(worldSeedInt)
+
+    scroll.setupBiomes()
+    scroll.blendBiomes()
+    scroll.giveNoiseToBiomes()
     scroll.setupMapView()
     scroll.setupTileset()
 
 end
 
-function scroll.biome()
+function scroll.blendBiomes()
+    for d = 1, dimensionNum do
+     for a=2,mapWidth do
+         for b=2,mapHeight do
+            if a > terrainExtreemity + 3 then
+            if a > mapWidth - (terrainExtreemity+3) then
+                    if biomeArray[d][a][b+love.math.random(-terrainExtreemity,-1)] ~= biomeArray[d][a][b] then
+                    biomeArray[d][a][b] = biomeArray[d][a][b+love.math.random(-terrainExtreemity,-1)]
+                end
+                if biomeArray[d][a+love.math.random(-terrainExtreemity,-1)][b] ~= biomeArray[d][a][b] then
+                 biomeArray[d][a][b] = biomeArray[d][a+love.math.random(-terrainExtreemity,-1)][b]
+                end
+            else
+                if biomeArray[d][a][b+love.math.random(-terrainExtreemity,terrainExtreemity)] ~= biomeArray[d][a][b] then
+                    biomeArray[d][a][b] = biomeArray[d][a][b+love.math.random(-terrainExtreemity,terrainExtreemity)]
+                end
+                if biomeArray[d][a+love.math.random(-terrainExtreemity,terrainExtreemity)][b] ~= biomeArray[d][a][b] then
+                 biomeArray[d][a][b] = biomeArray[d][a+love.math.random(-terrainExtreemity,terrainExtreemity)][b]
+                end
+            end
+            else
+                if biomeArray[d][a][b+love.math.random(1,terrainExtreemity)] ~= biomeArray[d][a][b] then
+                    biomeArray[d][a][b] = biomeArray[d][a][b+love.math.random(1,terrainExtreemity)]
+                end
+                if biomeArray[d][a+love.math.random(1,terrainExtreemity)][b] ~= biomeArray[d][a][b] then
+                 biomeArray[d][a][b] = biomeArray[d][a+love.math.random(1,terrainExtreemity)][b]
+                end
+
+            end
+        end
+    end
+end
+end
+
+function scroll.setupBiomes()
+
+        mapWidth = 480
+    mapHeight = 480
 
     biomeArray = {}
 
+    for d = 1, dimensionNum do
+        biomeArray[d] = {}
     for x=1, 480 do
-        biomeArray[x] = {}
+        biomeArray[d][x] = {}
         for y=1, 480 do
-            biomeArray[x][y] = 3--love.math.random(0,13)
+            biomeArray[d][x][y] = 3--love.math.random(0,13)
         end
     end
+end
 
     biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
     biomeSize = mapWidth/math.sqrt(biomeNum)
+    for d = 1, dimensionNum do
     for biomeX=1,math.sqrt(biomeNum) do
         for biomeY=1,math.sqrt(biomeNum) do
             xStart =biomeX*biomeSize - biomeSize + 1
@@ -66,91 +119,61 @@ function scroll.biome()
             biomeType = math.random(0,5)
             for x=xStart, xMax do
                 for y=yStart, yMax do
-                    biomeArray[x][y] = biomeType
+                    biomeArray[d][x][y] = biomeType
                 end
             end
         end
     end
-
-     for a=2,mapWidth do
-         for b=2,mapHeight do
-            if a > terrainExtreemity + 3 then
-            if a > mapWidth - (terrainExtreemity+3) then
-                    if biomeArray[a][b+love.math.random(-terrainExtreemity,-1)] ~= biomeArray[a][b] then
-                    biomeArray[a][b] = biomeArray[a][b+love.math.random(-terrainExtreemity,-1)]
-                end
-                if biomeArray[a+love.math.random(-terrainExtreemity,-1)][b] ~= biomeArray[a][b] then
-                 biomeArray[a][b] = biomeArray[a+love.math.random(-terrainExtreemity,-1)][b]
-                end
-            else
-                if biomeArray[a][b+love.math.random(-terrainExtreemity,terrainExtreemity)] ~= biomeArray[a][b] then
-                    biomeArray[a][b] = biomeArray[a][b+love.math.random(-terrainExtreemity,terrainExtreemity)]
-                end
-                if biomeArray[a+love.math.random(-terrainExtreemity,terrainExtreemity)][b] ~= biomeArray[a][b] then
-                 biomeArray[a][b] = biomeArray[a+love.math.random(-terrainExtreemity,terrainExtreemity)][b]
-                end
-            end
-            else
-                if biomeArray[a][b+love.math.random(1,terrainExtreemity)] ~= biomeArray[a][b] then
-                    biomeArray[a][b] = biomeArray[a][b+love.math.random(1,terrainExtreemity)]
-                end
-                if biomeArray[a+love.math.random(1,terrainExtreemity)][b] ~= biomeArray[a][b] then
-                 biomeArray[a][b] = biomeArray[a+love.math.random(1,terrainExtreemity)][b]
-                end
-
-            end
-        end
-    end
+end
 
 end
 
 
-function scroll.setupMap()
+function scroll.giveNoiseToBiomes()
 
-    mapWidth = 480
-    mapHeight = 480
 
-    scroll.biome()
 
     map = {}
 
+    for d=1, dimensionNum do
+    map[d] = {}
     for x=1, mapWidth do
-      map[x] = {}
+      map[d][x] = {}
         for y=1, mapHeight do
             random = math.random(0,3)
-            if biomeArray[x][y] == 0 then --Ocean 1
-                map[x][y] = 0     
-            elseif biomeArray[x][y] == 1 then -- Grass 1
+            if biomeArray[d][x][y] == 0 then --Ocean 1
+                map[d][x][y] = 0     
+            elseif biomeArray[d][x][y] == 1 then -- Grass 1
                 if random == 0 then 
-                    map[x][y] = 8
+                    map[d][x][y] = 8
                 elseif random == 1 then
-                    map[x][y] = 9
+                    map[d][x][y] = 9
                 else
-                    map[x][y] = 10
+                    map[d][x][y] = 10
                 end
-            elseif biomeArray[x][y] == 2 then --Deset 1
+            elseif biomeArray[d][x][y] == 2 then --Deset 1
                 if random == 0 then 
-                    map[x][y] = 7
+                    map[d][x][y] = 7
                 else
-                    map[x][y] = 6
+                    map[d][x][y] = 6
                 end
-            elseif biomeArray[x][y] == 3 then --Beach 1
-                map[x][y] = 1
-            elseif biomeArray[x][y] == 4 then --Forest 1
+            elseif biomeArray[d][x][y] == 3 then --Beach 1
+                map[d][x][y] = 1
+            elseif biomeArray[d][x][y] == 4 then --Forest 1
                 if random == 0 then 
-                    map[x][y] = 8
+                    map[d][x][y] = 8
                 elseif random == 1 then
-                    map[x][y] = 9
+                    map[d][x][y] = 9
                 elseif random == 2 then
-                    map[x][y] = 11
+                    map[d][x][y] = 11
                 else
-                    map[x][y] = 12
+                    map[d][x][y] = 12
                 end
             else
                 if random == 0 then 
-                    map[x][y] = 14 --Jungle 1
+                    map[d][x][y] = 14 --Jungle 1
                 else
-                    map[x][y] = 13 --Jungle 2
+                    map[d][x][y] = 13 --Jungle 2
                 end
                 
             end
@@ -158,59 +181,10 @@ function scroll.setupMap()
         end
 
     end
+    end
 
     --Name Signiture
-    map[1][1] = 5
-    map[1][2] = 5
-    map[1][3] = 5
-    map[2][1] = 5
-    map[2][3] = 5
-    map[3][2] = 5
-
-    map[5][1] = 5
-    map[5][2] = 5
-    map[5][3] = 5
-    map[6][2] = 5
-    map[7][1] = 5
-    map[7][2] = 5
-    map[7][3] = 5
-
-    map[1][6] = 5
-    map[3][6] = 5
-    map[3][8] = 5
-    map[1][7] = 5
-    map[1][8] = 5
-    map[2][6] = 5
-    map[2][8] = 5
-    map[3][7] = 5
-
-    map[5][6] = 5
-    map[6][6] = 5
-    map[7][6] = 5
-    map[6][7] = 5
-    map[6][8] = 5
-
-    map[1][11] = 5
-    map[1][12] = 5
-    map[1][13] = 5
-    map[1][14] = 5
-    map[1][15] = 5
-    map[2][11] = 5
-    map[2][15] = 5
-    map[3][12] = 5
-    map[3][14] = 5
-    map[2][13] = 5
-
-    map[5][11] = 5
-    map[5][12] = 5
-    map[5][13] = 5
-    map[5][14] = 5
-    map[5][15] = 5
-    map[6][11] = 5
-    map[6][15] = 5
-    map[7][12] = 5
-    map[7][14] = 5
-    map[6][13] = 5
+    map[1][1][1] = 5 map[1][1][2] = 5 map[1][1][3] = 5   map[1][2][1] = 5  map[1][2][3] = 5  map[1][3][2] = 5 map[1][5][1] = 5 map[1][5][2] = 5 map[1][5][3] = 5 map[1][6][2] = 5 map[1][7][1] = 5  map[1][7][2] = 5  map[1][7][3] = 5   map[1][1][6] = 5   map[1][3][6] = 5   map[1][3][8] = 5 map[1][1][7] = 5  map[1][1][8] = 5   map[1][2][6] = 5 map[1][2][8] = 5 map[1][3][7] = 5   map[1][5][6] = 5   map[1][6][6] = 5   map[1][7][6] = 5 map[1][6][7] = 5  map[1][6][8] = 5 map[1][1][11] = 5   map[1][1][12] = 5   map[1][1][13] = 5   map[1][1][14] = 5   map[1][1][15] = 5   map[1][2][11] = 5  map[1][2][15] = 5  map[1][3][12] = 5  map[1][3][14] = 5  map[1][2][13] = 5 map[1][5][11] = 5 map[1][5][12] = 5  map[1][5][13] = 5 map[1][5][14] = 5 map[1][5][15] = 5 map[1][6][11] = 5 map[1][6][15] = 5 map[1][7][12] = 5 map[1][7][14] = 5 map[1][6][13] = 5
 
     mapDrawn = true
     
@@ -293,7 +267,7 @@ function scroll.updateTilesetBatch()
     tilesetBatch:clear()
     for x=0, tilesDisplayWidth-1 do
         for y=0, tilesDisplayHeight-1 do
-            tilesetBatch:add(tileQuads[map[x+math.floor(mapX)][y+math.floor(mapY)]],
+            tilesetBatch:add(tileQuads[map[currentDimension][x+math.floor(mapX)][y+math.floor(mapY)]],
             x*tileSize, y*tileSize)
         end
     end
@@ -322,7 +296,7 @@ end
 function mine(x,y)
 
   --  if map[x][y] == 11 then
-        map[x][y] = 10
+      --  map[x][y] = 10
     --else
     --end
 
@@ -340,12 +314,10 @@ down = love.mouse.isDown(1)
     playerY = mapY
 
     if mapDrawn == true then
-        currentBiome = biomeArray[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
-        currentTile = map[(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+        currentBiome = biomeArray[currentDimension][(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
+        currentTile = map[currentDimension][(math.floor(playerX+0.5))+9][(math.floor(playerY+0.5))+5]
     end
 
-    worldSeedInt= 3--= tonumber(seed)
-    math.randomseed(worldSeedInt)
 
     if inmenu == false and loadScreen == false and alive == true then
         if love.keyboard.isDown("w") and love.keyboard.isDown("d") then
