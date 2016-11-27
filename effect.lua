@@ -5,7 +5,7 @@ require "player"
 function effect.load ()
 
 effectIndex = {}
-effectIndex[1] = {}
+effectIndex[1] = {"Healing",images.healing}
 
 end
 

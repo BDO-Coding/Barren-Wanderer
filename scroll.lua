@@ -37,39 +37,44 @@ function round(num, idp)
 end
 
 function scroll.load()
-
+ biomeArray = {}
     scroll.setupMap()
     scroll.setupMapView()
     scroll.setupTileset()
 
 end
 
-function scroll.biome()
+function scroll.biome(mode,dimensionOrMapID)
 
-    biomeArray = {}
+    if mode == "dimensional" then
+    if dimensionOrMapID == 1 then
 
-    for x=1, 480 do
-        biomeArray[x] = {}
-        for y=1, 480 do
-            biomeArray[x][y] = 3--love.math.random(0,13)
+        for x=1, 480 do
+         biomeArray[x] = {}
+         for y=1, 480 do
+                biomeArray[x][y] = 3--love.math.random(0,13)
+         end
         end
+
+        biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
+     biomeSize = mapWidth/math.sqrt(biomeNum)
+     for biomeX=1,math.sqrt(biomeNum) do
+            for biomeY=1,math.sqrt(biomeNum) do
+             xStart =biomeX*biomeSize - biomeSize + 1
+             yStart =biomeY*biomeSize - biomeSize + 1
+             xMax = biomeX*biomeSize
+              yMax = biomeY*biomeSize
+              biomeType = math.random(0,5)
+             for x=xStart, xMax do
+                 for y=yStart, yMax do
+                     biomeArray[x][y] = biomeType
+                  end
+                end
+         end
+
+    end
     end
 
-    biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
-    biomeSize = mapWidth/math.sqrt(biomeNum)
-    for biomeX=1,math.sqrt(biomeNum) do
-        for biomeY=1,math.sqrt(biomeNum) do
-            xStart =biomeX*biomeSize - biomeSize + 1
-            yStart =biomeY*biomeSize - biomeSize + 1
-            xMax = biomeX*biomeSize
-            yMax = biomeY*biomeSize
-            biomeType = math.random(0,5)
-            for x=xStart, xMax do
-                for y=yStart, yMax do
-                    biomeArray[x][y] = biomeType
-                end
-            end
-        end
     end
 
      for a=2,mapWidth do
@@ -110,7 +115,7 @@ function scroll.setupMap()
     mapWidth = 480
     mapHeight = 480
 
-    scroll.biome()
+    scroll.biome("dimensional",1)
 
     map = {}
 
@@ -293,7 +298,7 @@ function scroll.updateTilesetBatch()
     tilesetBatch:clear()
     for x=0, tilesDisplayWidth-1 do
         for y=0, tilesDisplayHeight-1 do
-            tilesetBatch:add(tileQuads[map[x+math.floor(mapX)][y+math.floor(mapY)]],
+            tilesetBatch:add(tileQuads[map[x+math.floor(mapX)][y+math.floor(mapY)]], -- *****************
             x*tileSize, y*tileSize)
         end
     end

@@ -45,7 +45,7 @@ function mob.update(dt)
 	behaviorTimer = behaviorTimer + dt
 
 	for i = 1, mob.amount do
-		mobArray[i][14][1] = mobArray[i][14][1] - dt
+	--	mobArray[i][14][1] = mobArray[i][14][1] - dt
 		if mobArray[i][1] > (playerX*64)+510 and mobArray[i][1] < (playerX*64)+570 and mobArray[i][2] > (playerY*64)+280 and mobArray[i][2] < (playerY*64)+330 then
 			mobArray[i][12][5] = true
 			if mobArray[i][4] == 3 then
@@ -306,20 +306,20 @@ function mob.draw()
             love.graphics.setColor(255, 255, 255)
         end
 
-        if mobArray[i][14][1] <= 0 then
-        	mobArray[i][14][1] = 1
-        end
+      --  if mobArray[i][14][1] <= 0 then
+        --	mobArray[i][14][1] = 1
+       -- end
 
-        if mobArray[i][13][1] == true and mobArray[i][14][1] <= 0.1 then
-        	if mobArray[i][3] ~= 3 then
-	        	mobArray[i][13][3] = not mobArray[i][13][3]
-		        if mobArray[i][13][3] == true then
-		        	mobArray[i][7] = mobArray[i][13][4]
-		        else
-		        	mobArray[i][7] = mobArray[i][13][2]
-		        end
-		    end
-	    end
+       -- if mobArray[i][13][1] == true and mobArray[i][14][1] <= 0.1 then
+        	--if mobArray[i][3] ~= 3 then
+	        	--mobArray[i][13][3] = not mobArray[i][13][3]
+		      --  if mobArray[i][13][3] == true then
+		        --	mobArray[i][7] = mobArray[i][13][4]
+		      --  else
+		      --  	mobArray[i][7] = mobArray[i][13][2]
+		      --  end
+		   -- end
+	   -- end
 
         if mobArray[i][13][1] == false then
 			love.graphics.draw(mobArray[i][7], math.floor((mapX)*-64) + mobArray[i][1] + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])

@@ -51,6 +51,9 @@ function images.load()
 	--Other
 	images.bag = love.graphics.newImage("images/entities/bag.png")
 
+	--Particles
+	images.healing = love.graphics.newImage("images/particles/healing.png")
+
 end
 
 function UPDATE_IMAGES(dt)
