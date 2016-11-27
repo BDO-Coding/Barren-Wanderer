@@ -22,10 +22,12 @@ function item.load()
 	itemIndex[4] = {"Log",2,images.log,true}
 	itemIndex[5] = {"Wooden Sword",2,images.woodenSword,false}
 
-		item.indexAmount =5
+		item.indexAmount = 4
 
 	for i = 1, 1000 do
+
 		addItem(love.math.random(2,item.indexAmount),2,love.math.random(1,200),love.math.random(1,200))
+	
 	end
 
 end
