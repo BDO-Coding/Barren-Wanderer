@@ -20,9 +20,10 @@ function item.load()
 	itemIndex[2] = {"Stick",1,images.stick,true}
 	itemIndex[3] = {"Stone",2,images.stone,true}
 	itemIndex[4] = {"Log",2,images.log,true}
-	itemIndex[5] = {"Wooden Sword",2,images.woodenSword,false}
+	itemIndex[5] = {"Mucus",2,images.mucus,true}
+	itemIndex[6] = {"Wooden Sword",2,images.woodenSword,false}
 
-		item.indexAmount = 4
+		item.indexAmount = 5
 
 	for i = 1, 1000 do
 
