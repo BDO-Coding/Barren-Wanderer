@@ -48,6 +48,7 @@ function scroll.load()
     worldSeedInt= 300--= tonumber(seed)
     math.randomseed(worldSeedInt)
 
+    scroll.setupDimensions()
     scroll.setupBiomes()
     scroll.blendBiomes()
     scroll.giveNoiseToBiomes()
@@ -56,8 +57,18 @@ function scroll.load()
 
 end
 
+function scroll.setupDimensions()
+
+    dimensionArray = {{}}
+    dimensionArray[1] = {"Overworld", true , true} -- Name, does biome blending, is main dimension type
+    dimensionArray[2] = {"Test Overworld", false , true}
+
+end
+
 function scroll.blendBiomes()
     for d = 1, dimensionNum do
+        if dimensionArray[d][2] == true then
+
      for a=2,mapWidth do
          for b=2,mapHeight do
             if a > terrainExtreemity + 3 then
@@ -86,6 +97,7 @@ function scroll.blendBiomes()
 
             end
         end
+    end
     end
 end
 end
