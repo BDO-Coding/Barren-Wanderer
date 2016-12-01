@@ -25,7 +25,7 @@ local setBiomeSize = 30
 local biomeSize
 local mapDrawn = false
 local terrainExtreemity = setBiomeSize*setTerrainExtreemness
-dimensionNum = 2
+dimensionNum = 1
 
 currentDimension = 1
 
@@ -61,7 +61,8 @@ function scroll.setupDimensions()
 
     dimensionArray = {{}}
     dimensionArray[1] = {"Overworld", true , true} -- Name, does biome blending, is main dimension type
-    dimensionArray[2] = {"Test Overworld", false , true}
+
+    dimensionNum = #dimensionArray
 
 end
 
@@ -104,7 +105,10 @@ end
 
 function scroll.setupBiomes()
 
-        mapWidth = 480
+    biomeArray = {{}}
+    biomeArray[1] = {1,5,3,1,2,2,5,3,3} -- biomeID,rarity /10, number of tiles, tile1ID,tile1 rarity, tile""ID...  Tile rarities must add to 10!
+
+    mapWidth = 480
     mapHeight = 480
 
     biomeArray = {}
