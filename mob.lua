@@ -3,7 +3,6 @@ require "images"
 require "conversation"
 require "player"
 require "item"
-require "crafting"
 
 function mob.load()
 
@@ -85,8 +84,8 @@ function mob.createMobs()
 				mobArray[i][2] = love.math.random(400, 50000)
 			elseif mobArray[i][4] == 3 then
 				mobArray[i][6][1] = love.math.random(4, 4)
-				mobArray[i][1] = love.math.random(600, 50000)
-				mobArray[i][2] = love.math.random(400, 50000)
+				mobArray[i][1] = love.math.random(600, 100000)
+				mobArray[i][2] = love.math.random(400, 100000)
 			end
 			if mobArray[i][6][1] == 1 then
 				mobArray[i][7] = images.chicken
@@ -299,7 +298,7 @@ function mob.draw()
 			mobArray[i][10][3] = 100
 		end
 
-        if mobArray[i][12][5] == true and love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" then
+        if mobArray[i][12][5] == true and love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" and inCrafting == false then
             love.graphics.setColor(255, 0, 0)
             mobArray[i][8][1] = mobArray[i][8][1] - currentWeapon[5]
             if mobArray[i][4] == 1 then

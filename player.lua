@@ -1,6 +1,7 @@
 player={}
 require "images"
 require "utensil"
+require "crafting"
 
 function player.load()
 
@@ -77,7 +78,7 @@ function player.update(dt)
         mana = mana + manaRegen
     end
 
-    if love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" then
+    if love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" and inCrafting == false then
         weaponRotation = weaponRotation + 0.09817477
         weaponXOffset = 588
         weaponYOffset = 377

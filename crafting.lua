@@ -62,24 +62,28 @@ function crafting.draw()
 					love.graphics.setColor(255,255,255)
 				end
 				love.graphics.print(item.getItemName(recipeIndex[i][3]),380, 128+((lineNum-1)*lineSpacing))
-					love.graphics.setColor(255,255,255)
+				love.graphics.setColor(255,255,255)
 				love.graphics.draw(item.getItemImage(recipeIndex[i][3]),350,128+((lineNum-1)*lineSpacing),0,0.75,0.75)
 				lineNum = lineNum+1
 			end
 		end
 
 		if unselected == false then
-		ingredientNum = 1
-		lineNum = 1
-					love.graphics.setColor(255,255,255)
-					love.graphics.print("Craft",670,580)
-
-		for i = 1, (recipeIndex[selectedRecipe][5])/2 do
-			ingredientNum = (i*2)-1
-			love.graphics.print(item.getItemName(recipeIndex[selectedRecipe][6][ingredientNum]).." x "..recipeIndex[selectedRecipe][6][ingredientNum+1],650,128+((lineNum-1)*lineSpacing))
-			love.graphics.draw(item.getItemImage(recipeIndex[selectedRecipe][6][ingredientNum]),600,128+((lineNum-1)*lineSpacing),0,0.75,0.75)
-			lineNum = lineNum+1
-		end
+			ingredientNum = 1
+			lineNum = 1
+			if love.mouse.getX() > 660 and love.mouse.getX() < 700  and love.mouse.getY() > 570 and love.mouse.getY() < 590 then
+				love.graphics.setColor(50,255,50)
+			else
+				love.graphics.setColor(255,255,255)
+			end
+			love.graphics.print("Craft",670,580)
+			love.graphics.setColor(255,255,255)
+			for i = 1, (recipeIndex[selectedRecipe][5])/2 do
+				ingredientNum = (i*2)-1
+				love.graphics.print(item.getItemName(recipeIndex[selectedRecipe][6][ingredientNum]).." x "..recipeIndex[selectedRecipe][6][ingredientNum+1],650,128+((lineNum-1)*lineSpacing))
+				love.graphics.draw(item.getItemImage(recipeIndex[selectedRecipe][6][ingredientNum]),600,128+((lineNum-1)*lineSpacing),0,0.75,0.75)
+				lineNum = lineNum+1
+			end
 		end
 
 	end
@@ -96,21 +100,16 @@ function crafting.update(dt)
 		end
 	end
 
-
-
 	mouseX, mouseY = love.mouse.getX(),love.mouse.getY()
 
 	if love.mouse.isDown(1) == true then
-		if inCrafting == true then
-		if unselected == false then
-			if love.mouse.getX() > 590 and love.mouse.getX() < 740  and love.mouse.getY() > 550 and love.mouse.getY() < 580 then
-			inCrafting = false
-			item.grab(0,0,"specificGive",recipeIndex[selectedRecipe][3],1)
-			hotbar.take(2,1)
-	end
+		if inCrafting == true and unselected == false then
+			if love.mouse.getX() > 660 and love.mouse.getX() < 700  and love.mouse.getY() > 570 and love.mouse.getY() < 590 then
+				item.grab(0,0,"specificGive",recipeIndex[selectedRecipe][3],1)
+				hotbar.take(2,1)
+				love.timer.sleep(0.1)
+			end
 		end
-	end
-
 		lineNum = 0
 		for i = 2, #recipeIndex do
 			if recipeIndex[i][1] == true then
@@ -123,11 +122,10 @@ function crafting.update(dt)
 						recipeIndex[i][2] = false
 					end
 				end
-
 			lineNum = lineNum+1
-
 		end
 	end
+
 end
 
 	if keyPressed == true then
