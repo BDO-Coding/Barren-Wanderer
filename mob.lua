@@ -30,7 +30,7 @@ function mob.load()
 
 end
 
-local function contains(array, value)
+function mob.contains(array, value)
 
 	if array[value] == value then 
 		return true
@@ -53,7 +53,7 @@ function mob.update(dt)
 			mobArray[i][12][5] = false
 			mobArray[i][8][1] = mobArray[i][8][1] + 0.01
 		end
-		if contains(dropsActive, i) == true then
+		if mob.contains(dropsActive, i) == true then
 			dropArray[i][2] = dropArray[i][2] - dt
 			if dropArray[i][2] <= 0 then
 				dropsActive[i] = 0
@@ -164,7 +164,7 @@ end
 function mob.drops()
 
 	for i = 1, mob.amount do
-		if contains(dropsActive, i) == true then
+		if mob.contains(dropsActive, i) == true then
 			love.graphics.setColor(255, 255, 255)
 			love.graphics.draw(images.bag, math.floor((mapX)*-64) + dropArray[i][3][1], math.floor((mapY)*-64) + dropArray[i][3][2])
 			if playerScreenX > math.floor((mapX)*-64) + dropArray[i][3][1] - 30 and playerScreenX < math.floor((mapX)*-64) + dropArray[i][3][1] + 30 and playerScreenY > math.floor((mapY)*-64) + dropArray[i][3][2] - 30 and playerScreenY < math.floor((mapY)*-64) + dropArray[i][3][2] + 30 then 

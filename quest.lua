@@ -9,12 +9,12 @@ function quest.load ()
 	questIndex[2] = {"It Begins...","event",1,0,10,2,3,{false,true}}
 	questIndex[3] = {"Gatherer","collect",3,1,3,4,2,{false,false}}
 	questIndex[4] = {"Lumberjack","collect",4,10,20,4,100,{false,false}}
+	questIndex[4] = {"Monster Slayer!","kill",1,0,30,4,100,{false,false}}
 
 	eventIndex={{}}
 	eventIndex[1] = {1--[[ID]],true--[[is this event happening?]],"player starts the game"}
 
 	printWait = 0
-
 
 	quest.getQuest(4)
 	quest.getQuest(3)
@@ -43,6 +43,7 @@ function quest.getQuest(questID)
 end
 
 function quest.reward(questID)
+
 	if questIndex[questID][8][1]==false and questIndex[questID][8][2]==true then
 		item.grab(0,0,"specificGive",questIndex[questID][6],questIndex[questID][7])
 		printWait = 200
@@ -62,6 +63,11 @@ function quest.checkForCompletedQuests()
 			end
 		end
 		if questIndex[i][2] == "event" then
+			if eventIndex[questIndex[i][3]][2] == true then
+				quest.reward(i)
+			end
+		end
+		if questIndex[i][2] == "kill" then
 			if eventIndex[questIndex[i][3]][2] == true then
 				quest.reward(i)
 			end
