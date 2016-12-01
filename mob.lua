@@ -7,7 +7,7 @@ require "crafting"
 
 function mob.load()
 
-	mob.amount = 100
+	mob.amount = 10000
 	behaviorTimer = 5
 	changeBehavior = true
 	createMobs = true
@@ -77,16 +77,16 @@ function mob.createMobs()
 		if mobArray[i][6][2] == "mob" then
 			if mobArray[i][4] == 1 then
 				mobArray[i][6][1] = love.math.random(1, 2)
-				mobArray[i][1] = love.math.random(600, 1000)
-				mobArray[i][2] = love.math.random(400, 800)
+				mobArray[i][1] = love.math.random(600, 50000)
+				mobArray[i][2] = love.math.random(400, 50000)
 			elseif mobArray[i][4] == 2 then
 				mobArray[i][6][1] = love.math.random(3, 3)
-				mobArray[i][1] = love.math.random(1010, 1500)
-				mobArray[i][2] = love.math.random(810, 1300)
+				mobArray[i][1] = love.math.random(600, 50000)
+				mobArray[i][2] = love.math.random(400, 50000)
 			elseif mobArray[i][4] == 3 then
 				mobArray[i][6][1] = love.math.random(4, 4)
-				mobArray[i][1] = love.math.random(1510, 2000)
-				mobArray[i][2] = love.math.random(1310, 1800)
+				mobArray[i][1] = love.math.random(600, 50000)
+				mobArray[i][2] = love.math.random(400, 50000)
 			end
 			if mobArray[i][6][1] == 1 then
 				mobArray[i][7] = images.chicken
@@ -201,7 +201,7 @@ function mob.behavior(dt)
 
 	for i = 1, mob.amount do
 		if mobArray[i][6][2] == "mob" then
-			if (math.floor((mapX)*-64) + mobArray[i][1]) < 1200 and math.floor((mapY)*-64) + mobArray[i][2] > 0 and (math.floor((mapX)*-64) + mobArray[i][1]) > 0 and math.floor((mapY)*-64) + mobArray[i][2] < 750 and changeBehavior == true then
+			if (math.floor((mapX)*-64) + mobArray[i][1]) < 1200 and math.floor((mapY)*-64) + mobArray[i][2] > -100 and (math.floor((mapX)*-64) + mobArray[i][1]) > -100 and math.floor((mapY)*-64) + mobArray[i][2] < 750 and changeBehavior == true then
 				mobArray[i][3] = love.math.random(1, 4)
 			elseif mobArray[i][11][2] == 2 and changeBehavior == true then
 				mobArray[i][3] = love.math.random(3, 4)
@@ -318,7 +318,9 @@ function mob.draw()
             love.graphics.setColor(255, 255, 255)
         end
 
-		love.graphics.draw(mobArray[i][7], math.floor((mapX)*-64) + mobArray[i][1] + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])
+        if (math.floor((mapX)*-64) + mobArray[i][1]) < 1200 and math.floor((mapY)*-64) + mobArray[i][2] > -100 and (math.floor((mapX)*-64) + mobArray[i][1]) > -100 and math.floor((mapY)*-64) + mobArray[i][2] < 750 then
+			love.graphics.draw(mobArray[i][7], math.floor((mapX)*-64) + mobArray[i][1] + mobArray[i][10][3], math.floor((mapY)*-64) + mobArray[i][2], 0, mobArray[i][10][1], mobArray[i][10][2])
+		end
 
 		if mobArray[i][6][2] == "npc" then
 			love.graphics.setColor(30, 30, 30)
