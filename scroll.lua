@@ -46,7 +46,8 @@ end
 function scroll.setupDimensions()
 
     dimensionArray = {{}}
-    dimensionArray[1] = {"Overworld", true , true, true} -- Name, does biome blending, is main dimension type, does biome noise
+    dimensionArray[1] = {"Overworld", true , false, true} -- Name, does biome blending, is main dimension type, does biome noise
+    dimensionArray[1][5] = {3,3,{1,2,3}{1,2,3}{1,2,3}} --biome h/w, preset map
 
     dimensionNum = #dimensionArray
 
@@ -78,6 +79,7 @@ end
     biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
     biomeSize = mapWidth/math.sqrt(biomeNum)
     for d = 1, dimensionNum do
+        if dimensionArray[d][3] == true then
     for biomeX=1,math.sqrt(biomeNum) do
         for biomeY=1,math.sqrt(biomeNum) do
             xStart =biomeX*biomeSize - biomeSize + 1
@@ -92,6 +94,9 @@ end
             end
         end
     end
+else
+
+end
 end
 end
 
