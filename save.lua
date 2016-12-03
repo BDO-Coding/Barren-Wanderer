@@ -26,6 +26,14 @@ function save.update(dt)
 
 end
 
+function save.save()
+    save.clear()    
+    local file = io.open(worldName..".txt", "a")
+    file:write("Seed:\n"..worldSeed.."\nName:\n"..worldName)
+    file:close()
+    save.read()
+end
+
 function save.clear()
 
     local file = io.open(worldName..".txt", "w")

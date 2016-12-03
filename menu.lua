@@ -789,6 +789,7 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true and clickDelay < 0 then
                 inmenu = false
                 ingame = true
+                scroll.load()
 
                 if doLoadScreen == true then
                     loadScreen = true
@@ -860,8 +861,8 @@ function love.mousepressed(x, y, button, istouch)
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 500 and x < 720 and y > 350 and y < 410 and clickDelay < 0 then
-                save.load()
+            if button == 1 and x > 500 and x < 720 and y > 350 and y < 410 and clickDelay < 0 then -------SAVING
+                save.save()
             end
 
         end
