@@ -790,11 +790,21 @@ function love.mousepressed(x, y, button, istouch)
                 inmenu = false
                 ingame = true
                 scroll.load()
+                save.load()
+                quest.load()
+                crafting.load()
+                player.load()
+                item.load()
+                mob.load()
+                hotbar.load()
+                utensil.load()
+                conversation.load()
+                effect.load()
 
                 if doLoadScreen == true then
                     loadScreen = true
                 end
-                loadFunctions = true
+                --loadFunctions = true
                 newgame = false
             end
 
