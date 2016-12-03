@@ -14,7 +14,7 @@ require "effect"
 
 function love.load()
 	
-	love.mouse.setVisible(false)
+	love.mouse.setVisible(true)
 	ingame = false
 	inmenu = true
 	loadFunctions = false

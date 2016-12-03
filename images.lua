@@ -44,7 +44,7 @@ function images.load()
 	images.hotbar = love.graphics.newImage("images/GUI/hotbar.png")
 	images.guiBar = love.graphics.newImage("images/GUI/bar.png")
 	images.guiBarInside = love.graphics.newImage("images/GUI/barInside.png")
-	images.handCursor = love.graphics.newImage("images/GUI/cursor.png")
+	images.handCursor = love.mouse.newCursor("images/GUI/cursor.png")
 
 	--Other
 	images.bag = love.graphics.newImage("images/entities/bag.png")

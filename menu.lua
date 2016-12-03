@@ -721,12 +721,13 @@ function menu.loadScreen()
             end
         end
     end
-    love.graphics.setColor(255, 255, 255)
-  local x, y = love.mouse.getPosition() -- get the position of the mouse
-   love.graphics.draw(images.handCursor, x, y,0,cursorSizeX,cursorSizeY)
-   if loading == true then
-    cursorSizeX,cursorSizeY = mouseX,mouseY
-   end
+    --[[love.graphics.setColor(255, 255, 255)
+    local x, y = love.mouse.getPosition() -- get the position of the mouse
+    love.graphics.draw(images.handCursor, x, y,0,cursorSizeX,cursorSizeY)
+    if loading == true then
+        cursorSizeX,cursorSizeY = mouseX,mouseY
+    end]]
+    love.mouse.setCursor(images.handcursor)
 end
 
 
@@ -873,6 +874,7 @@ function love.mousepressed(x, y, button, istouch)
 
             if button == 1 and x > 500 and x < 720 and y > 350 and y < 410 and clickDelay < 0 then -------SAVING
                 save.save()
+                love.event.quit( )
             end
 
         end
