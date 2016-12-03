@@ -29,30 +29,16 @@ dimensionNum = 1
 
 currentDimension = 1
 
-
-function scroll.gotoDimension(num)
-    if num < dimensionNum + 1 then
-        currentDimension = num
-    end
-end
-
-function round(num, idp)
-
-    local mult = 10^(idp or 0)
-    return math.floor(num * mult + 0.5) / mult
-
-end
-
 function scroll.load()
 
     worldSeedInt= 300--= tonumber(seed)
     math.randomseed(worldSeedInt)
 
-    scroll.setupDimensions()
-    scroll.setupBiomes()
-    scroll.blendBiomes()
-    scroll.giveNoiseToBiomes()
-    scroll.setupMapView()
+    scroll.setupDimensions() -- Makes dimension array
+    scroll.setupBiomes()    --Generateds biomes for main dimension types
+    scroll.blendBiomes()       -- blends biomes together
+    scroll.giveNoiseToBiomes()  --Coverts biome maps to textured tiles
+    scroll.setupMapView() -- sets various view settings
     scroll.setupTileset()
 
 end
@@ -60,11 +46,55 @@ end
 function scroll.setupDimensions()
 
     dimensionArray = {{}}
-    dimensionArray[1] = {"Overworld", true , true} -- Name, does biome blending, is main dimension type
+    dimensionArray[1] = {"Overworld", true , true, false} -- Name, does biome blending, is main dimension type, does biome noise
 
     dimensionNum = #dimensionArray
 
 end
+
+
+function scroll.setupBiomes()
+
+    biomeTypesArray = {{}}
+    biomeTypesArray[1] = {1,1,30} -- biomeID, tile1ID, tile1rarity, tile""ID...  Tile rarities must add to 100!
+    biomeTypesArray[2] = {1,2,30}
+    biomeTypesArray[3] = {1,3,30}
+
+    mapWidth = 480
+    mapHeight = 480
+
+    biomeArray = {}
+
+    for d = 1, dimensionNum do
+        biomeArray[d] = {}
+    for x=1, 480 do
+        biomeArray[d][x] = {}
+        for y=1, 480 do
+            biomeArray[d][x][y] = 3--love.math.random(0,13)
+        end
+    end
+end
+
+    biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
+    biomeSize = mapWidth/math.sqrt(biomeNum)
+    for d = 1, dimensionNum do
+    for biomeX=1,math.sqrt(biomeNum) do
+        for biomeY=1,math.sqrt(biomeNum) do
+            xStart =biomeX*biomeSize - biomeSize + 1
+            yStart =biomeY*biomeSize - biomeSize + 1
+            xMax = biomeX*biomeSize
+            yMax = biomeY*biomeSize
+            biomeType = math.random(1,#biomeTypesArray)
+            for x=xStart, xMax do
+                for y=yStart, yMax do
+                    biomeArray[d][x][y] = biomeType
+                end
+            end
+        end
+    end
+end
+end
+
 
 function scroll.blendBiomes()
     for d = 1, dimensionNum do
@@ -103,47 +133,6 @@ function scroll.blendBiomes()
 end
 end
 
-function scroll.setupBiomes()
-
-    biomeArray = {{}}
-    biomeArray[1] = {1,5,3,1,2,2,5,3,3} -- biomeID,rarity /10, number of tiles, tile1ID,tile1 rarity, tile""ID...  Tile rarities must add to 10!
-
-    mapWidth = 480
-    mapHeight = 480
-
-    biomeArray = {}
-
-    for d = 1, dimensionNum do
-        biomeArray[d] = {}
-    for x=1, 480 do
-        biomeArray[d][x] = {}
-        for y=1, 480 do
-            biomeArray[d][x][y] = 3--love.math.random(0,13)
-        end
-    end
-end
-
-    biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
-    biomeSize = mapWidth/math.sqrt(biomeNum)
-    for d = 1, dimensionNum do
-    for biomeX=1,math.sqrt(biomeNum) do
-        for biomeY=1,math.sqrt(biomeNum) do
-            xStart =biomeX*biomeSize - biomeSize + 1
-            yStart =biomeY*biomeSize - biomeSize + 1
-            xMax = biomeX*biomeSize
-            yMax = biomeY*biomeSize
-            biomeType = math.random(0,5)
-            for x=xStart, xMax do
-                for y=yStart, yMax do
-                    biomeArray[d][x][y] = biomeType
-                end
-            end
-        end
-    end
-end
-
-end
-
 
 function scroll.giveNoiseToBiomes()
 
@@ -151,52 +140,46 @@ function scroll.giveNoiseToBiomes()
 
     map = {}
 
-    for d=1, dimensionNum do
-    map[d] = {}
+    for d=1, dimensionNum do -- for every dimension
+            map[d] = {}
+
+    
     for x=1, mapWidth do
       map[d][x] = {}
-        for y=1, mapHeight do
-            random = math.random(0,3)
-            if biomeArray[d][x][y] == 0 then --Ocean 1
-                map[d][x][y] = 0     
-            elseif biomeArray[d][x][y] == 1 then -- Grass 1
-                if random == 0 then 
-                    map[d][x][y] = 8
-                elseif random == 1 then
-                    map[d][x][y] = 9
-                else
-                    map[d][x][y] = 10
+        for y=1, mapHeight do -- for every tile in that dimesion
+            --random = math.random(0,3)  
+            map[d][x][y] = 11
+               if dimensionArray[d][4] == true then                          
+            for biomeToCheck = 1, #biomeTypesArray do -- for every possible biome that could be in this dimension
+                if biomeArray[d][x][y] == biomeToCheck then -- if the tile that is selected is a specific biome type
+                    selectedBiomeTypeArray = biomeTypesArray[biomeToCheck] -- copies a temp version of the selected biome stats
+                    amountOfPossibleTiles = (#selectedBiomeTypeArray-1)/2 -- finds the amount of posssible tiles specified in the biomeTypesArray
+                    tileRandomised = false
+                    random = math.random(1,amountOfPossibleTiles) -- picks a random number 1 - the amount of possible tiles
+                        while tileRandomised == false do
+                        for tileSelected = 1,amountOfPossibleTiles do -- for every possible tile in this biome
+                            if random == selectedBiomeTypeArray[tileSelected] then-- if this tile was chosen
+                                arrayItemForTileID = tileSelected*2
+                                arrayItemForTileRarity = (tileSelected*2)+2
+                                selectedTileID = selectedBiomeTypeArray[arrayItemForTileID]
+                                selectedTileRarity = selectedBiomeTypeArray[arrayItemForTileRarity]
+                                if selectedTileRarity == 1 then
+                                    tileToPlace = selectedTileID
+                                    tileRandomised = true
+                                else
+                                    selectedBiomeTypeArray[2] = selectedBiomeTypeArray[2] - 1
+                                end
+                            end
+                        end
+                        end
+                    --tileToPlace = random
+                    map[d][x][y] = tileToPlace -- places tile selected
                 end
-            elseif biomeArray[d][x][y] == 2 then --Deset 1
-                if random == 0 then 
-                    map[d][x][y] = 7
-                else
-                    map[d][x][y] = 6
-                end
-            elseif biomeArray[d][x][y] == 3 then --Beach 1
-                map[d][x][y] = 1
-            elseif biomeArray[d][x][y] == 4 then --Forest 1
-                if random == 0 then 
-                    map[d][x][y] = 8
-                elseif random == 1 then
-                    map[d][x][y] = 9
-                elseif random == 2 then
-                    map[d][x][y] = 11
-                else
-                    map[d][x][y] = 12
-                end
-            else
-                if random == 0 then 
-                    map[d][x][y] = 14 --Jungle 1
-                else
-                    map[d][x][y] = 13 --Jungle 2
-                end
-                
             end
-            
         end
 
     end
+end
     end
 
     --Name Signiture
@@ -205,6 +188,21 @@ function scroll.giveNoiseToBiomes()
     mapDrawn = true
     
 end
+
+
+function scroll.gotoDimension(num)
+    if num < dimensionNum + 1 then
+        currentDimension = num
+    end
+end
+
+function round(num, idp)
+
+    local mult = 10^(idp or 0)
+    return math.floor(num * mult + 0.5) / mult
+
+end
+
  
 function scroll.setupMapView()
 
