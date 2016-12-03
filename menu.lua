@@ -438,10 +438,11 @@ function menu.newgame()
         else
             love.graphics.print("World Name : "..worldName, 190, 210, 0, 2, 3)
         end
-        worldSeed = 1
+        
         if worldSeedType == true then
             love.graphics.print("World Seed-: "..worldSeed, 190, 290, 0, 2, 3)
         else
+            worldSeed = 1
             love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
         end
         
