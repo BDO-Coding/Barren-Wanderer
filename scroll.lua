@@ -31,8 +31,8 @@ currentDimension = 1
 
 function scroll.load()
 
-    worldSeedInt= 300--= tonumber(seed)
-    math.randomseed(worldSeedInt)
+    worldSeedInt = tonumber(seed)
+    math.randomseed(seed)--worldSeedInt)
 
     scroll.setupDimensions() -- Makes dimension array
     scroll.setupBiomes()    --Generateds biomes for main dimension types
@@ -46,7 +46,7 @@ end
 function scroll.setupDimensions()
 
     dimensionArray = {{}}
-    dimensionArray[1] = {"Overworld", true , true, false} -- Name, does biome blending, is main dimension type, does biome noise
+    dimensionArray[1] = {"Overworld", true , true, true} -- Name, does biome blending, is main dimension type, does biome noise
 
     dimensionNum = #dimensionArray
 
@@ -134,7 +134,7 @@ end
 end
 
 
-function scroll.giveNoiseToBiomes()
+--[[function scroll.giveNoiseToBiomes()
 
 
 
@@ -187,6 +187,112 @@ end
 
     mapDrawn = true
     
+end]]
+
+function scroll.giveNoiseToBiomes()
+
+    map = {}
+    for d = 1, dimensionNum do
+        map[d] = {}
+    for x=1, mapWidth do
+      map[d][x] = {}
+        for y=1, mapHeight do
+            random = math.random(0,3)
+            if biomeArray[d][x][y] == 0 then --Ocean 1
+                map[d][x][y] = 0     
+            elseif biomeArray[d][x][y] == 1 then -- Grass 1
+                if random == 0 then 
+                    map[d][x][y] = 8
+                elseif random == 1 then
+                    map[d][x][y] = 9
+                else
+                    map[d][x][y] = 10
+                end
+            elseif biomeArray[d][x][y] == 2 then --Deset 1
+                if random == 0 then 
+                    map[d][x][y] = 7
+                else
+                    map[d][x][y] = 6
+                end
+            elseif biomeArray[d][x][y] == 3 then --Beach 1
+                map[d][x][y] = 1
+            elseif biomeArray[d][x][y] == 4 then --Forest 1
+                if random == 0 then 
+                    map[d][x][y] = 8
+                elseif random == 1 then
+                    map[d][x][y] = 9
+                elseif random == 2 then
+                    map[d][x][y] = 11
+                else
+                    map[d][x][y] = 12
+                end
+            else
+                if random == 0 then 
+                    map[d][x][y] = 14 --Jungle 1
+                else
+                    map[d][x][y] = 13 --Jungle 2
+                end
+                
+            end
+            
+        end
+end
+    end
+
+    --Name Signiture
+    map[1][1][1] = 5
+    map[1][1][2] = 5
+    map[1][1][3] = 5
+    map[1][2][1] = 5
+    map[1][2][3] = 5
+    map[1][3][2] = 5
+
+    map[1][5][1] = 5
+    map[1][5][2] = 5
+    map[1][5][3] = 5
+    map[1][6][2] = 5
+    map[1][7][1] = 5
+    map[1][7][2] = 5
+    map[1][7][3] = 5
+
+    map[1][1][6] = 5
+    map[1][3][6] = 5
+    map[1][3][8] = 5
+    map[1][1][7] = 5
+    map[1][1][8] = 5
+    map[1][2][6] = 5
+    map[1][2][8] = 5
+    map[1][3][7] = 5
+
+    map[1][5][6] = 5
+    map[1][6][6] = 5
+    map[1][7][6] = 5
+    map[1][6][7] = 5
+    map[1][6][8] = 5
+
+    map[1][1][11] = 5
+    map[1][1][12] = 5
+    map[1][1][13] = 5
+    map[1][1][14] = 5
+    map[1][1][15] = 5
+    map[1][2][11] = 5
+    map[1][2][15] = 5
+    map[1][3][12] = 5
+    map[1][3][14] = 5
+    map[1][2][13] = 5
+
+    map[1][5][11] = 5
+    map[1][5][12] = 5
+    map[1][5][13] = 5
+    map[1][5][14] = 5
+    map[1][5][15] = 5
+    map[1][6][11] = 5
+    map[1][6][15] = 5
+    map[1][7][12] = 5
+    map[1][7][14] = 5
+    map[1][6][13] = 5
+
+    mapDrawn = true
 end
 
 
@@ -309,8 +415,8 @@ function scroll.round(num, idp)
 end
 function mine(x,y)
 
-  --  if map[x][y] == 11 then
-      --  map[x][y] = 10
+  --  if map[d][x][y] == 11 then
+      --  map[d][x][y] = 10
     --else
     --end
 
