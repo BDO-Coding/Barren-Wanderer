@@ -121,16 +121,16 @@ function mob.createMob(i)
 
 	if mobArray[i][4] == 1 then
 		mobArray[i][6][1] = love.math.random(1, 2)
-		mobArray[i][1] = love.math.random(600, 1000)
-		mobArray[i][2] = love.math.random(400, 800)
+		mobArray[i][1] = love.math.random(600, 50000)
+		mobArray[i][2] = love.math.random(400, 50000)
 	elseif mobArray[i][4] == 2 then
 		mobArray[i][6][1] = love.math.random(3, 3)
-		mobArray[i][1] = love.math.random(1010, 1500)
-		mobArray[i][2] = love.math.random(810, 1300)
+		mobArray[i][1] = love.math.random(600, 50000)
+		mobArray[i][2] = love.math.random(400, 50000)
 	elseif mobArray[i][4] == 3 then
 		mobArray[i][6][1] = love.math.random(4, 4)
-		mobArray[i][1] = love.math.random(1510, 2000)
-		mobArray[i][2] = love.math.random(1310, 1800)
+		mobArray[i][1] = love.math.random(600, 100000)
+		mobArray[i][2] = love.math.random(400, 100000)
 	end
 	if mobArray[i][6][1] == 1 then
 		mobArray[i][7] = images.chicken
