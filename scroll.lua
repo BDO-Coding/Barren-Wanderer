@@ -25,7 +25,9 @@ local mapDrawn = false
 local terrainExtreemity = setBiomeSize*setTerrainExtreemness
 dimensionNum = 3
 
-currentDimension = 3
+currentDimension = 1
+
+
 
 function scroll.load()
 
