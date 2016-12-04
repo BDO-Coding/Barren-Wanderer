@@ -209,7 +209,7 @@ function mob.drops()
 							end
 						end
 						if dropArray[i][1][j][2] == true then
-							love.graphics.setColor(10,10,10)
+							love.graphics.setColor(30,255,30)
 						else
 							love.graphics.setColor(255,255,255)
 						end

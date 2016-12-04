@@ -9,7 +9,7 @@ function quest.load ()
 	questIndex[2] = {"It Begins...","event",1,0,10,2,3,{false,true}}
 	questIndex[3] = {"Gatherer","collect",3,1,3,4,2,{false,false}}
 	questIndex[4] = {"Lumberjack","collect",4,10,20,4,100,{false,false}}
-	questIndex[4] = {"Monster Slayer!","kill",1,0,30,4,100,{false,false}}
+	questIndex[5] = {"Monster Slayer!","kill",1,0,30,4,100,{false,false}}
 
 	eventIndex={{}}
 	eventIndex[1] = {1--[[ID]],true--[[is this event happening?]],"player starts the game"}

@@ -57,7 +57,7 @@ function crafting.draw()
 		for i = 2, #recipeIndex do
 			if recipeIndex[i][1] == true then
 				if recipeIndex [i][2] == true then
-					love.graphics.setColor(10,10,10)
+					love.graphics.setColor(30,255,30)
 				else
 					love.graphics.setColor(255,255,255)
 				end
