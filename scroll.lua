@@ -47,7 +47,7 @@ function scroll.setupDimensions()
 
     dimensionArray = {{}}
     dimensionArray[1] = {"Overworld", true , false, true} -- Name, does biome blending, is main dimension type, does biome noise
-    dimensionArray[1][5] = {3,3,{1,2,3}{1,2,3}{1,2,3}} --biome h/w, preset map
+    dimensionArray[1][5] = {3,3,{1,2,3},{1,2,3},{1,2,3}} --biome h/w, preset map
 
     dimensionNum = #dimensionArray
 
