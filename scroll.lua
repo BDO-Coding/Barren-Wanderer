@@ -11,10 +11,8 @@ local mapWidth, mapHeight -- Width and Height in pixels
  
 local tilesDisplayWidth, tilesDisplayHeight -- number of tiles to show
 local zoomX, zoomY
- 
 
 local setTerrainExtreemness = 1 -- Use this to edit how steep the terrain is ********************************************
-
 
 local tilesetImage
 local tileSize -- size of tiles in pixels
@@ -25,14 +23,14 @@ local setBiomeSize = 30
 local biomeSize
 local mapDrawn = false
 local terrainExtreemity = setBiomeSize*setTerrainExtreemness
-dimensionNum = 1
+dimensionNum = 3
 
-currentDimension = 2
+currentDimension = 1
 
 function scroll.load()
 
     worldSeedInt = tonumber(seed)
-    math.randomseed(100)--worldSeedInt)
+    math.randomseed(worldSeedInt)--worldSeedInt)
 
     map = {}
 
@@ -53,9 +51,13 @@ function scroll.setupDimensions()
     dimensionArray[1][5] = {7,1,2,3,4,5,6,7} --numOfBiomes, list of biome IDs
     dimensionArray[1][6] = {480,480,{1,2,3},{1,2,3},{1,2,3}} --biome h/w, preset map
 
-    dimensionArray[2] = {"GhostDimension", true , true, true}
-    dimensionArray[2][5] = {3,8,9,10}
+    dimensionArray[2] = {"Underground", true , true, true}
+    dimensionArray[2][5] = {3,7,8,10}
     dimensionArray[2][6] = {480,480,{1,2,3},{1,2,3},{1,2,3}}
+
+    dimensionArray[3] = {"Oblivion", true , true, true}
+    dimensionArray[3][5] = {3,8,9,10}
+    dimensionArray[3][6] = {480,480,{1,2,3},{1,2,3},{1,2,3}}
 
     dimensionNum = #dimensionArray
 
@@ -94,33 +96,33 @@ function scroll.setupBiomes()
 
     biomeNum = mapWidth/setBiomeSize*mapWidth/setBiomeSize
     biomeSize = mapWidth/math.sqrt(biomeNum)
-        for d = 1, dimensionNum do
-            if dimensionArray[d][3] == true then
-                for biomeX=1,math.sqrt(biomeNum) do
-                    for biomeY=1,math.sqrt(biomeNum) do
-                        xStart =biomeX*biomeSize - biomeSize + 1
-                        yStart =biomeY*biomeSize - biomeSize + 1
-                        xMax = biomeX*biomeSize
-                        yMax = biomeY*biomeSize
-                        biomeType = dimensionArray[d][5][math.random(2,(dimensionArray[d][5][1])+1)]
-                            for x=xStart, xMax do
-                                for y=yStart, yMax do
-                                    biomeArray[d][x][y] = biomeType
-                                end
+    for d = 1, dimensionNum do
+        if dimensionArray[d][3] == true then
+            for biomeX=1,math.sqrt(biomeNum) do
+                for biomeY=1,math.sqrt(biomeNum) do
+                    xStart =biomeX*biomeSize - biomeSize + 1
+                    yStart =biomeY*biomeSize - biomeSize + 1
+                    xMax = biomeX*biomeSize
+                    yMax = biomeY*biomeSize
+                    biomeType = dimensionArray[d][5][math.random(2,(dimensionArray[d][5][1])+1)]
+                        for x=xStart, xMax do
+                            for y=yStart, yMax do
+                                biomeArray[d][x][y] = biomeType
                             end
-                    end
+                        end
                 end
-            else
-                map[d] = {}
-                for mapX = 1, dimensionArray[d][6][1] do
-                    map[d][mapX] = {}
-                    for mapY = 1, dimensionArray[d][6][2] do
-                        map[d][mapX][mapY] = 1
-                        map[d][mapX][mapX] = dimensionArray[d][6][(mapX)+2][mapY]
-                    end
+            end
+        else
+            map[d] = {}
+            for mapX = 1, dimensionArray[d][6][1] do
+                map[d][mapX] = {}
+                for mapY = 1, dimensionArray[d][6][2] do
+                    map[d][mapX][mapY] = 1
+                    map[d][mapX][mapX] = dimensionArray[d][6][(mapX)+2][mapY]
                 end
             end
         end
+    end
 end
 
 
