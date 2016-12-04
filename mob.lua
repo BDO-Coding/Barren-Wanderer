@@ -12,15 +12,17 @@ function mob.load()
 	createMobs = true
 	EPressed = false
 	waitBag = 0
+	selectNum = 0
+	mobUnselected = true
 
 	mobArray = {{}}
-	mobArray[1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {itemIndex[2]}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]], 1--[[Accuracy 13]]}
+	mobArray[1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {2}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]], 1--[[Accuracy 13]]}
 
 	for i = 1, mob.amount do
-		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {itemIndex[2]}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]], 1--[[Accuracy 13]]}
+		mobArray[#mobArray + 1] = {1--[[X position 1]], 100--[[Y position 2]], 1--[[Behaviour 3]], love.math.random(1, 3)--[[Temperament 4]], 1--[[Speed 5]], {1,"mob"}--[[Type Array 6]], images.chicken--[[Image 7]], {30, 0.1}--[[Health & Damage 8]], {2}--[[Drops 9]], {3, 3, 0}--[[Size Array 10]], {"Chicken", 1}--[[Name & Creation 11]], {1, 1, "left", true, false}--[[Destination Array 12]], 1--[[Accuracy 13]]}
 	end
 
-	dropArray = {{}}--[[1 = Drops, 2 = Timer, 4 = X & Y, 5 = inBag]]
+	dropArray = {{}}--[[1 = Drops & Selected, 2 = Timer, 4 = X & Y, 5 = inBag]]
 	dropsActive = {}
 
 	--[[Temperament (4) 1 is passive
@@ -59,7 +61,10 @@ function mob.update(dt)
 			end
 		end
 		if mobArray[i][8][1] <= 0 then
-			dropArray[i] = {mobArray[i][9], 20, {mobArray[i][1] + 35, mobArray[i][2] + 50}, false}
+			dropArray[i] = {{{}}, 20, {mobArray[i][1] + 35, mobArray[i][2] + 50}, false}
+			for j = 1, #mobArray[i][9] do
+				dropArray[i][1][j] = {mobArray[i][9][j], false}
+			end
 			dropsActive[i] = i
 			mob.createMob(i)
 		end
@@ -138,6 +143,7 @@ function mob.createMob(i)
 		mobArray[i][8][2] = 0.01
 		mobArray[i][11][1] = "Chicken"
 		mobArray[i][13] = 3
+		mobArray[i][9][1] = 5
 	elseif mobArray[i][6][1] == 2 then
 		mobArray[i][7] = images.worm
 		mobArray[i][8][1] = 2
@@ -167,7 +173,14 @@ function mob.drops()
 			love.graphics.setColor(255, 255, 255)
 			love.graphics.draw(images.bag, math.floor((mapX)*-64) + dropArray[i][3][1], math.floor((mapY)*-64) + dropArray[i][3][2])
 			if playerScreenX > math.floor((mapX)*-64) + dropArray[i][3][1] - 30 and playerScreenX < math.floor((mapX)*-64) + dropArray[i][3][1] + 30 and playerScreenY > math.floor((mapY)*-64) + dropArray[i][3][2] - 30 and playerScreenY < math.floor((mapY)*-64) + dropArray[i][3][2] + 30 then 
-				love.graphics.setColor(30, 30, 30)
+				if love.keyboard.isDown("e") and waitBag == 0 then
+					EPressed = true
+					waitBag = 40
+				else
+					love.graphics.setColor(30, 30, 30)
+					love.graphics.print("Press 'e' to open", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
+				end
+				love.graphics.setColor(255,255,255)
 				if EPressed == true then
 					dropArray[i][5] = not dropArray[i][5]
 					EPressed = false
@@ -175,22 +188,55 @@ function mob.drops()
 				if waitBag > 0 then
 					waitBag = waitBag - 1
 				end
-				if love.keyboard.isDown("e") and waitBag == 0 then
-					EPressed = true
-					waitBag = 20
-				else
-					love.graphics.print("Press 'e' to open", math.floor((mapX)*-64) + dropArray[i][3][1] - 23, math.floor((mapY)*-64) + dropArray[i][3][2] + 30)
-				end
 				if dropArray[i][5] == true then
-					love.graphics.setColor(255,255,255)
 					love.graphics.draw(images.crafting,350,50,0,1,1)
 					love.graphics.print("Drops:",437,110)
 					love.graphics.print("Stats:",648,110)
 					inCrafting = false
+					if mobUnselected == true then
+						love.graphics.print("Select an item by clicking on it.",572,140)
+					end
+					for j = 1, #dropArray[i][1] do
+						if love.mouse.getX() > 385 and love.mouse.getX() < 525 then
+							if love.mouse.getY() > 110 + (10*j) and love.mouse.getY() < 140 + (10*j) and love.mouse.isDown(1) then
+								dropArray[i][1][j][2] = true
+								mobUnselected = false
+							elseif love.mouse.getY() < 110 + (10*j) or love.mouse.getY() > 140 + (10*j) then
+								if love.mouse.isDown(1) then
+									dropArray[i][1][j][2] = false
+									mobUnselected = true
+								end
+							end
+						end
+						if dropArray[i][1][j][2] == true then
+							love.graphics.setColor(10,10,10)
+						else
+							love.graphics.setColor(255,255,255)
+						end
+						love.graphics.print(item.getItemName(dropArray[i][1][j][1]),450, 128+((j-1)*10))
+						love.graphics.setColor(255,255,255)
+						love.graphics.draw(item.getItemImage(dropArray[i][1][j][1]),420,128+((j-1)*10),0,0.75,0.75)
+					end
 				end
 			elseif dropArray[i][5] == true then
 				dropArray[i][5] = false
 			end
+			if playerScreenX > math.floor((mapX)*-64) + dropArray[i][3][1] - 30 and playerScreenX < math.floor((mapX)*-64) + dropArray[i][3][1] + 30 and playerScreenY > math.floor((mapY)*-64) + dropArray[i][3][2] - 30 and playerScreenY < math.floor((mapY)*-64) + dropArray[i][3][2] + 30 then else
+				mobUnselected = true
+				for j = 1, #dropArray[i][1] do
+					dropArray[i][1][j][2] = false
+				end
+			end
+			--[[for j = 1, #dropArray[i][1] do
+				if dropArray[i][1][j][2] == true then
+					selectNum = 0
+				else
+					selectNum = selectNum + 1
+				end
+			end
+			if selectNum == #dropArray[i][1] then
+				mobUnselected = true
+			end]]
 		end
 	end
 
@@ -298,7 +344,7 @@ function mob.draw()
 			mobArray[i][10][3] = 100
 		end
 
-        if mobArray[i][12][5] == true and love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" and inCrafting == false then
+        if mobArray[i][12][5] == true and love.mouse.isDown(1) and inmenu == false and currentWeapon[2] == "melee" and inCrafting == false and mobUnselected == true then
             love.graphics.setColor(255, 0, 0)
             mobArray[i][8][1] = mobArray[i][8][1] - currentWeapon[5]
             if mobArray[i][4] == 1 then
