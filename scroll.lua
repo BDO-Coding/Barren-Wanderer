@@ -89,7 +89,7 @@ function scroll.setupBiomes()
         for x=1, dimensionArray[d][6][1] do
             biomeArray[d][x] = {}
             for y=1, dimensionArray[d][6][2] do
-                biomeArray[d][x][y] = 0--love.math.random(0,13)
+                biomeArray[d][x][y] = 0--math.random(0,13)
             end
         end
     end
@@ -134,26 +134,26 @@ function scroll.blendBiomes()
          for b=2,mapHeight do
             if a > terrainExtreemity + 3 then
             if a > mapWidth - (terrainExtreemity+3) then
-                    if biomeArray[d][a][b+love.math.random(-terrainExtreemity,-1)] ~= biomeArray[d][a][b] then
-                    biomeArray[d][a][b] = biomeArray[d][a][b+love.math.random(-terrainExtreemity,-1)]
+                    if biomeArray[d][a][b+math.random(-terrainExtreemity,-1)] ~= biomeArray[d][a][b] then
+                    biomeArray[d][a][b] = biomeArray[d][a][b+math.random(-terrainExtreemity,-1)]
                 end
-                if biomeArray[d][a+love.math.random(-terrainExtreemity,-1)][b] ~= biomeArray[d][a][b] then
-                 biomeArray[d][a][b] = biomeArray[d][a+love.math.random(-terrainExtreemity,-1)][b]
+                if biomeArray[d][a+math.random(-terrainExtreemity,-1)][b] ~= biomeArray[d][a][b] then
+                 biomeArray[d][a][b] = biomeArray[d][a+math.random(-terrainExtreemity,-1)][b]
                 end
             else
-                if biomeArray[d][a][b+love.math.random(-terrainExtreemity,terrainExtreemity)] ~= biomeArray[d][a][b] then
-                    biomeArray[d][a][b] = biomeArray[d][a][b+love.math.random(-terrainExtreemity,terrainExtreemity)]
+                if biomeArray[d][a][b+math.random(-terrainExtreemity,terrainExtreemity)] ~= biomeArray[d][a][b] then
+                    biomeArray[d][a][b] = biomeArray[d][a][b+math.random(-terrainExtreemity,terrainExtreemity)]
                 end
-                if biomeArray[d][a+love.math.random(-terrainExtreemity,terrainExtreemity)][b] ~= biomeArray[d][a][b] then
-                 biomeArray[d][a][b] = biomeArray[d][a+love.math.random(-terrainExtreemity,terrainExtreemity)][b]
+                if biomeArray[d][a+math.random(-terrainExtreemity,terrainExtreemity)][b] ~= biomeArray[d][a][b] then
+                 biomeArray[d][a][b] = biomeArray[d][a+math.random(-terrainExtreemity,terrainExtreemity)][b]
                 end
             end
             else
-                if biomeArray[d][a][b+love.math.random(1,terrainExtreemity)] ~= biomeArray[d][a][b] then
-                    biomeArray[d][a][b] = biomeArray[d][a][b+love.math.random(1,terrainExtreemity)]
+                if biomeArray[d][a][b+math.random(1,terrainExtreemity)] ~= biomeArray[d][a][b] then
+                    biomeArray[d][a][b] = biomeArray[d][a][b+math.random(1,terrainExtreemity)]
                 end
-                if biomeArray[d][a+love.math.random(1,terrainExtreemity)][b] ~= biomeArray[d][a][b] then
-                 biomeArray[d][a][b] = biomeArray[d][a+love.math.random(1,terrainExtreemity)][b]
+                if biomeArray[d][a+math.random(1,terrainExtreemity)][b] ~= biomeArray[d][a][b] then
+                 biomeArray[d][a][b] = biomeArray[d][a+math.random(1,terrainExtreemity)][b]
                 end
 
             end
