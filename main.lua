@@ -113,8 +113,9 @@ function love.draw()
     if ingame == true and doLoadScreen == false then
 	    love.graphics.print("X: "..playerX, 10, 70)
 	    love.graphics.print("Y: "..playerY, 10, 80)
-	    love.graphics.print("Tile: "..currentTileWord, 10, 90)
-	     love.graphics.print("Biome: "..currentBiomeWord, 10, 100)
+	    love.graphics.print("Tile: "..currentTileWord, 10, 100)
+	    love.graphics.print("Biome: "..currentBiomeWord, 10, 110)
+	    love.graphics.print("Dimension: "..currentDimensionWord, 10, 120)
 	end
 
 end
