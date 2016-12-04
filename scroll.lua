@@ -208,8 +208,8 @@ end
  
 function scroll.setupMapView()
 
-    mapX = 1
-    mapY = 1
+    mapX = 240
+    mapY = 240
     tilesDisplayWidth = 26
     tilesDisplayHeight = 26
 
