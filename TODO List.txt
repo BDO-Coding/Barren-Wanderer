@@ -12,7 +12,6 @@ This is our Barren World TODO List:
 
 		-Make Load Game work
 		-Make terrain generation more preportioned
-			-Stop islands being square
 			-Add ruined town/village
 		-Add powas (YAY)
 		-Add a quest system
