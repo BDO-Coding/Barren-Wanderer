@@ -11,6 +11,7 @@ require "quest"
 require "conversation"
 require "crafting"
 require "effect"
+require "sound"
 
 function love.load()
 	
@@ -21,11 +22,9 @@ function love.load()
 
 	menu.load()
 	images.load()
-	
-	bg_music = love.audio.newSource("elvishMusic.mp3") -- sound stuff - needs to go in own class
-	bg_music:play()
-	bg_music:setLooping(true)
 	save.load()
+	
+	sound.load()
 
 end
  

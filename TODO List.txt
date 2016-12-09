@@ -10,7 +10,6 @@ This is our Barren World TODO List:
 
 	General:
 
-		-Make Load Game work
 		-Make terrain generation more preportioned
 			-Add ruined town/village
 		-Add powas (YAY)
