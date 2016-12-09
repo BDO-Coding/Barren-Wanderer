@@ -25,6 +25,7 @@ function love.load()
 	bg_music = love.audio.newSource("elvishMusic.mp3") -- sound stuff - needs to go in own class
 	bg_music:play()
 	bg_music:setLooping(true)
+	save.load()
 
 end
  

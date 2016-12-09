@@ -433,17 +433,21 @@ function menu.newgame()
         love.graphics.rectangle("line", 170, 280, 670, 60)
         love.graphics.rectangle("line", 170, 360, 220, 60)
 
+        seed = 1
+
+        WorldSeed = seed
+
         if worldNameType == true then
             love.graphics.print("World Name-: "..worldName, 190, 210, 0, 2, 3)
         else
             love.graphics.print("World Name : "..worldName, 190, 210, 0, 2, 3)
         end
-        
         if worldSeedType == true then
             love.graphics.print("World Seed-: "..worldSeed, 190, 290, 0, 2, 3)
         else
             worldSeed = 1
             love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
+            --love.graphics.print("World Seed : ", 190, 290, 0, 2, 3)
         end
         
         love.graphics.print("Create World", 200, 370, 0, 2, 3)
@@ -516,9 +520,11 @@ function love.textinput(worldText)
     end
 
     if worldText == "1" or worldText == "2" or worldText == "3" or worldText == "4" or worldText == "5" or worldText == "6" or worldText == "7" or worldText == "8" or worldText == "9" or worldText == "0" then
+        --print(worldSeedType)
         if worldSeedType == true and newgame == true then
+            --print(worldSeedType)
             worldSeed = worldSeed .. worldText
-            --print()
+            print(worldSeed)
             worldSeedNum = worldSeedNum + 1
         end
     end
@@ -735,7 +741,6 @@ function menu.loadWorld()
 
     if loadNewGame == true and loading == false and loadWorldClicked == true then
         
-
         save.read()
         seedToLoad = seed
 
@@ -746,8 +751,27 @@ function menu.loadWorld()
             loadScreen = true
         end
 
-        loadFunctions = true
+        worldSeed = seed
+
+        inmenu = false
+        ingame = true
+        scroll.load()
+        quest.load()
+        crafting.load()
+        player.load()
+        item.load()
+        mob.load()
+        hotbar.load()
+        utensil.load()
+        conversation.load()
+        effect.load()
+
+        if doLoadScreen == true then
+            loadScreen = true
+        end
+
         newgame = false
+        loadNewGame = false
 
     end
 
@@ -777,17 +801,17 @@ function love.mousepressed(x, y, button, istouch)
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 380 and y < 440 and credits == false and newgame == false and loading == false and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 380 and y < 440 and credits == false and newgame == false and loading == false and clickDelay < 0 then  --options
                 options = true
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 480 and y < 540 and options == false and newgame == false and loading == false and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 480 and y < 540 and options == false and newgame == false and loading == false and clickDelay < 0 then-- credits
                 credits = true
                 clickDelay = 0.5
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 360 and y < 420 and newgame == true and clickDelay < 0 then -- create world
                 inmenu = false
                 ingame = true
                 scroll.load()
@@ -809,7 +833,7 @@ function love.mousepressed(x, y, button, istouch)
                 newgame = false
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and loading == true and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 280 and y < 340 and loading == true and clickDelay < 0 then -- load world
                 inmenu = false
                 ingame = true
 
@@ -825,8 +849,10 @@ function love.mousepressed(x, y, button, istouch)
                 loading = false
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 600 and y < 660 and clickDelay < 0 then
+            if button == 1 and x > 170 and x < 390 and y > 600 and y < 660 and clickDelay < 0 and options == true then -- back button on options
+                print(options)
                 options = false
+                print(options)
                 credits = false
                 newgame = false
                 loading = false
