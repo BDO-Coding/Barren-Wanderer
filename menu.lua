@@ -388,8 +388,9 @@ function menu.newgame()
 
         if doThisOnce == true then
             worldName = "World"
-            worldSeed = seed
             doThisOnce = false
+            save.load()
+            worldSeed = seed
         end
 
         if mouseX > 170 and mouseX < 840 and mouseY > 200 and mouseY < 260 then -- World Name
@@ -433,9 +434,6 @@ function menu.newgame()
         love.graphics.rectangle("line", 170, 280, 670, 60)
         love.graphics.rectangle("line", 170, 360, 220, 60)
 
-        seed = 1
-
-        WorldSeed = seed
 
         if worldNameType == true then
             love.graphics.print("World Name-: "..worldName, 190, 210, 0, 2, 3)
@@ -445,7 +443,6 @@ function menu.newgame()
         if worldSeedType == true then
             love.graphics.print("World Seed-: "..worldSeed, 190, 290, 0, 2, 3)
         else
-            worldSeed = 1
             love.graphics.print("World Seed : "..worldSeed, 190, 290, 0, 2, 3)
             --love.graphics.print("World Seed : ", 190, 290, 0, 2, 3)
         end
@@ -524,7 +521,7 @@ function love.textinput(worldText)
         if worldSeedType == true and newgame == true then
             --print(worldSeedType)
             worldSeed = worldSeed .. worldText
-            print(worldSeed)
+            --print(worldSeed)
             worldSeedNum = worldSeedNum + 1
         end
     end

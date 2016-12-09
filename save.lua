@@ -5,7 +5,7 @@ save={}
 
 
 function save.load()
-    seed = 3
+    seed = 1111
     --[[save.clear()
     local file = io.open(worldName..".txt", "a")
     file:write("Seed:\n"..worldSeed.."\nName:\n"..worldName)
