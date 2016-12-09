@@ -390,6 +390,7 @@ function menu.newgame()
             worldName = "World"
             doThisOnce = false
             save.load()
+            --print(seed)
             worldSeed = seed
         end
 
