@@ -1,16 +1,16 @@
 sound = {}
 
-function importSound()
+function sound.importSound()
 
 	bg_music = love.audio.newSource("elvishMusic.mp3")
 end
 
-function playSound()
+function sound.playSound()
 
 	bg_music:play()
 end
 
-function otherSoundOperations()
+function sound.otherSoundOperations()
 
 	bg_music:setLooping(true)
 

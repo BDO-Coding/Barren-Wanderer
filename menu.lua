@@ -847,10 +847,8 @@ function love.mousepressed(x, y, button, istouch)
                 loading = false
             end
 
-            if button == 1 and x > 170 and x < 390 and y > 600 and y < 660 and clickDelay < 0 and options == true then -- back button on options
-                print(options)
+            if button == 1 and x > 170 and x < 390 and y > 600 and y < 660 and clickDelay < 0 and (newgame == true or options == true or loading == true or credits == true) then -- back button on new a
                 options = false
-                print(options)
                 credits = false
                 newgame = false
                 loading = false
