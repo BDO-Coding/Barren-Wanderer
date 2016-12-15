@@ -896,7 +896,7 @@ function love.mousepressed(x, y, button, istouch)
 
             if button == 1 and x > 500 and x < 720 and y > 350 and y < 410 and clickDelay < 0 then -------SAVING
                 save.save()
-                love.event.quit( )
+                --love.event.quit( )
             end
 
         end
