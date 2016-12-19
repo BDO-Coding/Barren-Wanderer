@@ -52,6 +52,59 @@ function images.load()
 	--Particles
 	images.healing = love.graphics.newImage("images/particles/healing.png")
 
+
+	--SETS NEAREST NEIGHBOUR FILTERS!
+
+	--Player
+	images.playerDown:setFilter("nearest", "nearest")
+	images.playerDownHiRes:setFilter("nearest", "nearest")
+	images.playerSideHiRes:setFilter("nearest", "nearest")
+	images.playerUpHiRes:setFilter("nearest", "nearest")
+	images.playerDownAnimeA:setFilter("nearest", "nearest")
+	images.playerDownAnimeD:setFilter("nearest", "nearest")
+	images.playerUp:setFilter("nearest", "nearest")
+	images.playerUpAnimeA:setFilter("nearest", "nearest")
+	images.playerUpAnimeD:setFilter("nearest", "nearest")
+	images.playerSide:setFilter("nearest", "nearest")
+
+	--Weapons
+	images.woodenSword:setFilter("nearest", "nearest")
+
+	--Icons
+	images.health:setFilter("nearest", "nearest")
+	images.stamina:setFilter("nearest", "nearest")
+	images.mana:setFilter("nearest", "nearest")
+	images.hunger:setFilter("nearest", "nearest")
+
+	--Title
+	images.title:setFilter("nearest", "nearest")
+
+	--Items
+	images.stone:setFilter("nearest", "nearest")
+	images.stick:setFilter("nearest", "nearest")
+	images.log:setFilter("nearest", "nearest")
+	images.mucus:setFilter("nearest", "nearest")
+	images.copperBar:setFilter("nearest", "nearest")
+
+	--Mobs
+	images.chicken:setFilter("nearest", "nearest")
+	images.parrot:setFilter("nearest", "nearest")
+	images.worm:setFilter("nearest", "nearest")
+	images.evilworm = love.graphics.newImage("images/entities/mobs/evilWorm.png")
+
+	--GUI
+	images.crafting = love.graphics.newImage("images/GUI/craftingGUI.png")
+	images.hotbar = love.graphics.newImage("images/GUI/hotbar.png")
+	images.guiBar = love.graphics.newImage("images/GUI/bar.png")
+	images.guiBarInside = love.graphics.newImage("images/GUI/barInside.png")
+	images.handCursor = love.mouse.newCursor("images/GUI/cursor.png")
+
+	--Other
+	images.bag = love.graphics.newImage("images/entities/bag.png")
+
+	--Particles
+	images.healing = love.graphics.newImage("images/particles/healing.png")
+
 end
 
 function UPDATE_IMAGES(dt)
